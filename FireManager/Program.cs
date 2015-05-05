@@ -16,7 +16,7 @@ namespace FireManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FireManager());
+            Application.Run(new Forms.FireManager());
         }
     }
 }

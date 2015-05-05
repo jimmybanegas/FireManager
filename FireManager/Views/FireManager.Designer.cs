@@ -1,4 +1,4 @@
-﻿namespace FireManager
+﻿namespace FireManager.Forms
 {
     partial class FireManager
     {
@@ -95,14 +95,14 @@
             // cargarPerfilToolStripMenuItem
             // 
             this.cargarPerfilToolStripMenuItem.Name = "cargarPerfilToolStripMenuItem";
-            this.cargarPerfilToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cargarPerfilToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.cargarPerfilToolStripMenuItem.Text = "Cargar Perfil";
             this.cargarPerfilToolStripMenuItem.Click += new System.EventHandler(this.cargarPerfilToolStripMenuItem_Click);
             // 
             // guardarPerfilToolStripMenuItem
             // 
             this.guardarPerfilToolStripMenuItem.Name = "guardarPerfilToolStripMenuItem";
-            this.guardarPerfilToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.guardarPerfilToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.guardarPerfilToolStripMenuItem.Text = "Guardar Perfil";
             this.guardarPerfilToolStripMenuItem.Click += new System.EventHandler(this.guardarPerfilToolStripMenuItem_Click);
             // 
@@ -118,14 +118,14 @@
             // crearNuevaToolStripMenuItem
             // 
             this.crearNuevaToolStripMenuItem.Name = "crearNuevaToolStripMenuItem";
-            this.crearNuevaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.crearNuevaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.crearNuevaToolStripMenuItem.Text = "Crear Nueva";
             this.crearNuevaToolStripMenuItem.Click += new System.EventHandler(this.crearNuevaToolStripMenuItem_Click);
             // 
             // borrarDropToolStripMenuItem
             // 
             this.borrarDropToolStripMenuItem.Name = "borrarDropToolStripMenuItem";
-            this.borrarDropToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.borrarDropToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.borrarDropToolStripMenuItem.Text = "Borrar (Drop)";
             // 
             // nuevoObejtoToolStripMenuItem
@@ -149,6 +149,7 @@
             this.dominioToolStripMenuItem.Name = "dominioToolStripMenuItem";
             this.dominioToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dominioToolStripMenuItem.Text = "Dominio";
+            this.dominioToolStripMenuItem.Click += new System.EventHandler(this.dominioToolStripMenuItem_Click);
             // 
             // excepcionToolStripMenuItem
             // 
@@ -162,18 +163,21 @@
             this.funciónToolStripMenuItem.Name = "funciónToolStripMenuItem";
             this.funciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.funciónToolStripMenuItem.Text = "Función";
+            this.funciónToolStripMenuItem.Click += new System.EventHandler(this.funciónToolStripMenuItem_Click);
             // 
             // generadorToolStripMenuItem
             // 
             this.generadorToolStripMenuItem.Name = "generadorToolStripMenuItem";
             this.generadorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.generadorToolStripMenuItem.Text = "Generador";
+            this.generadorToolStripMenuItem.Click += new System.EventHandler(this.generadorToolStripMenuItem_Click);
             // 
             // procedimientoToolStripMenuItem
             // 
             this.procedimientoToolStripMenuItem.Name = "procedimientoToolStripMenuItem";
             this.procedimientoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.procedimientoToolStripMenuItem.Text = "Procedimiento";
+            this.procedimientoToolStripMenuItem.Click += new System.EventHandler(this.procedimientoToolStripMenuItem_Click);
             // 
             // rolToolStripMenuItem
             // 
@@ -186,18 +190,21 @@
             this.tablaToolStripMenuItem.Name = "tablaToolStripMenuItem";
             this.tablaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tablaToolStripMenuItem.Text = "Tabla";
+            this.tablaToolStripMenuItem.Click += new System.EventHandler(this.tablaToolStripMenuItem_Click);
             // 
             // triggerToolStripMenuItem
             // 
             this.triggerToolStripMenuItem.Name = "triggerToolStripMenuItem";
             this.triggerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.triggerToolStripMenuItem.Text = "Trigger";
+            this.triggerToolStripMenuItem.Click += new System.EventHandler(this.triggerToolStripMenuItem_Click);
             // 
             // vistaToolStripMenuItem
             // 
             this.vistaToolStripMenuItem.Name = "vistaToolStripMenuItem";
             this.vistaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.vistaToolStripMenuItem.Text = "Vista";
+            this.vistaToolStripMenuItem.Click += new System.EventHandler(this.vistaToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
@@ -390,6 +397,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FireManager";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FireManager";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);

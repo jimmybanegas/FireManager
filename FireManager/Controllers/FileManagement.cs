@@ -1,7 +1,8 @@
 using System;
 using System.IO;
+using FireManager.Models;
 
-namespace FireManager
+namespace FireManager.Controllers
 {
     public class FileManagement
     {
@@ -23,14 +24,14 @@ namespace FireManager
             }
 
             result.Success = true;
-            result.Message = "Save Was Successful";
+            result.Message = "Se guardó correctamente";
 
             return result;
         }
 
         public string OpenQueryFile(string file)
         {
-            string queryText = "";
+            var queryText = "";
 
             try
             {
@@ -49,11 +50,9 @@ namespace FireManager
 
         public Result SaveNewProfile(ConnectionData connectionData, string savePath)
         {
-            var result = new Result();
+            var profileManager = new ProfileManagement();
 
-            ProfileManagement profileManager = new ProfileManagement();
-
-            result = profileManager.CreateProfile(connectionData, savePath);
+            var result = profileManager.CreateProfile(connectionData, savePath);
 
             return result;
         }

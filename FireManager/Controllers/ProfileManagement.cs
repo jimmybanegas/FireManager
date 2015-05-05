@@ -1,8 +1,9 @@
 using System;
 using System.Text;
 using System.Xml;
+using FireManager.Models;
 
-namespace FireManager
+namespace FireManager.Controllers
 {
     public class ProfileManagement
     {
@@ -51,7 +52,7 @@ namespace FireManager
 
                 writer.Close();
 
-                result.Message = "Profile Was Saved";
+                result.Message = "Perfil guardado";
             }
             catch (Exception ex)
             {
@@ -68,15 +69,29 @@ namespace FireManager
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(filePath);
 
-            var nodeList = xmlDoc.DocumentElement.SelectNodes("/DatabaseConnectionData/Profile");
-
-            foreach (XmlNode node in nodeList)
+            if (xmlDoc.DocumentElement != null)
             {
-                connectionData.ServerName = node.SelectSingleNode("ServerName").InnerText;
-                connectionData.DatabaseName = node.SelectSingleNode("DatabaseName").InnerText;
-                connectionData.Password = node.SelectSingleNode("Password").InnerText;
-                connectionData.PortNumber = node.SelectSingleNode("PortNumber").InnerText;
-                connectionData.UserName = node.SelectSingleNode("UserName").InnerText;
+                var nodeList = xmlDoc.DocumentElement.SelectNodes("/DatabaseConnectionData/Profile");
+
+                if (nodeList != null)
+                    foreach (XmlNode node in nodeList)
+                    {
+                        var selectSingleNode = node.SelectSingleNode("ServerName");
+                        if (selectSingleNode != null)
+                            connectionData.ServerName = selectSingleNode.InnerText;
+                        var singleNode = node.SelectSingleNode("DatabaseName");
+                        if (singleNode != null)
+                            connectionData.DatabaseName = singleNode.InnerText;
+                        var xmlNode = node.SelectSingleNode("Password");
+                        if (xmlNode != null)
+                            connectionData.Password = xmlNode.InnerText;
+                        var selectSingleNode1 = node.SelectSingleNode("PortNumber");
+                        if (selectSingleNode1 != null)
+                            connectionData.PortNumber = selectSingleNode1.InnerText;
+                        var singleNode1 = node.SelectSingleNode("UserName");
+                        if (singleNode1 != null)
+                            connectionData.UserName = singleNode1.InnerText;
+                    }
             }
 
             return connectionData;

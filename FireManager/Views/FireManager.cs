@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using FireManager.Controllers;
+using FireManager.Models;
 using FireManager.Properties;
+using FireManager.Views;
 
-namespace FireManager
+namespace FireManager.Forms
 {
     public partial class FireManager : Form
     {
@@ -84,7 +80,7 @@ namespace FireManager
 
             if (saveDialogResult == DialogResult.OK)
             {
-                string file = saveFileDialog1.FileName;
+                var file = saveFileDialog1.FileName;
 
                 if (!string.IsNullOrWhiteSpace(queryText))
                 {
@@ -153,11 +149,11 @@ namespace FireManager
 
             if (result.Success)
             {
-                userMessage = string.Format("Can Connect = {0}", result.Success);
+                userMessage = string.Format("Hay conexión = {0}", result.Success);
             }
             else
             {
-                userMessage = string.Format("Message Returned = {0} Can Connect = {1}", result.Message, result.Success);
+                userMessage = string.Format("Mensaje = {0} Hay conexión = {1}", result.Message, result.Success);
             }
 
             MessageBox.Show(userMessage);
@@ -179,9 +175,7 @@ namespace FireManager
 
         private void cargarPerfilToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var connectionData = new ConnectionData();
-
-            connectionData = LoadProfile();
+            var connectionData = LoadProfile();
 
             tbServerName.Text = connectionData.ServerName;
             tbPort.Text = connectionData.PortNumber;
@@ -233,11 +227,9 @@ namespace FireManager
             {
                 var filePath = saveFileDialog1.FileName;
 
-                var fileName = Path.GetFileNameWithoutExtension(filePath);
-
                 var fileManager = new FileManagement();
-                var connectionData = new ConnectionData();
-                connectionData = GetConnectionInformation();
+
+                var connectionData = GetConnectionInformation();
 
                 result = fileManager.SaveNewProfile(connectionData, filePath);
             }
@@ -252,7 +244,58 @@ namespace FireManager
 
         private void crearNuevaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var nuevaDb = new CreateDatabase();
 
+            nuevaDb.Show();
+        }
+
+        private void tablaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nuevaTabla = new CreateTable();
+
+            nuevaTabla.Show();
+        }
+
+        private void procedimientoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nuevoProcedimiento = new CreateProcedure();
+
+            nuevoProcedimiento.Show();
+        }
+
+        private void vistaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nuevaVista = new CreateView();
+
+            nuevaVista.Show();
+        }
+
+        private void triggerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nuevoTrigger = new CreateTrigger();
+
+            nuevoTrigger.Show();
+        }
+
+        private void generadorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nuevoGenerador = new CreateGenerator();
+
+            nuevoGenerador.Show();
+        }
+
+        private void funciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nuevaFuncion = new CreateFunction();
+
+            nuevaFuncion.Show();
+        }
+
+        private void dominioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nuevoDominio = new CreateDomain();
+
+            nuevoDominio.Show();
         }
     }
 }

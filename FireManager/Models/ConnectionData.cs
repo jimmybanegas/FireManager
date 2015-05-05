@@ -1,4 +1,4 @@
-namespace FireManager
+namespace FireManager.Models
 {
     public class ConnectionData
     {

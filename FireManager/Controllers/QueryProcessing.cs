@@ -2,8 +2,9 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using FirebirdSql.Data.FirebirdClient;
+using FireManager.Models;
 
-namespace FireManager
+namespace FireManager.Controllers
 {
     public class QueryProcessing
     {
@@ -45,18 +46,18 @@ namespace FireManager
 
             try
             {
-                using (FbConnection connection = new FbConnection(connectionString))
+                using (var connection = new FbConnection(connectionString))
                 {
                     connection.Open();
 
-                    FbTransaction transaction = connection.BeginTransaction();
+                    var transaction = connection.BeginTransaction();
 
-                    FbCommand command = new FbCommand(queryText, connection)
+                    var command = new FbCommand(queryText, connection)
                     {
                         CommandType = CommandType.StoredProcedure
                     };
 
-                    using (FbDataReader reader = command.ExecuteReader())
+                    using (var reader = command.ExecuteReader())
                     {
                         dataTable.Load(reader);
                         transaction.Commit();

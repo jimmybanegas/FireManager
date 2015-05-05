@@ -1,7 +1,8 @@
 using System;
 using FirebirdSql.Data.FirebirdClient;
+using FireManager.Models;
 
-namespace FireManager
+namespace FireManager.Controllers
 {
     public class DataAccess
     {
@@ -28,13 +29,13 @@ namespace FireManager
                     if (connection.State == System.Data.ConnectionState.Open)
                     {
                         result.Success = true;
-                        result.Message = "Connection Test Passed";
+                        result.Message = "Test satisfactorio";
                         result.ConnectionString = connectionString;
                     }
                     else
                     {
                         result.Success = false;
-                        result.Message = "Connection Test Failed";
+                        result.Message = "Test fallido";
                         result.ConnectionString = connectionString;
                     }
 

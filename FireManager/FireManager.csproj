@@ -49,21 +49,93 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionData.cs" />
-    <Compile Include="DataAccess.cs" />
-    <Compile Include="FileManagement.cs" />
-    <Compile Include="FireManager.cs">
+    <Compile Include="Controllers\DataAccess.cs" />
+    <Compile Include="Controllers\FileManagement.cs" />
+    <Compile Include="Controllers\ProfileManagement.cs" />
+    <Compile Include="Controllers\QueryProcessing.cs" />
+    <Compile Include="Models\ConnectionData.cs" />
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Views\CreateDatabase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FireManager.Designer.cs">
+    <Compile Include="Views\CreateDatabase.Designer.cs">
+      <DependentUpon>CreateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateDomain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateDomain.Designer.cs">
+      <DependentUpon>CreateDomain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateFunction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateFunction.Designer.cs">
+      <DependentUpon>CreateFunction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateGenerator.Designer.cs">
+      <DependentUpon>CreateGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateProcedure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateProcedure.Designer.cs">
+      <DependentUpon>CreateProcedure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateTable.Designer.cs">
+      <DependentUpon>CreateTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTrigger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateTrigger.Designer.cs">
+      <DependentUpon>CreateTrigger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateView.Designer.cs">
+      <DependentUpon>CreateView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FireManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FireManager.Designer.cs">
       <DependentUpon>FireManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProfileManagement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryProcessing.cs" />
-    <Compile Include="Result.cs" />
-    <EmbeddedResource Include="FireManager.resx">
+    <EmbeddedResource Include="Views\CreateDatabase.resx">
+      <DependentUpon>CreateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateDomain.resx">
+      <DependentUpon>CreateDomain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateFunction.resx">
+      <DependentUpon>CreateFunction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateGenerator.resx">
+      <DependentUpon>CreateGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateProcedure.resx">
+      <DependentUpon>CreateProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateTable.resx">
+      <DependentUpon>CreateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateTrigger.resx">
+      <DependentUpon>CreateTrigger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateView.resx">
+      <DependentUpon>CreateView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FireManager.resx">
       <DependentUpon>FireManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -90,6 +162,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
