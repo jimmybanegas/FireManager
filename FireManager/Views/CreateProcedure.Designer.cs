@@ -128,6 +128,7 @@
             this.btnNuevoParametro.TabIndex = 1;
             this.btnNuevoParametro.Text = "Nuevo";
             this.btnNuevoParametro.UseVisualStyleBackColor = true;
+            this.btnNuevoParametro.Click += new System.EventHandler(this.btnNuevoParametro_Click);
             // 
             // dataGridViewParameters
             // 

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FireManager.Views
 {
-    public partial class CreateProcedure : Form
+    public partial class TableField : Form
     {
-        public CreateProcedure()
+        public TableField()
         {
             InitializeComponent();
         }
@@ -22,16 +22,14 @@ namespace FireManager.Views
             Close();
         }
 
-        private void dataGridViewForeignKeys_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void btnNuevoParametro_Click(object sender, EventArgs e)
+        private void groupBox3_Enter(object sender, EventArgs e)
         {
-            var nnuevoParametro = new ProcedureParameter();
 
-            nnuevoParametro.Show();
         }
     }
 }

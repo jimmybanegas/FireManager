@@ -31,5 +31,26 @@ namespace FireManager.Views
         {
             Close();
         }
+
+        private void btnNuevoCampo_Click(object sender, EventArgs e)
+        {
+            var nuevoCampo = new TableField();
+
+            nuevoCampo.Show();
+        }
+
+        private void btnNuevoIndice_Click(object sender, EventArgs e)
+        {
+            var nuevoIndice = new TableIndex();
+
+            nuevoIndice.Show();
+        }
+
+        private void btnNuevaForanea_Click(object sender, EventArgs e)
+        {
+            var nuevaLlaveForanea = new TableForeignKey();
+
+            nuevaLlaveForanea.Show();
+        }
     }
 }

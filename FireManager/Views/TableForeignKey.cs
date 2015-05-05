@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FireManager.Views
 {
-    public partial class CreateProcedure : Form
+    public partial class TableForeignKey : Form
     {
-        public CreateProcedure()
+        public TableForeignKey()
         {
             InitializeComponent();
         }
@@ -20,18 +20,6 @@ namespace FireManager.Views
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void dataGridViewForeignKeys_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnNuevoParametro_Click(object sender, EventArgs e)
-        {
-            var nnuevoParametro = new ProcedureParameter();
-
-            nnuevoParametro.Show();
         }
     }
 }

@@ -108,6 +108,7 @@
             this.btnNuevoCampo.TabIndex = 1;
             this.btnNuevoCampo.Text = "Nuevo";
             this.btnNuevoCampo.UseVisualStyleBackColor = true;
+            this.btnNuevoCampo.Click += new System.EventHandler(this.btnNuevoCampo_Click);
             // 
             // dataGridViewFields
             // 
@@ -137,6 +138,7 @@
             this.btnNuevoIndice.TabIndex = 2;
             this.btnNuevoIndice.Text = "Nuevo";
             this.btnNuevoIndice.UseVisualStyleBackColor = true;
+            this.btnNuevoIndice.Click += new System.EventHandler(this.btnNuevoIndice_Click);
             // 
             // dataGridViewIndexes
             // 
@@ -166,6 +168,7 @@
             this.btnNuevaForanea.TabIndex = 2;
             this.btnNuevaForanea.Text = "Nueva";
             this.btnNuevaForanea.UseVisualStyleBackColor = true;
+            this.btnNuevaForanea.Click += new System.EventHandler(this.btnNuevaForanea_Click);
             // 
             // dataGridViewForeignKeys
             // 

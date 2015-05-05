@@ -111,6 +111,30 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ProcedureParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ProcedureParameter.Designer.cs">
+      <DependentUpon>ProcedureParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TableField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TableField.Designer.cs">
+      <DependentUpon>TableField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TableForeignKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TableForeignKey.Designer.cs">
+      <DependentUpon>TableForeignKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TableIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TableIndex.Designer.cs">
+      <DependentUpon>TableIndex.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\CreateDatabase.resx">
       <DependentUpon>CreateDatabase.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +172,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\ProcedureParameter.resx">
+      <DependentUpon>ProcedureParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TableField.resx">
+      <DependentUpon>TableField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TableForeignKey.resx">
+      <DependentUpon>TableForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TableIndex.resx">
+      <DependentUpon>TableIndex.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
