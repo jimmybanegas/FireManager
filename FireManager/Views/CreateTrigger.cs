@@ -21,5 +21,30 @@ namespace FireManager.Views
         {
             Close();
         }
+
+        private void lblComentario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtComentario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTipo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPosicion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

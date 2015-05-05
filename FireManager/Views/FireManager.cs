@@ -2,11 +2,11 @@
 using System.Data;
 using System.Windows.Forms;
 using FireManager.Controllers;
+using FireManager.Forms;
 using FireManager.Models;
 using FireManager.Properties;
-using FireManager.Views;
 
-namespace FireManager.Forms
+namespace FireManager.Views
 {
     public partial class FireManager : Form
     {

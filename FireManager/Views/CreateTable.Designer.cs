@@ -28,28 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnNuevoCampo = new System.Windows.Forms.Button();
+            this.dataGridViewFields = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnNuevoIndice = new System.Windows.Forms.Button();
+            this.dataGridViewIndexes = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnNuevaForanea = new System.Windows.Forms.Button();
+            this.dataGridViewForeignKeys = new System.Windows.Forms.DataGridView();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.dataGridViewForeignKeys = new System.Windows.Forms.DataGridView();
-            this.dataGridViewIndexes = new System.Windows.Forms.DataGridView();
-            this.dataGridViewFields = new System.Windows.Forms.DataGridView();
-            this.btnNuevoCampo = new System.Windows.Forms.Button();
-            this.btnNuevoIndice = new System.Windows.Forms.Button();
-            this.btnNuevaForanea = new System.Windows.Forms.Button();
+            this.lblComentario = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.txtComentario = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFields)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIndexes)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForeignKeys)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIndexes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFields)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -96,6 +100,23 @@
             this.tabPage1.Text = "Campos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnNuevoCampo
+            // 
+            this.btnNuevoCampo.Location = new System.Drawing.Point(16, 231);
+            this.btnNuevoCampo.Name = "btnNuevoCampo";
+            this.btnNuevoCampo.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevoCampo.TabIndex = 1;
+            this.btnNuevoCampo.Text = "Nuevo";
+            this.btnNuevoCampo.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewFields
+            // 
+            this.dataGridViewFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFields.Location = new System.Drawing.Point(16, 15);
+            this.dataGridViewFields.Name = "dataGridViewFields";
+            this.dataGridViewFields.Size = new System.Drawing.Size(490, 210);
+            this.dataGridViewFields.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.btnNuevoIndice);
@@ -108,6 +129,23 @@
             this.tabPage2.Text = "Índices";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnNuevoIndice
+            // 
+            this.btnNuevoIndice.Location = new System.Drawing.Point(16, 231);
+            this.btnNuevoIndice.Name = "btnNuevoIndice";
+            this.btnNuevoIndice.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevoIndice.TabIndex = 2;
+            this.btnNuevoIndice.Text = "Nuevo";
+            this.btnNuevoIndice.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewIndexes
+            // 
+            this.dataGridViewIndexes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewIndexes.Location = new System.Drawing.Point(16, 15);
+            this.dataGridViewIndexes.Name = "dataGridViewIndexes";
+            this.dataGridViewIndexes.Size = new System.Drawing.Size(490, 210);
+            this.dataGridViewIndexes.TabIndex = 0;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.btnNuevaForanea);
@@ -119,6 +157,23 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Llaves foráneas";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnNuevaForanea
+            // 
+            this.btnNuevaForanea.Location = new System.Drawing.Point(16, 231);
+            this.btnNuevaForanea.Name = "btnNuevaForanea";
+            this.btnNuevaForanea.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevaForanea.TabIndex = 2;
+            this.btnNuevaForanea.Text = "Nueva";
+            this.btnNuevaForanea.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewForeignKeys
+            // 
+            this.dataGridViewForeignKeys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewForeignKeys.Location = new System.Drawing.Point(16, 15);
+            this.dataGridViewForeignKeys.Name = "dataGridViewForeignKeys";
+            this.dataGridViewForeignKeys.Size = new System.Drawing.Size(490, 210);
+            this.dataGridViewForeignKeys.TabIndex = 0;
             // 
             // btnGuardar
             // 
@@ -139,62 +194,35 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // dataGridViewForeignKeys
+            // lblComentario
             // 
-            this.dataGridViewForeignKeys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewForeignKeys.Location = new System.Drawing.Point(16, 6);
-            this.dataGridViewForeignKeys.Name = "dataGridViewForeignKeys";
-            this.dataGridViewForeignKeys.Size = new System.Drawing.Size(484, 206);
-            this.dataGridViewForeignKeys.TabIndex = 0;
+            this.lblComentario.AutoSize = true;
+            this.lblComentario.Location = new System.Drawing.Point(290, 36);
+            this.lblComentario.Name = "lblComentario";
+            this.lblComentario.Size = new System.Drawing.Size(66, 13);
+            this.lblComentario.TabIndex = 5;
+            this.lblComentario.Text = "Comentario: ";
             // 
-            // dataGridViewIndexes
+            // notifyIcon1
             // 
-            this.dataGridViewIndexes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewIndexes.Location = new System.Drawing.Point(16, 6);
-            this.dataGridViewIndexes.Name = "dataGridViewIndexes";
-            this.dataGridViewIndexes.Size = new System.Drawing.Size(483, 202);
-            this.dataGridViewIndexes.TabIndex = 0;
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
-            // dataGridViewFields
+            // txtComentario
             // 
-            this.dataGridViewFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewFields.Location = new System.Drawing.Point(16, 6);
-            this.dataGridViewFields.Name = "dataGridViewFields";
-            this.dataGridViewFields.Size = new System.Drawing.Size(488, 208);
-            this.dataGridViewFields.TabIndex = 0;
-            // 
-            // btnNuevoCampo
-            // 
-            this.btnNuevoCampo.Location = new System.Drawing.Point(16, 229);
-            this.btnNuevoCampo.Name = "btnNuevoCampo";
-            this.btnNuevoCampo.Size = new System.Drawing.Size(75, 23);
-            this.btnNuevoCampo.TabIndex = 1;
-            this.btnNuevoCampo.Text = "Nuevo";
-            this.btnNuevoCampo.UseVisualStyleBackColor = true;
-            // 
-            // btnNuevoIndice
-            // 
-            this.btnNuevoIndice.Location = new System.Drawing.Point(16, 225);
-            this.btnNuevoIndice.Name = "btnNuevoIndice";
-            this.btnNuevoIndice.Size = new System.Drawing.Size(75, 23);
-            this.btnNuevoIndice.TabIndex = 2;
-            this.btnNuevoIndice.Text = "Nuevo";
-            this.btnNuevoIndice.UseVisualStyleBackColor = true;
-            // 
-            // btnNuevaForanea
-            // 
-            this.btnNuevaForanea.Location = new System.Drawing.Point(16, 222);
-            this.btnNuevaForanea.Name = "btnNuevaForanea";
-            this.btnNuevaForanea.Size = new System.Drawing.Size(75, 23);
-            this.btnNuevaForanea.TabIndex = 2;
-            this.btnNuevaForanea.Text = "Nueva";
-            this.btnNuevaForanea.UseVisualStyleBackColor = true;
+            this.txtComentario.Location = new System.Drawing.Point(362, 33);
+            this.txtComentario.Name = "txtComentario";
+            this.txtComentario.Size = new System.Drawing.Size(214, 41);
+            this.txtComentario.TabIndex = 7;
+            this.txtComentario.Text = "";
             // 
             // CreateTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 463);
+            this.ClientSize = new System.Drawing.Size(619, 462);
+            this.Controls.Add(this.txtComentario);
+            this.Controls.Add(this.lblComentario);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.tabControl1);
@@ -206,11 +234,11 @@
             this.Load += new System.EventHandler(this.CreateTable_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFields)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIndexes)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewForeignKeys)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIndexes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFields)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,5 +261,8 @@
         private System.Windows.Forms.Button btnNuevoIndice;
         private System.Windows.Forms.DataGridView dataGridViewIndexes;
         private System.Windows.Forms.Button btnNuevaForanea;
+        private System.Windows.Forms.Label lblComentario;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.RichTextBox txtComentario;
     }
 }

@@ -21,5 +21,10 @@ namespace FireManager.Views
         {
             Close();
         }
+
+        private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

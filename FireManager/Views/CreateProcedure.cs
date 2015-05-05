@@ -21,5 +21,10 @@ namespace FireManager.Views
         {
             Close();
         }
+
+        private void dataGridViewForeignKeys_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

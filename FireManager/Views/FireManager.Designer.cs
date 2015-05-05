@@ -1,4 +1,4 @@
-﻿namespace FireManager.Forms
+﻿namespace FireManager.Views
 {
     partial class FireManager
     {

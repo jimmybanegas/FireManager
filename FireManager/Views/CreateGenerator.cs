@@ -21,5 +21,10 @@ namespace FireManager.Views
         {
             Close();
         }
+
+        private void lblTamano_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
