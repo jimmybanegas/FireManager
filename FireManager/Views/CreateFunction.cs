@@ -21,5 +21,12 @@ namespace FireManager.Views
         {
             Close();
         }
+
+        private void btnNuevoParametro_Click(object sender, EventArgs e)
+        {
+            var nuevoParametro = new FunctionParameter();
+
+            nuevoParametro.Show();
+        }
     }
 }

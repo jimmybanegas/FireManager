@@ -17,7 +17,44 @@ namespace FireManager.Views
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            var treeNode = new TreeNode("Dominios");
+            treeView1.Nodes.Add(treeNode);
+            //
+            // Another node following the first node.
+            //
+            treeNode = new TreeNode("Funciones");
+            treeView1.Nodes.Add(treeNode);
 
+            treeNode = new TreeNode("Generadores");
+            treeView1.Nodes.Add(treeNode);
+
+            treeNode = new TreeNode("Procedimientos");
+            treeView1.Nodes.Add(treeNode);
+
+            treeNode = new TreeNode("Roles");
+            treeView1.Nodes.Add(treeNode);
+
+            treeNode = new TreeNode("Tablas");
+            treeView1.Nodes.Add(treeNode);
+
+            treeNode = new TreeNode("Triggers");
+            treeView1.Nodes.Add(treeNode);
+
+            treeNode = new TreeNode("Vistas");
+            treeView1.Nodes.Add(treeNode);
+            //
+            // Create two child nodes and put them in an array.
+            // ... Add the third node, and specify these as its children.
+            //
+
+            TreeNode node2 = new TreeNode("VB.NET");
+            TreeNode node3 = new TreeNode("VB.NET");
+            TreeNode[] array = new TreeNode[] { node2, node3 };
+            //
+            // Final node.
+            //
+            treeNode = new TreeNode("Dot Net Perls", array);
+            treeView1.Nodes.Add(treeNode);
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)

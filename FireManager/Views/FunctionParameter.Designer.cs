@@ -74,12 +74,13 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(159, 176);
+            this.btnCancelar.Location = new System.Drawing.Point(176, 176);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(98, 34);
             this.btnCancelar.TabIndex = 35;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGuardar
             // 
@@ -114,7 +115,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Name = "FunctionParameter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FunctionParameter";
+            this.Text = "Parámetro";
             this.ResumeLayout(false);
             this.PerformLayout();
 

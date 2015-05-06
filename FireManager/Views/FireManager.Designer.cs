@@ -66,6 +66,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbServerName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -226,7 +227,7 @@
             this.QueryTextBox.Multiline = true;
             this.QueryTextBox.Name = "QueryTextBox";
             this.QueryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.QueryTextBox.Size = new System.Drawing.Size(608, 174);
+            this.QueryTextBox.Size = new System.Drawing.Size(629, 174);
             this.QueryTextBox.TabIndex = 3;
             // 
             // btSaveQuery
@@ -261,7 +262,7 @@
             // 
             // ClearAllButton
             // 
-            this.ClearAllButton.Location = new System.Drawing.Point(757, 132);
+            this.ClearAllButton.Location = new System.Drawing.Point(778, 132);
             this.ClearAllButton.Name = "ClearAllButton";
             this.ClearAllButton.Size = new System.Drawing.Size(75, 23);
             this.ClearAllButton.TabIndex = 17;
@@ -272,14 +273,14 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(23, 368);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 368);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(818, 259);
+            this.dataGridView1.Size = new System.Drawing.Size(841, 259);
             this.dataGridView1.TabIndex = 21;
             // 
             // btConnectionTest
             // 
-            this.btConnectionTest.Location = new System.Drawing.Point(579, 72);
+            this.btConnectionTest.Location = new System.Drawing.Point(608, 72);
             this.btConnectionTest.Name = "btConnectionTest";
             this.btConnectionTest.Size = new System.Drawing.Size(108, 23);
             this.btConnectionTest.TabIndex = 32;
@@ -289,7 +290,7 @@
             // 
             // tbDatabaseName
             // 
-            this.tbDatabaseName.Location = new System.Drawing.Point(307, 75);
+            this.tbDatabaseName.Location = new System.Drawing.Point(336, 75);
             this.tbDatabaseName.Name = "tbDatabaseName";
             this.tbDatabaseName.Size = new System.Drawing.Size(78, 20);
             this.tbDatabaseName.TabIndex = 29;
@@ -297,7 +298,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(233, 78);
+            this.label5.Location = new System.Drawing.Point(262, 78);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 13);
             this.label5.TabIndex = 28;
@@ -305,7 +306,7 @@
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(693, 36);
+            this.tbPassword.Location = new System.Drawing.Point(722, 36);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 20);
@@ -314,7 +315,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(626, 39);
+            this.label4.Location = new System.Drawing.Point(655, 39);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 26;
@@ -323,7 +324,7 @@
             // 
             // tbUserName
             // 
-            this.tbUserName.Location = new System.Drawing.Point(469, 36);
+            this.tbUserName.Location = new System.Drawing.Point(498, 36);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(122, 20);
             this.tbUserName.TabIndex = 25;
@@ -331,7 +332,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(406, 43);
+            this.label3.Location = new System.Drawing.Point(435, 43);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 24;
@@ -339,7 +340,7 @@
             // 
             // tbPort
             // 
-            this.tbPort.Location = new System.Drawing.Point(469, 74);
+            this.tbPort.Location = new System.Drawing.Point(498, 74);
             this.tbPort.Name = "tbPort";
             this.tbPort.Size = new System.Drawing.Size(61, 20);
             this.tbPort.TabIndex = 31;
@@ -347,7 +348,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(406, 81);
+            this.label2.Location = new System.Drawing.Point(435, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 30;
@@ -356,7 +357,7 @@
             // 
             // tbServerName
             // 
-            this.tbServerName.Location = new System.Drawing.Point(307, 36);
+            this.tbServerName.Location = new System.Drawing.Point(336, 36);
             this.tbServerName.Name = "tbServerName";
             this.tbServerName.Size = new System.Drawing.Size(92, 20);
             this.tbServerName.TabIndex = 23;
@@ -364,12 +365,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(233, 39);
+            this.label1.Location = new System.Drawing.Point(262, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 22;
             this.label1.Text = "Servidor";
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(224, 21);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(629, 99);
+            this.groupBox1.TabIndex = 33;
+            this.groupBox1.TabStop = false;
             // 
             // FireManager
             // 
@@ -395,6 +404,7 @@
             this.Controls.Add(this.QueryTextBox);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.groupBox1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FireManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -448,6 +458,7 @@
         private System.Windows.Forms.ToolStripMenuItem tablaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem triggerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vistaToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
