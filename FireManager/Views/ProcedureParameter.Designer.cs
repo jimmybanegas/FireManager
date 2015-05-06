@@ -45,7 +45,7 @@
             this.lblValor.Name = "lblValor";
             this.lblValor.Size = new System.Drawing.Size(44, 13);
             this.lblValor.TabIndex = 30;
-            this.lblValor.Text = "Scope: ";
+            this.lblValor.Text = "ScopeProcedureParameter: ";
             // 
             // txtNombre
             // 

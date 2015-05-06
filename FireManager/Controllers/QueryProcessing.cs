@@ -54,7 +54,8 @@ namespace FireManager.Controllers
 
                     var command = new FbCommand(queryText, connection)
                     {
-                        CommandType = CommandType.StoredProcedure
+                        CommandType = CommandType.StoredProcedure,
+                        
                     };
 
                     using (var reader = command.ExecuteReader())

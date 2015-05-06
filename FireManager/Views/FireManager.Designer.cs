@@ -272,9 +272,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(23, 372);
+            this.dataGridView1.Location = new System.Drawing.Point(23, 368);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(818, 368);
+            this.dataGridView1.Size = new System.Drawing.Size(818, 259);
             this.dataGridView1.TabIndex = 21;
             // 
             // btConnectionTest
@@ -375,7 +375,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 760);
+            this.ClientSize = new System.Drawing.Size(865, 638);
             this.Controls.Add(this.btConnectionTest);
             this.Controls.Add(this.tbDatabaseName);
             this.Controls.Add(this.label5);
