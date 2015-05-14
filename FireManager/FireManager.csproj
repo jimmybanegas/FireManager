@@ -50,10 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DataAccess.cs" />
+    <Compile Include="Controllers\FbObjetos.cs" />
     <Compile Include="Controllers\FileManagement.cs" />
     <Compile Include="Controllers\MetadataItemCreateStatement.cs" />
     <Compile Include="Controllers\ProfileManagement.cs" />
     <Compile Include="Controllers\QueryProcessing.cs" />
+    <Compile Include="Controllers\SystemTables.cs" />
     <Compile Include="Models\ConnectionData.cs" />
     <Compile Include="EnumTypes\DataTypes.cs" />
     <Compile Include="EnumTypes\ScopeProcedureParameter.cs" />

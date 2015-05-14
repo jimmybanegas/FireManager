@@ -25,12 +25,11 @@ namespace FireManager.Controllers
                     DataTable tables = connection.GetSchema("Tables", new string[] {null, null, null, 
                               "TABLE"});
 
-
                     var transaction = connection.BeginTransaction();
 
                     using (var adapter = new FbDataAdapter(queryText, connectionString))
                     {
-                        adapter.Fill(dataTable);
+                        adapter.Fill(tables);
                         transaction.Commit();
                         connection.Close();
                     }

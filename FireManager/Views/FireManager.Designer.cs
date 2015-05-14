@@ -67,8 +67,10 @@
             this.tbServerName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnCrear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -126,8 +128,9 @@
             // borrarDropToolStripMenuItem
             // 
             this.borrarDropToolStripMenuItem.Name = "borrarDropToolStripMenuItem";
-            this.borrarDropToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.borrarDropToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.borrarDropToolStripMenuItem.Text = "Borrar (Drop)";
+            this.borrarDropToolStripMenuItem.Click += new System.EventHandler(this.borrarDropToolStripMenuItem_Click);
             // 
             // nuevoObejtoToolStripMenuItem
             // 
@@ -374,11 +377,22 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnCrear);
             this.groupBox1.Location = new System.Drawing.Point(224, 21);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(629, 99);
             this.groupBox1.TabIndex = 33;
             this.groupBox1.TabStop = false;
+            // 
+            // btnCrear
+            // 
+            this.btnCrear.Location = new System.Drawing.Point(523, 50);
+            this.btnCrear.Name = "btnCrear";
+            this.btnCrear.Size = new System.Drawing.Size(75, 23);
+            this.btnCrear.TabIndex = 0;
+            this.btnCrear.Text = "Crear";
+            this.btnCrear.UseVisualStyleBackColor = true;
+            this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
             // FireManager
             // 
@@ -413,6 +427,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -459,6 +474,7 @@
         private System.Windows.Forms.ToolStripMenuItem triggerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vistaToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnCrear;
     }
 }
 

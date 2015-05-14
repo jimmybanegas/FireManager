@@ -17,6 +17,7 @@ namespace FireManager.Views
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             var treeNode = new TreeNode("Dominios");
             treeView1.Nodes.Add(treeNode);
             //
@@ -187,6 +188,16 @@ namespace FireManager.Views
             if (result.Success)
             {
                 userMessage = string.Format("Hay conexión = {0}", result.Success);
+
+                var connData = GetConnectionInformation();
+
+                DataTable tablas = FbObjetos.GetTables(connData);
+                DataTable dominios = FbObjetos.GetDomains(connData);
+                DataTable funciones = FbObjetos.GetFunctions(connData);
+                DataTable generadores = FbObjetos.GetGenerators(connData);
+                DataTable procedimientos = FbObjetos.GetProcedures(connData);
+                DataTable triggers = FbObjetos.GetTriggers(connData);
+                DataTable vistas = FbObjetos.GetViews(connData);
             }
             else
             {
@@ -194,6 +205,8 @@ namespace FireManager.Views
             }
 
             MessageBox.Show(userMessage);
+
+           
         }
 
         private ConnectionData GetConnectionInformation()
@@ -239,6 +252,16 @@ namespace FireManager.Views
 
                 connectionData = profileManager.GetSavedProfile(filePath);
             }
+
+        //    var connData = GetConnectionInformation();
+
+            DataTable tablas = FbObjetos.GetTables(connectionData);
+            DataTable dominios = FbObjetos.GetDomains(connectionData);
+            DataTable funciones = FbObjetos.GetFunctions(connectionData);
+            DataTable generadores = FbObjetos.GetGenerators(connectionData);
+            DataTable procedimientos = FbObjetos.GetProcedures(connectionData);
+            DataTable triggers = FbObjetos.GetTriggers(connectionData);
+            DataTable vistas = FbObjetos.GetViews(connectionData);
 
             return connectionData;
         }
@@ -333,6 +356,44 @@ namespace FireManager.Views
             var nuevoDominio = new CreateDomain();
 
             nuevoDominio.Show();
+        }
+
+        private void btnCrear_Click(object sender, EventArgs e)
+        {
+            var userMessage = "";
+            var connectionInfo = GetConnectionInformation();
+            var dataAccess = new DataAccess(connectionInfo);
+            var result = dataAccess.CreateDatabase();
+
+            if (result.Success)
+            {
+                userMessage = string.Format("Creada = {0}", result.Success);
+            }
+            else
+            {
+                userMessage = string.Format("Mensaje = {0} No creada = {1}", result.Message, result.Success);
+            }
+
+            MessageBox.Show(userMessage);
+        }
+
+        private void borrarDropToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var userMessage = "";
+            var connectionInfo = GetConnectionInformation();
+            var dataAccess = new DataAccess(connectionInfo);
+            var result = dataAccess.DropDatabase();
+
+            if (result.Success)
+            {
+                userMessage = string.Format("Borrada = {0}", result.Success);
+            }
+            else
+            {
+                userMessage = string.Format("Mensaje = {0} No borrada = {1}", result.Message, result.Success);
+            }
+
+            MessageBox.Show(userMessage);
         }
     }
 }

@@ -51,26 +51,54 @@ namespace FireManager.Controllers
             return result;
         }
 
+        public Result CreateDatabase()
+        {
+            var result = new Result();
+            try
+            {
+                var connectionString = CreateConnectionString();
+
+                if (!string.IsNullOrWhiteSpace(connectionString))
+                {
+                    FbConnection.CreateDatabase(connectionString);
+                }
+                result.Success = true;
+                result.Message = "Creada";
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
+        public Result DropDatabase()
+        {
+            var result = new Result();
+            try
+            {
+                var connectionString = CreateConnectionString();
+
+                if (!string.IsNullOrWhiteSpace(connectionString))
+                {
+                    FbConnection.DropDatabase(connectionString);
+                }
+                result.Success = true;
+                result.Message = "Borrada";
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = ex.Message;
+            }
+
+            return result;
+        }
+
         public string CreateConnectionString()
         {
-
-            // Set the ServerType to 1 for connect to the embedded server
-         /*   string connectionString =
-            "User=SYSDBA;" +
-            "Password=masterkey;" +
-            "Database=SampleDatabase.fdb;" +
-            "DataSource=localhost;" +
-            "Port=3050;" +
-            "Dialect=3;" +
-            "Charset=NONE;" +
-            "Role=;" +
-            "Connection lifetime=15;" +
-            "Pooling=true;" +
-            "MinPoolSize=0;" +
-            "MaxPoolSize=50;" +
-            "Packet Size=8192;" +
-            "ServerType=0";*/
-
             var connectionString = string.Format("Server={0};Port={1};User Id={2};Password={3};Database={4}",
                 _connectionData.ServerName, _connectionData.PortNumber, _connectionData.UserName, _connectionData.Password, _connectionData.DatabaseName);
 
