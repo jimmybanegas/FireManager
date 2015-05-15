@@ -155,84 +155,8 @@ namespace FireManager.Views
             {
 
                 userMessage = string.Format("Hay conexión = {0}", result.Success);
-
-                var connData = GetConnectionInformation();
-
-                var tablas = FbObjetos.GetTables(connData);
-                var dominios = FbObjetos.GetDomains(connData);
-                var funciones = FbObjetos.GetFunctions(connData);
-                var generadores = FbObjetos.GetGenerators(connData);
-                var procedimientos = FbObjetos.GetProcedures(connData);
-                var triggers = FbObjetos.GetTriggers(connData);
-                var vistas = FbObjetos.GetViews(connData);
-
-                //GETTING TABLES
-                var misTablas = tablas.Select("TABLE_NAME <> ''");
-
-                var arrayTablas = misTablas.Select(row => new TreeNode((string) row["TABLE_NAME"])).ToArray();//
-
-                var treeNode = new TreeNode("Tablas", arrayTablas);
-
-                treeView1.Nodes.Add(treeNode);
-
-
-                //GETTING DOMAINS
-                var misDominios  = dominios.Select("DOMAIN_NAME <> ''");
-
-                var arrayDominios = misDominios.Select(row => new TreeNode((string)row["DOMAIN_NAME"])).ToArray();//
-
-                treeNode = new TreeNode("Dominios", arrayDominios);
-
-                treeView1.Nodes.Add(treeNode);
-                
-
-                //GETTING FUNCTIONS
-                var misFunciones = funciones.Select("IS_SYSTEM_FUNCTION = 0 ");
-
-                var arrayFunciones = misFunciones.Select(row => new TreeNode((string)row["FUNCTION_NAME"])).ToArray();//
-
-                treeNode = new TreeNode("Funciones", arrayFunciones);
-
-                treeView1.Nodes.Add(treeNode);
-
-
-                //GETTING GENERATORS
-                var misGeneradores = generadores.Select("IS_SYSTEM_GENERATOR = 0");
-
-                var arrayGeneradores = misGeneradores.Select(row => new TreeNode((string)row["GENERATOR_NAME"])).ToArray();//
-                
-                treeNode = new TreeNode("Generadores", arrayGeneradores);
-
-                treeView1.Nodes.Add(treeNode);
-
-
-                //GETTING PROCEDURES
-                var misProcedimientos = procedimientos.Select("IS_SYSTEM_PROCEDURE = 0");
-
-                var arrayProcedimientos = misProcedimientos.Select(row => new TreeNode((string)row["PROCEDURE_NAME"])).ToArray();//
-
-                treeNode = new TreeNode("Procedimientos", arrayProcedimientos);
-
-                treeView1.Nodes.Add(treeNode);
-
-
-                //GETTING TRIGGERS
-                var misTriggers  = triggers.Select("IS_SYSTEM_TRIGGER = 0 ");
-                var arrayTriggers = misTriggers.Select(row => new TreeNode((string)row["TRIGGER_NAME"])).ToArray();//
-
-                treeNode = new TreeNode("Triggers", arrayTriggers);
-
-                treeView1.Nodes.Add(treeNode);
-
-
-                //GETTING VIEWS
-                var misVistas = vistas.Select("IS_SYSTEM_VIEW = 0");
-
-                var arrayVistas = misVistas.Select(row => new TreeNode((string)row["VIEW_NAME"])).ToArray();//
-
-                treeNode = new TreeNode("Vistas", arrayVistas);
-
-                treeView1.Nodes.Add(treeNode);
+           
+                SetTreeValues(connectionInfo);
             }
             else
             {
@@ -242,6 +166,86 @@ namespace FireManager.Views
             MessageBox.Show(userMessage);
 
            
+        }
+
+        public void SetTreeValues(ConnectionData connData)
+        {
+            var tablas = FbObjetos.GetTables(connData);
+            var dominios = FbObjetos.GetDomains(connData);
+            var funciones = FbObjetos.GetFunctions(connData);
+            var generadores = FbObjetos.GetGenerators(connData);
+            var procedimientos = FbObjetos.GetProcedures(connData);
+            var triggers = FbObjetos.GetTriggers(connData);
+            var vistas = FbObjetos.GetViews(connData);
+
+            //GETTING TABLES
+            var misTablas = tablas.Select("TABLE_NAME <> ''");
+
+            var arrayTablas = misTablas.Select(row => new TreeNode((string) row["TABLE_NAME"])).ToArray(); //
+
+            var treeNode = new TreeNode("Tablas", arrayTablas);
+
+            treeView1.Nodes.Add(treeNode);
+
+
+            //GETTING DOMAINS
+            var misDominios = dominios.Select("DOMAIN_NAME <> ''");
+
+            var arrayDominios = misDominios.Select(row => new TreeNode((string) row["DOMAIN_NAME"])).ToArray(); //
+
+            treeNode = new TreeNode("Dominios", arrayDominios);
+
+            treeView1.Nodes.Add(treeNode);
+
+
+            //GETTING FUNCTIONS
+            var misFunciones = funciones.Select("IS_SYSTEM_FUNCTION = 0 ");
+
+            var arrayFunciones = misFunciones.Select(row => new TreeNode((string) row["FUNCTION_NAME"])).ToArray(); //
+
+            treeNode = new TreeNode("Funciones", arrayFunciones);
+
+            treeView1.Nodes.Add(treeNode);
+
+
+            //GETTING GENERATORS
+            var misGeneradores = generadores.Select("IS_SYSTEM_GENERATOR = 0");
+
+            var arrayGeneradores = misGeneradores.Select(row => new TreeNode((string) row["GENERATOR_NAME"])).ToArray(); //
+
+            treeNode = new TreeNode("Generadores", arrayGeneradores);
+
+            treeView1.Nodes.Add(treeNode);
+
+
+            //GETTING PROCEDURES
+            var misProcedimientos = procedimientos.Select("IS_SYSTEM_PROCEDURE = 0");
+
+            var arrayProcedimientos = misProcedimientos.Select(row => new TreeNode((string) row["PROCEDURE_NAME"])).ToArray();
+                //
+
+            treeNode = new TreeNode("Procedimientos", arrayProcedimientos);
+
+            treeView1.Nodes.Add(treeNode);
+
+
+            //GETTING TRIGGERS
+            var misTriggers = triggers.Select("IS_SYSTEM_TRIGGER = 0 ");
+            var arrayTriggers = misTriggers.Select(row => new TreeNode((string) row["TRIGGER_NAME"])).ToArray(); //
+
+            treeNode = new TreeNode("Triggers", arrayTriggers);
+
+            treeView1.Nodes.Add(treeNode);
+
+
+            //GETTING VIEWS
+            var misVistas = vistas.Select("IS_SYSTEM_VIEW = 0");
+
+            var arrayVistas = misVistas.Select(row => new TreeNode((string) row["VIEW_NAME"])).ToArray(); //
+
+            treeNode = new TreeNode("Vistas", arrayVistas);
+
+            treeView1.Nodes.Add(treeNode);
         }
 
         private ConnectionData GetConnectionInformation()
@@ -287,20 +291,7 @@ namespace FireManager.Views
 
                 connectionData = profileManager.GetSavedProfile(filePath);
 
-                DataTable tablas = FbObjetos.GetTables(connectionData);
-                DataTable dominios = FbObjetos.GetDomains(connectionData);
-                DataTable funciones = FbObjetos.GetFunctions(connectionData);
-                DataTable generadores = FbObjetos.GetGenerators(connectionData);
-                DataTable procedimientos = FbObjetos.GetProcedures(connectionData);
-                DataTable triggers = FbObjetos.GetTriggers(connectionData);
-                DataTable vistas = FbObjetos.GetViews(connectionData);
-
-             /*   DataRow[] result = tablas.Select("Size >= 230 AND Sex = 'm'");
-                foreach (DataRow row in result)
-                {
-                    Console.WriteLine("{0}, {1}", row[0], row[1]);
-                }*/
-                
+                SetTreeValues(connectionData);
             }
 
             return connectionData;
