@@ -51,8 +51,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                   dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                   dataTable = connection.GetSchema("Tables", new string[] {null, null, null, "TABLE"});
                 }
             }
             catch (Exception ex)
@@ -172,8 +171,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Domains");
                 }
             }
             catch (Exception ex)
@@ -244,8 +242,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Functions");
                 }
             }
             catch (Exception ex)
@@ -268,8 +265,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Generators");
                 }
             }
             catch (Exception ex)
@@ -412,8 +408,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Procedures");
                 }
             }
             catch (Exception ex)
@@ -460,8 +455,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Roles");
                 }
             }
             catch (Exception ex)
@@ -556,8 +550,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Triggers");
                 }
             }
             catch (Exception ex)
@@ -628,8 +621,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Views");
                 }
             }
             catch (Exception ex)

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 using FireManager.Controllers;
 using FireManager.Forms;
@@ -17,45 +19,7 @@ namespace FireManager.Views
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            var treeNode = new TreeNode("Dominios");
-            treeView1.Nodes.Add(treeNode);
-            //
-            // Another node following the first node.
-            //
-            treeNode = new TreeNode("Funciones");
-            treeView1.Nodes.Add(treeNode);
-
-            treeNode = new TreeNode("Generadores");
-            treeView1.Nodes.Add(treeNode);
-
-            treeNode = new TreeNode("Procedimientos");
-            treeView1.Nodes.Add(treeNode);
-
-            treeNode = new TreeNode("Roles");
-            treeView1.Nodes.Add(treeNode);
-
-            treeNode = new TreeNode("Tablas");
-            treeView1.Nodes.Add(treeNode);
-
-            treeNode = new TreeNode("Triggers");
-            treeView1.Nodes.Add(treeNode);
-
-            treeNode = new TreeNode("Vistas");
-            treeView1.Nodes.Add(treeNode);
-            //
-            // Create two child nodes and put them in an array.
-            // ... Add the third node, and specify these as its children.
-            //
-
-            TreeNode node2 = new TreeNode("VB.NET");
-            TreeNode node3 = new TreeNode("VB.NET");
-            TreeNode[] array = new TreeNode[] { node2, node3 };
-            //
-            // Final node.
-            //
-            treeNode = new TreeNode("Dot Net Perls", array);
-            treeView1.Nodes.Add(treeNode);
+           
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -185,19 +149,90 @@ namespace FireManager.Views
             var dataAccess = new DataAccess(connectionInfo);
             var result = dataAccess.TestDatabaseConnection();
 
+            treeView1.Nodes.Clear();
+
             if (result.Success)
             {
+
                 userMessage = string.Format("Hay conexión = {0}", result.Success);
 
                 var connData = GetConnectionInformation();
 
-                DataTable tablas = FbObjetos.GetTables(connData);
-                DataTable dominios = FbObjetos.GetDomains(connData);
-                DataTable funciones = FbObjetos.GetFunctions(connData);
-                DataTable generadores = FbObjetos.GetGenerators(connData);
-                DataTable procedimientos = FbObjetos.GetProcedures(connData);
-                DataTable triggers = FbObjetos.GetTriggers(connData);
-                DataTable vistas = FbObjetos.GetViews(connData);
+                var tablas = FbObjetos.GetTables(connData);
+                var dominios = FbObjetos.GetDomains(connData);
+                var funciones = FbObjetos.GetFunctions(connData);
+                var generadores = FbObjetos.GetGenerators(connData);
+                var procedimientos = FbObjetos.GetProcedures(connData);
+                var triggers = FbObjetos.GetTriggers(connData);
+                var vistas = FbObjetos.GetViews(connData);
+
+                //GETTING TABLES
+                var misTablas = tablas.Select("TABLE_NAME <> ''");
+
+                var arrayTablas = misTablas.Select(row => new TreeNode((string) row["TABLE_NAME"])).ToArray();//
+
+                var treeNode = new TreeNode("Tablas", arrayTablas);
+
+                treeView1.Nodes.Add(treeNode);
+
+
+                //GETTING DOMAINS
+                var misDominios  = dominios.Select("DOMAIN_NAME <> ''");
+
+                var arrayDominios = misDominios.Select(row => new TreeNode((string)row["DOMAIN_NAME"])).ToArray();//
+
+                treeNode = new TreeNode("Dominios", arrayDominios);
+
+                treeView1.Nodes.Add(treeNode);
+                
+
+                //GETTING FUNCTIONS
+                var misFunciones = funciones.Select("IS_SYSTEM_FUNCTION = 0 ");
+
+                var arrayFunciones = misFunciones.Select(row => new TreeNode((string)row["FUNCTION_NAME"])).ToArray();//
+
+                treeNode = new TreeNode("Funciones", arrayFunciones);
+
+                treeView1.Nodes.Add(treeNode);
+
+
+                //GETTING GENERATORS
+                var misGeneradores = generadores.Select("IS_SYSTEM_GENERATOR = 0");
+
+                var arrayGeneradores = misGeneradores.Select(row => new TreeNode((string)row["GENERATOR_NAME"])).ToArray();//
+                
+                treeNode = new TreeNode("Generadores", arrayGeneradores);
+
+                treeView1.Nodes.Add(treeNode);
+
+
+                //GETTING PROCEDURES
+                var misProcedimientos = procedimientos.Select("IS_SYSTEM_PROCEDURE = 0");
+
+                var arrayProcedimientos = misProcedimientos.Select(row => new TreeNode((string)row["PROCEDURE_NAME"])).ToArray();//
+
+                treeNode = new TreeNode("Procedimientos", arrayProcedimientos);
+
+                treeView1.Nodes.Add(treeNode);
+
+
+                //GETTING TRIGGERS
+                var misTriggers  = triggers.Select("IS_SYSTEM_TRIGGER = 0 ");
+                var arrayTriggers = misTriggers.Select(row => new TreeNode((string)row["TRIGGER_NAME"])).ToArray();//
+
+                treeNode = new TreeNode("Triggers", arrayTriggers);
+
+                treeView1.Nodes.Add(treeNode);
+
+
+                //GETTING VIEWS
+                var misVistas = vistas.Select("IS_SYSTEM_VIEW = 0");
+
+                var arrayVistas = misVistas.Select(row => new TreeNode((string)row["VIEW_NAME"])).ToArray();//
+
+                treeNode = new TreeNode("Vistas", arrayVistas);
+
+                treeView1.Nodes.Add(treeNode);
             }
             else
             {
@@ -251,17 +286,22 @@ namespace FireManager.Views
                 var filePath = openFileDialog1.FileName;
 
                 connectionData = profileManager.GetSavedProfile(filePath);
+
+                DataTable tablas = FbObjetos.GetTables(connectionData);
+                DataTable dominios = FbObjetos.GetDomains(connectionData);
+                DataTable funciones = FbObjetos.GetFunctions(connectionData);
+                DataTable generadores = FbObjetos.GetGenerators(connectionData);
+                DataTable procedimientos = FbObjetos.GetProcedures(connectionData);
+                DataTable triggers = FbObjetos.GetTriggers(connectionData);
+                DataTable vistas = FbObjetos.GetViews(connectionData);
+
+             /*   DataRow[] result = tablas.Select("Size >= 230 AND Sex = 'm'");
+                foreach (DataRow row in result)
+                {
+                    Console.WriteLine("{0}, {1}", row[0], row[1]);
+                }*/
+                
             }
-
-        //    var connData = GetConnectionInformation();
-
-            DataTable tablas = FbObjetos.GetTables(connectionData);
-            DataTable dominios = FbObjetos.GetDomains(connectionData);
-            DataTable funciones = FbObjetos.GetFunctions(connectionData);
-            DataTable generadores = FbObjetos.GetGenerators(connectionData);
-            DataTable procedimientos = FbObjetos.GetProcedures(connectionData);
-            DataTable triggers = FbObjetos.GetTriggers(connectionData);
-            DataTable vistas = FbObjetos.GetViews(connectionData);
 
             return connectionData;
         }
