@@ -114,5 +114,15 @@ namespace FireManager.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public static Result CrearTrigger(Trigger trigger)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Result CrearVista(MyView vista)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

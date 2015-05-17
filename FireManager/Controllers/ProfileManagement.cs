@@ -15,7 +15,7 @@ namespace FireManager.Controllers
 
             try
             {
-                XmlTextWriter writer = new XmlTextWriter(file, Encoding.UTF8);
+                var writer = new XmlTextWriter(file, Encoding.UTF8);
 
                 writer.WriteStartDocument(true);
                 writer.Formatting = Formatting.Indented;

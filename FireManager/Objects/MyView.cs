@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace FireManager.Objects
 {
-    public class View
+    public class MyView
     {
         public string Nombre { get; set; }
 
-        public Table Tabla { get; set; }
+        public string Tabla { get; set; }
 
-        public List<Field> Campos { get; set; }
+        public List<string> Campos { get; set; }
 
         public void Inicializar()
         {
-            Campos = new List<Field>();
+            Campos = new List<string>();
         }
     }
 }

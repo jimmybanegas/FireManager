@@ -56,6 +56,7 @@
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtNombre
             // 
@@ -125,6 +126,7 @@
             this.Name = "CreateView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crear Nueva Vista";
+            this.Load += new System.EventHandler(this.CreateView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

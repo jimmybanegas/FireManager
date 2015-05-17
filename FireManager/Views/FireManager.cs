@@ -246,6 +246,8 @@ namespace FireManager.Views
             treeNode = new TreeNode("Vistas", arrayVistas);
 
             treeView1.Nodes.Add(treeNode);
+
+            nuevoObejtoToolStripMenuItem.Enabled = true;
         }
 
         public  ConnectionData GetConnectionInformation()
@@ -281,7 +283,7 @@ namespace FireManager.Views
             var dialogResult = new Result();
 
             openFileDialog1.FileName = "";
-            openFileDialog1.InitialDirectory = @"C:\";
+            openFileDialog1.InitialDirectory = @"C:\Documents";
             openFileDialog1.Filter = Resources.FireManager_LoadProfile_Firebird_Profile_File____XML____XML;
             var openDialogResult = openFileDialog1.ShowDialog();
 
@@ -309,7 +311,7 @@ namespace FireManager.Views
             var result = new Result();
 
             saveFileDialog1.FileName = "Profile";
-            saveFileDialog1.InitialDirectory = @"C:\";
+            saveFileDialog1.InitialDirectory = @"C:\Documents";
             saveFileDialog1.Filter = Resources.FireManager_LoadProfile_Firebird_Profile_File____XML____XML;
 
             var saveDialogResult = saveFileDialog1.ShowDialog();
@@ -356,7 +358,7 @@ namespace FireManager.Views
 
         private void vistaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var nuevaVista = new CreateView();
+            var nuevaVista = new CreateView(this);
 
             nuevaVista.Show();
         }

@@ -126,4 +126,7 @@
   <data name="Click_Nombre_vacío" xml:space="preserve">
     <value>Nombre vacío</value>
   </data>
+  <data name="Click_Parámetros_vacíos" xml:space="preserve">
+    <value>Parámetros vacíos</value>
+  </data>
 </root>

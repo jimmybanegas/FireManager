@@ -49,6 +49,11 @@ namespace FireManager.Views
                 return;
             }
 
+            if (Procedimiento.Parametros.Count == 0)
+            {
+                MessageBox.Show(Resources.Click_Parámetros_vacíos);
+                return;
+            }
 
             Procedimiento.Nombre = txtNombre.Text;
             Procedimiento.Comentario = txtComentario.Text;

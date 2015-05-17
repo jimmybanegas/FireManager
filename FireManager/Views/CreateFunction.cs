@@ -44,6 +44,12 @@ namespace FireManager.Views
                 return;
             }
 
+            if (Funcion.Parametros.Count == 0)
+            {
+                MessageBox.Show(Resources.Click_Parámetros_vacíos);
+                return;
+            }
+
             Funcion.Nombre = txtNombre.Text;
             Funcion.Comentario = txtComentario.Text;
 

@@ -14,7 +14,7 @@ namespace FireManager.Objects
 
         public string Comentario { get; set; }
 
-        public Table Tabla { get; set; }
+        public string Tabla { get; set; }
 
         public TriggerEvent Evento { get; set; }
 
@@ -25,10 +25,6 @@ namespace FireManager.Objects
         public bool Activo { get; set; }
 
         public string Definicion { get; set; }
-
-        public void Inicializar()
-        {
-            Tabla= new Table();
-        }
+       
     }
 }

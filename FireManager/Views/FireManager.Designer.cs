@@ -144,6 +144,7 @@
             this.tablaToolStripMenuItem,
             this.triggerToolStripMenuItem,
             this.vistaToolStripMenuItem});
+            this.nuevoObejtoToolStripMenuItem.Enabled = false;
             this.nuevoObejtoToolStripMenuItem.Name = "nuevoObejtoToolStripMenuItem";
             this.nuevoObejtoToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.nuevoObejtoToolStripMenuItem.Text = "Nuevo Objeto";

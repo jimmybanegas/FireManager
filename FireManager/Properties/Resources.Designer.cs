@@ -70,6 +70,15 @@ namespace FireManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parámetros vacíos.
+        /// </summary>
+        internal static string Click_Parámetros_vacíos {
+            get {
+                return ResourceManager.GetString("Click_Parámetros_vacíos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No hay nada que guardar.
         /// </summary>
         internal static string FireManager_btSaveQuery_Click_No_hay_nada_que_guardar {

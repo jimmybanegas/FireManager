@@ -59,7 +59,7 @@ namespace FireManager.Views
             
             foreach (var item in checkedListBox1.CheckedItems)
             {
-              Indice.Campos.Add(Tabla.Tabla.Campos.Find(x=>x.Nombre==checkedListBox1.GetItemText(item)));  
+               Indice.Campos.Add(Tabla.Tabla.Campos.Find(x=>x.Nombre==checkedListBox1.GetItemText(item)));  
             }
 
             Tabla.Tabla.Indices.Add(Indice);
