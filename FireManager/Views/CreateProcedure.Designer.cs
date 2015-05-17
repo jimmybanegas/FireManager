@@ -64,6 +64,7 @@
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtComentario
             // 
@@ -171,6 +172,7 @@
             this.Name = "CreateProcedure";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crear Nuevo Procedimiento";
+            this.Load += new System.EventHandler(this.CreateProcedure_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewParameters)).EndInit();

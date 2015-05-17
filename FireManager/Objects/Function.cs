@@ -13,6 +13,11 @@ namespace FireManager.Objects
 
         public string Comentario { get; set; }
 
-        public List<FunctionParameter> Parametros { get; set; } 
+        public List<FuncParameter> Parametros { get; set; }
+
+        public void Inicializar()
+        {
+            Parametros = new List<FuncParameter>();
+        }
     }
 }

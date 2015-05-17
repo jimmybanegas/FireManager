@@ -248,7 +248,7 @@ namespace FireManager.Views
             treeView1.Nodes.Add(treeNode);
         }
 
-        private ConnectionData GetConnectionInformation()
+        public  ConnectionData GetConnectionInformation()
         {
             var data = new ConnectionData
             {
@@ -342,7 +342,7 @@ namespace FireManager.Views
 
         private void tablaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var nuevaTabla = new CreateTable();
+            var nuevaTabla = new CreateTable(this);
 
             nuevaTabla.Show();
         }
@@ -363,28 +363,28 @@ namespace FireManager.Views
 
         private void triggerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var nuevoTrigger = new CreateTrigger();
+            var nuevoTrigger = new CreateTrigger(this);
 
             nuevoTrigger.Show();
         }
 
         private void generadorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var nuevoGenerador = new CreateGenerator();
+            var nuevoGenerador = new CreateGenerator(this);
 
             nuevoGenerador.Show();
         }
 
         private void funciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var nuevaFuncion = new CreateFunction();
+            var nuevaFuncion = new CreateFunction(this);
 
             nuevaFuncion.Show();
         }
 
         private void dominioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var nuevoDominio = new CreateDomain();
+            var nuevoDominio = new CreateDomain(this);
 
             nuevoDominio.Show();
         }
@@ -425,6 +425,11 @@ namespace FireManager.Views
             }
 
             MessageBox.Show(userMessage);
+        }
+
+        private void rolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

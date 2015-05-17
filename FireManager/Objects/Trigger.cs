@@ -25,5 +25,10 @@ namespace FireManager.Objects
         public bool Activo { get; set; }
 
         public string Definicion { get; set; }
+
+        public void Inicializar()
+        {
+            Tabla= new Table();
+        }
     }
 }

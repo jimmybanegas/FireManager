@@ -43,13 +43,13 @@
             this.lblValor.AutoSize = true;
             this.lblValor.Location = new System.Drawing.Point(58, 81);
             this.lblValor.Name = "lblValor";
-            this.lblValor.Size = new System.Drawing.Size(44, 13);
+            this.lblValor.Size = new System.Drawing.Size(141, 13);
             this.lblValor.TabIndex = 30;
             this.lblValor.Text = "ScopeProcedureParameter: ";
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(114, 35);
+            this.txtNombre.Location = new System.Drawing.Point(160, 38);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(166, 20);
             this.txtNombre.TabIndex = 29;
@@ -82,6 +82,7 @@
             this.btnGuardar.TabIndex = 26;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // label1
             // 
@@ -95,7 +96,7 @@
             // cmbScope
             // 
             this.cmbScope.FormattingEnabled = true;
-            this.cmbScope.Location = new System.Drawing.Point(114, 78);
+            this.cmbScope.Location = new System.Drawing.Point(205, 78);
             this.cmbScope.Name = "cmbScope";
             this.cmbScope.Size = new System.Drawing.Size(121, 21);
             this.cmbScope.TabIndex = 32;
@@ -103,7 +104,7 @@
             // cmbTipo
             // 
             this.cmbTipo.FormattingEnabled = true;
-            this.cmbTipo.Location = new System.Drawing.Point(114, 121);
+            this.cmbTipo.Location = new System.Drawing.Point(205, 124);
             this.cmbTipo.Name = "cmbTipo";
             this.cmbTipo.Size = new System.Drawing.Size(121, 21);
             this.cmbTipo.TabIndex = 33;
@@ -124,6 +125,7 @@
             this.Name = "ProcedureParameter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nuevo Parámetro";
+            this.Load += new System.EventHandler(this.ProcedureParameter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

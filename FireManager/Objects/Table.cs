@@ -15,5 +15,15 @@ namespace FireManager.Objects
 
         public List<ForeignKey> Foraneas { get; set; }
 
+
+        public void Inicializar()
+        {
+            Campos = new List<Field>();
+            Indices = new List<Index>();
+            Foraneas = new List<ForeignKey>();
+        }
+
     }
+
+  
 }

@@ -117,6 +117,7 @@
             this.dataGridViewFields.Name = "dataGridViewFields";
             this.dataGridViewFields.Size = new System.Drawing.Size(490, 210);
             this.dataGridViewFields.TabIndex = 0;
+            this.dataGridViewFields.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFields_CellContentClick);
             // 
             // tabPage2
             // 
@@ -186,6 +187,7 @@
             this.btnGuardar.TabIndex = 3;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 

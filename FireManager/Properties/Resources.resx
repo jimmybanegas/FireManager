@@ -123,4 +123,7 @@
   <data name="FireManager_LoadProfile_Firebird_Profile_File____XML____XML" xml:space="preserve">
     <value>Firebird Profile File (*.XML)|*.XML</value>
   </data>
+  <data name="Click_Nombre_vacío" xml:space="preserve">
+    <value>Nombre vacío</value>
+  </data>
 </root>

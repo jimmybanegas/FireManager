@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FireManager.Models;
+using FireManager.Objects;
 
 namespace FireManager.Controllers
 {
@@ -87,6 +89,30 @@ namespace FireManager.Controllers
         }
 
 
+        public static Result CrearDominio(Domain dominio)
+        {
+            return null;
+        }
 
+        public static Result CrearTabla(Table tabla)
+        {
+            return null;
+        }
+
+
+        public static Result CrearFuncion(Function funcion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Result CrearGenerador(Generator generador)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Result CrearProcedimiento(Procedure procedimiento)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

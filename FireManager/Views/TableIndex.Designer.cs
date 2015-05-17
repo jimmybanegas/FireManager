@@ -54,6 +54,7 @@
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(463, 199);
             this.checkedListBox1.TabIndex = 19;
+            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // lblComentario
             // 
@@ -98,6 +99,7 @@
             this.btnGuardar.TabIndex = 13;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtComentario
             // 
@@ -123,6 +125,7 @@
             this.Name = "TableIndex";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Indices";
+            this.Load += new System.EventHandler(this.TableIndex_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

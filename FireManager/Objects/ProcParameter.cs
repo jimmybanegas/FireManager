@@ -3,7 +3,7 @@ using FireManager.Models;
 
 namespace FireManager.Objects
 {
-    public class ProcedureParameter
+    public class ProcParameter
     {
         public string Nombre { get; set; }
         

@@ -90,6 +90,7 @@
             this.btnGuardar.TabIndex = 34;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // chkIsReturn
             // 
@@ -116,6 +117,7 @@
             this.Name = "FunctionParameter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Parámetro";
+            this.Load += new System.EventHandler(this.FunctionParameter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

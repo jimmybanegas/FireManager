@@ -110,7 +110,7 @@ namespace FireManager.Controllers
             return dataTable;
         }
 
-       public static DataTable GetColumns(ConnectionData connectionData)
+       public static DataTable GetColumns(ConnectionData connectionData,string tableName)
         {
             var dataTable = new DataTable();
             var access = new DataAccess(connectionData);
@@ -122,8 +122,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Columns", new[] { null, null, tableName });
                 }
             }
             catch (Exception ex)

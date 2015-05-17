@@ -12,7 +12,7 @@ namespace FireManager.Views
 {
     public partial class CreateTrigger : Form
     {
-        public CreateTrigger()
+        public CreateTrigger(FireManager fireManager)
         {
             InitializeComponent();
         }

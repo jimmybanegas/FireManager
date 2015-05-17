@@ -128,7 +128,7 @@
             // borrarDropToolStripMenuItem
             // 
             this.borrarDropToolStripMenuItem.Name = "borrarDropToolStripMenuItem";
-            this.borrarDropToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.borrarDropToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.borrarDropToolStripMenuItem.Text = "Borrar (Drop)";
             this.borrarDropToolStripMenuItem.Click += new System.EventHandler(this.borrarDropToolStripMenuItem_Click);
             // 
@@ -188,6 +188,7 @@
             this.rolToolStripMenuItem.Name = "rolToolStripMenuItem";
             this.rolToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rolToolStripMenuItem.Text = "Rol";
+            this.rolToolStripMenuItem.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
             // 
             // tablaToolStripMenuItem
             // 

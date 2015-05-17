@@ -8,6 +8,11 @@ namespace FireManager.Objects
 
         public string Comentario { get; set; }
 
-        public List<Field> Campos { get; set; } 
+        public List<Field> Campos { get; set; }
+
+        public void Inicializar()
+        {
+            Campos = new List<Field>();
+        }
     }
 }

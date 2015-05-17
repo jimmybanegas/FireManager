@@ -12,6 +12,13 @@ namespace FireManager.Objects
 
         public string Comentario { get; set; }
 
-        public List<ProcedureParameter> Parametros { get; set; } 
+        public string Definicion { get; set; }
+
+        public List<ProcParameter> Parametros { get; set; }
+
+        public void Inicializar()
+        {
+            Parametros = new List<ProcParameter>();
+        }
     }
 }

@@ -47,6 +47,7 @@
             this.cmbForeignTable.Name = "cmbForeignTable";
             this.cmbForeignTable.Size = new System.Drawing.Size(166, 21);
             this.cmbForeignTable.TabIndex = 41;
+            this.cmbForeignTable.SelectedIndexChanged += new System.EventHandler(this.cmbForeignTable_SelectedIndexChanged);
             // 
             // cmbField
             // 
@@ -55,6 +56,7 @@
             this.cmbField.Name = "cmbField";
             this.cmbField.Size = new System.Drawing.Size(166, 21);
             this.cmbField.TabIndex = 40;
+            this.cmbField.SelectedIndexChanged += new System.EventHandler(this.cmbField_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -108,6 +110,7 @@
             this.btnGuardar.TabIndex = 34;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // cmbForeignColumn
             // 
@@ -144,6 +147,7 @@
             this.Name = "TableForeignKey";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Llave Foránea";
+            this.Load += new System.EventHandler(this.TableForeignKey_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

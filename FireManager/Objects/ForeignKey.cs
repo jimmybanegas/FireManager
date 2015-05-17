@@ -4,10 +4,10 @@
     {
         public string Nombre { get; set; }
 
-        public Field Campo { get; set; }
+        public string Campo { get; set; }
 
-        public Table TablaReferida { get; set; }
+        public string TablaReferida { get; set; }
 
-        public Field CampoReferico { get; set; }
+        public string CampoReferico { get; set; }
     }
 }

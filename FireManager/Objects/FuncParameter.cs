@@ -3,7 +3,7 @@ using FireManager.Models;
 
 namespace FireManager.Objects
 {
-    public class FunctionParameter
+    public class FuncParameter
     {
         public MechanismFunctionParameter Mecanismo { get; set; }
 
