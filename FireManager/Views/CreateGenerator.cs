@@ -17,10 +17,12 @@ namespace FireManager.Views
     public partial class CreateGenerator : Form
     {
         private Generator Generador;
+        private FireManager Padre;
 
         public CreateGenerator(FireManager fireManager)
         {
             InitializeComponent();
+            Padre = fireManager;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -45,6 +47,10 @@ namespace FireManager.Views
             Generador.Tamano = (int) numericUpDown1.Value;
 
             var resultado = MetadataItemCreateStatement.CrearGenerador(Generador);
+
+            Padre.SetQueryText(resultado.Message);
+
+            Close();
 
         }
 

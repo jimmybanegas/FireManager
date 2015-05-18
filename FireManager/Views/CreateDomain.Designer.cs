@@ -45,7 +45,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(225, 319);
+            this.btnCancelar.Location = new System.Drawing.Point(225, 267);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(98, 34);
             this.btnCancelar.TabIndex = 6;
@@ -55,7 +55,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(42, 319);
+            this.btnGuardar.Location = new System.Drawing.Point(42, 267);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(98, 34);
             this.btnGuardar.TabIndex = 5;
@@ -116,16 +116,17 @@
             // lblTamano
             // 
             this.lblTamano.AutoSize = true;
-            this.lblTamano.Location = new System.Drawing.Point(39, 191);
+            this.lblTamano.Location = new System.Drawing.Point(53, 248);
             this.lblTamano.Name = "lblTamano";
             this.lblTamano.Size = new System.Drawing.Size(52, 13);
             this.lblTamano.TabIndex = 14;
             this.lblTamano.Text = "Tamaño: ";
+            this.lblTamano.Visible = false;
             // 
             // lblNotNull
             // 
             this.lblNotNull.AutoSize = true;
-            this.lblNotNull.Location = new System.Drawing.Point(39, 250);
+            this.lblNotNull.Location = new System.Drawing.Point(41, 203);
             this.lblNotNull.Name = "lblNotNull";
             this.lblNotNull.Size = new System.Drawing.Size(48, 13);
             this.lblNotNull.TabIndex = 16;
@@ -134,7 +135,7 @@
             // chkNotNull
             // 
             this.chkNotNull.AutoSize = true;
-            this.chkNotNull.Location = new System.Drawing.Point(109, 250);
+            this.chkNotNull.Location = new System.Drawing.Point(109, 203);
             this.chkNotNull.Name = "chkNotNull";
             this.chkNotNull.Size = new System.Drawing.Size(15, 14);
             this.chkNotNull.TabIndex = 17;
@@ -142,16 +143,17 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(109, 191);
+            this.numericUpDown1.Location = new System.Drawing.Point(129, 241);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(131, 20);
             this.numericUpDown1.TabIndex = 18;
+            this.numericUpDown1.Visible = false;
             // 
             // CreateDomain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 382);
+            this.ClientSize = new System.Drawing.Size(375, 333);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.chkNotNull);
             this.Controls.Add(this.lblNotNull);

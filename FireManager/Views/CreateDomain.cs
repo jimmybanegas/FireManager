@@ -39,8 +39,7 @@ namespace FireManager.Views
         private void CreateDomain_Load(object sender, EventArgs e)
         {
             cmbTipo.DataSource = Enum.GetValues(typeof(DataTypes));
-            
-          
+            Dominio = new Domain();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -59,6 +58,9 @@ namespace FireManager.Views
 
             var resultado = MetadataItemCreateStatement.CrearDominio(Dominio);
 
+            Padre.SetQueryText(resultado.Message);
+
+            Close();
         }
     
     }

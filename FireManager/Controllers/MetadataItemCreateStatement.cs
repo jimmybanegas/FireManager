@@ -92,7 +92,30 @@ namespace FireManager.Controllers
 
         public static Result CrearDominio(Domain dominio)
         {
-            return null;
+            var result = new Result();
+            var sql = new StringBuilder();
+
+            try
+            {
+                var nulos = dominio.NoNulos ? "NOT NULL" : "";
+
+                sql.Append(@"CREATE DOMAIN " + dominio.Nombre + "\r\n" +
+                           "AS " + dominio.Tipo + "\r\n" + nulos + ";\r\n");
+
+                if (dominio.Comentario != "")
+                {
+                    sql.Append("\r\n\rCOMMENT ON DOMAIN " + dominio.Nombre + " IS '" + dominio.Comentario + "';\r\n\r");  
+                }
+
+                result.Message = sql.ToString().ToUpper();
+            }
+            catch (Exception ex)
+            {
+                
+                result.Message=ex.Message;
+            }
+            
+            return result;
         }
 
         public static Result CrearTabla(Table tabla)
@@ -100,7 +123,6 @@ namespace FireManager.Controllers
             var result = new Result();
             var sql = new StringBuilder();
             var comentarios = new StringBuilder();
-            
 
             try
             {
@@ -163,7 +185,7 @@ namespace FireManager.Controllers
 
                 if (tabla.Comentario != "")
                 {
-                    comentarios.Append("\r\n\r COMMENT ON TABLE " + tabla.Nombre + " IS '"+tabla.Comentario+"';\r\n\r");
+                    comentarios.Append("\r\n\rCOMMENT ON TABLE " + tabla.Nombre + " IS '"+tabla.Comentario+"';\r\n\r");
                 }
                 
 
@@ -175,12 +197,12 @@ namespace FireManager.Controllers
 
                         var ind = string.Join(",", indices);
 
-                        sql.Append("\r\n CREATE INDEX " + indice.Nombre+ " \r\n ON "+tabla.Nombre+"\r\n "
+                        sql.Append("\r\n\rCREATE INDEX " + indice.Nombre+ " \r\n ON "+tabla.Nombre+"\r\n "
                             +"("+ind+");\r\n\r");
 
                         if (indice.Comentario != "")
                         {
-                            comentarios.Append("\r\n COMMENT ON INDEX " + indice.Nombre + " IS '" + indice.Comentario + "';\r\n\r");
+                            comentarios.Append("\r\nCOMMENT ON INDEX " + indice.Nombre + " IS '" + indice.Comentario + "';\r\n\r");
                         }
                     }
                 }
@@ -197,36 +219,132 @@ namespace FireManager.Controllers
             
             return result;
         }
-
-
+        
         public static Result CrearFuncion(Function funcion)
         {
-            throw new NotImplementedException();
+            var result = new Result();
+            var sql = new StringBuilder();
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                result.Message = ex.Message;
+            }
+
+            return result;
         }
 
         public static Result CrearGenerador(Generator generador)
         {
-            throw new NotImplementedException();
+            var result = new Result();
+            var sql = new StringBuilder();
+
+            try
+            {
+                sql.Append(@"CREATE SEQUENCE " + generador.Nombre + ";\r\n");
+
+                sql.Append("\r\n\rALTER SEQUENCE " + generador.Nombre + " RESTART WITH " + generador.Tamano + ";\r\n\r");
+
+                result.Message = sql.ToString().ToUpper();   
+            }
+            catch (Exception ex)
+            {
+
+                result.Message = ex.Message;
+            }
+
+            return result;
         }
 
         public static Result CrearProcedimiento(Procedure procedimiento)
         {
-            throw new NotImplementedException();
+            var result = new Result();
+            var sql = new StringBuilder();
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                result.Message = ex.Message;
+            }
+
+            return result;
         }
 
         public static Result CrearTrigger(Trigger trigger)
         {
-            throw new NotImplementedException();
+            var result = new Result();
+            var sql = new StringBuilder();
+
+            try
+            {
+                var activo = trigger.Activo ? "ACTIVE" : "INACTIVE";
+                
+                sql.Append(@"SET TERM ^ ; "+"\r\n"+
+                "\r\n\rCREATE TRIGGER "+trigger.Nombre+" FOR "+trigger.Tabla+" \r\n"+
+                " "+activo+" " +trigger.Tipo+" "+trigger.Evento+" POSITION "+trigger.Posicion+" \r\n"+
+                "AS \r\n"+
+                "BEGIN \r\n"+
+                "   "+trigger.Definicion+ "\r\n"+
+                "END^\r\n\r"+
+                "\nSET TERM ; ^\r\n");
+
+                if (trigger.Comentario != "")
+                {
+                    sql.Append("\r\n\rCOMMENT ON TRIGGER " + trigger.Nombre + " IS '" + trigger.Comentario + "';\r\n\r");
+                }
+
+                result.Message = sql.ToString().ToUpper();
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+
+            return result;
         }
 
         public static Result CrearVista(MyView vista)
         {
-            throw new NotImplementedException();
+            var result = new Result();
+            var sql = new StringBuilder();
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                result.Message = ex.Message;
+            }
+
+            return result;
         }
 
         public static Result CrearUsuario(User usuario)
         {
-            throw new NotImplementedException();
+            var result = new Result();
+            var sql = new StringBuilder();
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                result.Message = ex.Message;
+            }
+
+            return result;
         }
     }
 }

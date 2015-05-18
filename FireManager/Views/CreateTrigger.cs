@@ -68,7 +68,7 @@ namespace FireManager.Views
             Trigger.Nombre = txtNombre.Text;
             Trigger.Comentario = txtComentario.Text;
             Trigger.Activo = chkActivo.Checked;
-            Trigger.Tabla = cmbTabla.SelectedText;
+            Trigger.Tabla = cmbTabla.Text;
             Trigger.Definicion = txtDefinicion.Text;
             Trigger.Evento = (TriggerEvent)cmbEvento.SelectedItem;
             Trigger.Tipo = (TriggerType)cmbTipo.SelectedItem;
@@ -76,8 +76,9 @@ namespace FireManager.Views
 
             var resultado = MetadataItemCreateStatement.CrearTrigger(Trigger);
 
+            Padre.SetQueryText(resultado.Message);
             
-
+            Close();
         }
 
         private void CreateTrigger_Load(object sender, EventArgs e)

@@ -78,9 +78,9 @@
             this.lblValor.AutoSize = true;
             this.lblValor.Location = new System.Drawing.Point(45, 75);
             this.lblValor.Name = "lblValor";
-            this.lblValor.Size = new System.Drawing.Size(52, 13);
+            this.lblValor.Size = new System.Drawing.Size(37, 13);
             this.lblValor.TabIndex = 16;
-            this.lblValor.Text = "Tamaño: ";
+            this.lblValor.Text = "Valor: ";
             this.lblValor.Click += new System.EventHandler(this.lblTamano_Click);
             // 
             // numericUpDown1
