@@ -433,5 +433,12 @@ namespace FireManager.Views
         {
 
         }
+
+        private void usuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var nuevoDominio = new CreateUser(this);
+
+            nuevoDominio.Show();
+        }
     }
 }

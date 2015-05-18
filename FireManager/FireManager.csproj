@@ -75,6 +75,7 @@
     <Compile Include="Objects\Table.cs" />
     <Compile Include="Objects\Trigger.cs" />
     <Compile Include="Objects\MyView.cs" />
+    <Compile Include="Objects\User.cs" />
     <Compile Include="Views\CreateDatabase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +117,12 @@
     </Compile>
     <Compile Include="Views\CreateTrigger.Designer.cs">
       <DependentUpon>CreateTrigger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CreateUser.Designer.cs">
+      <DependentUpon>CreateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\CreateView.cs">
       <SubType>Form</SubType>
@@ -181,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateTrigger.resx">
       <DependentUpon>CreateTrigger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CreateUser.resx">
+      <DependentUpon>CreateUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CreateView.resx">
       <DependentUpon>CreateView.cs</DependentUpon>

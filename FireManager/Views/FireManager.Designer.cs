@@ -68,6 +68,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCrear = new System.Windows.Forms.Button();
+            this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -143,7 +144,8 @@
             this.rolToolStripMenuItem,
             this.tablaToolStripMenuItem,
             this.triggerToolStripMenuItem,
-            this.vistaToolStripMenuItem});
+            this.vistaToolStripMenuItem,
+            this.usuarioToolStripMenuItem});
             this.nuevoObejtoToolStripMenuItem.Enabled = false;
             this.nuevoObejtoToolStripMenuItem.Name = "nuevoObejtoToolStripMenuItem";
             this.nuevoObejtoToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
@@ -396,6 +398,13 @@
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
+            // usuarioToolStripMenuItem
+            // 
+            this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.usuarioToolStripMenuItem.Text = "Usuario";
+            this.usuarioToolStripMenuItem.Click += new System.EventHandler(this.usuarioToolStripMenuItem_Click);
+            // 
             // FireManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -477,6 +486,7 @@
         private System.Windows.Forms.ToolStripMenuItem vistaToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnCrear;
+        private System.Windows.Forms.ToolStripMenuItem usuarioToolStripMenuItem;
     }
 }
 

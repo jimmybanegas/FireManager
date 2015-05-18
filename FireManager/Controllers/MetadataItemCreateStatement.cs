@@ -124,5 +124,10 @@ namespace FireManager.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public static Result CrearUsuario(User usuario)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
