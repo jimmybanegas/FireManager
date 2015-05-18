@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using FireManager.Models;
@@ -96,7 +97,105 @@ namespace FireManager.Controllers
 
         public static Result CrearTabla(Table tabla)
         {
-            return null;
+            var result = new Result();
+            var sql = new StringBuilder();
+            var comentarios = new StringBuilder();
+            
+
+            try
+            {
+                sql.Append(
+                    @"CREATE TABLE "+tabla.Nombre+ "( \r\n");
+
+                var primaryKeys = tabla.Campos.FindAll(x => x.EsLlavePrimaria).Select(x=>x.Nombre).ToArray();
+                
+                foreach (var campo in tabla.Campos)
+                {
+                    if (campo.NoNulos)
+                    {
+                        if (campo.Tamano > 0)
+                        {
+                            sql.Append("  "+campo.Nombre + " " + campo.Tipo + "(" + campo.Tamano + ") " + " NOT NULL ,\r\n"); 
+                        }
+                        else
+                        {
+                            sql.Append("  " + campo.Nombre + " " + (campo.Tipo) + " " + " NOT NULL ,\r\n");
+                        }
+                    }
+                    else
+                    {
+                        if (campo.Tamano > 0)
+                        {
+                            sql.Append("  " + campo.Nombre + " " + campo.Tipo + "(" + campo.Tamano + ")" + " , \r\n");
+                        }
+                        else
+                        {
+                            sql.Append("  " + campo.Nombre + " " + campo.Tipo + " , \r\n");
+                        }
+                    }
+                }
+
+                sql.Append("  " + "PRIMARY KEY (");
+           
+                var campos = string.Join(",", primaryKeys);
+
+                sql.Append( campos+ "),");
+                
+
+                if (tabla.Foraneas.Count >= 0)
+                {
+                    foreach (var foreignKey in tabla.Foraneas)
+                    {
+                        sql.Append("\r\n\r CONSTRAINT " + foreignKey.Nombre +
+                                   " FOREIGN KEY ("+foreignKey.Campo+")\r\n " +
+                                   " REFERENCES "+foreignKey.TablaReferida+"("+foreignKey.CampoReferico+"),");
+                    }
+
+                    sql.Length -= 1;
+                    sql.Append("\r\n);");
+                }
+                else
+                {
+                    sql.Length -= 1;
+                    sql.Append("\r\n);");
+                }
+
+
+                if (tabla.Comentario != "")
+                {
+                    comentarios.Append("\r\n\r COMMENT ON TABLE " + tabla.Nombre + " IS '"+tabla.Comentario+"';\r\n\r");
+                }
+                
+
+                if (tabla.Indices.Count > 0)
+                {
+                    foreach (var indice in tabla.Indices)
+                    {
+                        var indices = indice.Campos.Select(x => x.Nombre).ToArray();
+
+                        var ind = string.Join(",", indices);
+
+                        sql.Append("\r\n CREATE INDEX " + indice.Nombre+ " \r\n ON "+tabla.Nombre+"\r\n "
+                            +"("+ind+");\r\n\r");
+
+                        if (indice.Comentario != "")
+                        {
+                            comentarios.Append("\r\n COMMENT ON INDEX " + indice.Nombre + " IS '" + indice.Comentario + "';\r\n\r");
+                        }
+                    }
+                }
+
+                sql.Append(comentarios);
+
+                result.Message = sql.ToString().ToUpper();
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            
+            return result;
         }
 
 

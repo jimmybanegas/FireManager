@@ -116,6 +116,11 @@ namespace FireManager.Views
 
             var resultado = MetadataItemCreateStatement.CrearTabla(Tabla);
 
+
+            Padre.SetQueryText(resultado.Message);
+
+            Close();
+
         }
 
         private void dataGridViewFields_CellContentClick(object sender, DataGridViewCellEventArgs e)

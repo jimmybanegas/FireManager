@@ -77,6 +77,8 @@ namespace FireManager.Views
 
             Llave.TablaReferida = cmbForeignTable.Text;
 
+            Tabla.Tabla.Foraneas.Add(Llave);
+
             Tabla.RefrescarForaneas(Llave);
 
             Close();

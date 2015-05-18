@@ -1,5 +1,7 @@
 namespace FireManager.EnumTypes
 {
+   
+   
     public enum DataTypes
     {
         Array,

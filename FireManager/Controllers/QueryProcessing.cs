@@ -13,14 +13,13 @@ namespace FireManager.Controllers
             var dataTable = new DataTable();
             var access = new DataAccess(connectionData);
             var connectionString = access.CreateConnectionString();
-
+            
             try
             {
                 using (var connection = new FbConnection(connectionString))
                 {
                     connection.Open();
 
-                
                     var transaction = connection.BeginTransaction();
 
                     using (var adapter = new FbDataAdapter(queryText, connectionString))

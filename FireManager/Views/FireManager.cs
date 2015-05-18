@@ -440,5 +440,10 @@ namespace FireManager.Views
 
             nuevoDominio.Show();
         }
+
+        public void SetQueryText(string message)
+        {
+            QueryTextBox.Text = message;
+        }
     }
 }
