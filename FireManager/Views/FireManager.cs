@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using FireManager.Controllers;
 using FireManager.Forms;
 using FireManager.Models;
@@ -182,12 +183,67 @@ namespace FireManager.Views
             var misTablas = tablas.Select("TABLE_NAME <> ''");
 
             var arrayTablas = misTablas.Select(row => new TreeNode((string) row["TABLE_NAME"])).ToArray(); //
-
+             
             var treeNode = new TreeNode("Tablas", arrayTablas);
+            
 
             treeView1.Nodes.Add(treeNode);
+        
+            
+            foreach (TreeNode child in treeNode.Nodes)
+            {
+                //SETTIG COLUMNS TO EACH TABLE
+                var a = child.Text;
+
+                var col = FbObjetos.GetColumns(connData, a);
+
+                var misCs = col.Select("COLUMN_NAME <> ''");
+
+                var arrayCols = misCs.Select(row => new TreeNode((string)row["COLUMN_NAME"])).ToArray(); //
+
+                child.Nodes.Add(new TreeNode("Columnas", arrayCols));
+
+                //SETTIG primnary TO EACH TABLE
+                var pri = FbObjetos.GetPrimaryKeys(connData, a);
+
+                var misPri = pri.Select("COLUMN_NAME <> '' ");
+
+                var arrPri = misPri.Select(row => new TreeNode((string)row["COLUMN_NAME"])).ToArray(); //
+
+                child.Nodes.Add(new TreeNode("Primarias", arrPri));
+
+                //SETTIG INDEXES TO EACH TABLE
+                var ind = FbObjetos.GetIndexes(connData,a);
+
+                var misIn = ind.Select("INDEX_NAME <> '' AND IS_PRIMARY = FALSE");
+
+                var arrIn = misIn.Select(row => new TreeNode((string)row["INDEX_NAME"])).ToArray(); //
+
+                child.Nodes.Add(new TreeNode("Indices", arrIn));
 
 
+                //SETTIG FOREIGN KEYS TO EACH TABLE
+                var fora = FbObjetos.GetForeignKeys(connData);
+
+                var misFora = fora.Select("CONSTRAINT_NAME <> '' AND TABLE_NAME ='"+a+"'");
+
+                var arrFora = misFora.Select(row => new TreeNode((string)row["CONSTRAINT_NAME"])).ToArray(); //
+
+                child.Nodes.Add(new TreeNode("Foráneas", arrFora));
+
+
+                //SETTIG triggers KEYS TO EACH TABLE
+                var tr = FbObjetos.GetTriggers(connData);
+
+                var misTr = tr.Select("TRIGGER_NAME <> '' AND TABLE_NAME ='" + a + "' AND IS_SYSTEM_TRIGGER = 0" );
+
+                var arrTr = misTr.Select(row => new TreeNode((string)row["TRIGGER_NAME"])).ToArray(); //
+
+                child.Nodes.Add(new TreeNode("Triggers", arrTr));
+
+            }
+            
+      
             //GETTING DOMAINS
             var misDominios = dominios.Select("DOMAIN_NAME <> ''");
 
@@ -248,6 +304,20 @@ namespace FireManager.Views
             treeView1.Nodes.Add(treeNode);
 
             nuevoObejtoToolStripMenuItem.Enabled = true;
+
+            foreach (TreeNode child in treeNode.Nodes)
+            {
+                //SETTIG COLUMNS TO EACH VIEW
+                var a = child.Text;
+
+                var col = FbObjetos.GetViewColumns(connData, a);
+
+                var misCs = col.Select("COLUMN_NAME <> '' AND VIEW_NAME = '"+a+"'");
+
+                var arrayCols = misCs.Select(row => new TreeNode((string) row["COLUMN_NAME"])).ToArray(); //
+
+                child.Nodes.Add(new TreeNode("Columnas", arrayCols));
+            }
         }
 
         public  ConnectionData GetConnectionInformation()
@@ -463,6 +533,9 @@ namespace FireManager.Views
             }
 
             MessageBox.Show(result.Message);
+
+            treeView1.Nodes.Clear();
+            SetTreeValues(connData);
         }
     }
 }

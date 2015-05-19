@@ -193,8 +193,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("ForeignKeys");
                 }
             }
             catch (Exception ex)
@@ -275,7 +274,7 @@ namespace FireManager.Controllers
             return dataTable;
         }
 
-       public static DataTable GetIndexes(ConnectionData connectionData)
+       public static DataTable GetIndexes(ConnectionData connectionData,string tabla)
         {
             var dataTable = new DataTable();
             var access = new DataAccess(connectionData);
@@ -287,8 +286,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("Indexes", new string[] { null, null, tabla });
                 }
             }
             catch (Exception ex)
@@ -299,7 +297,7 @@ namespace FireManager.Controllers
             return dataTable;
         }
 
-       public static DataTable GetIndexColumns(ConnectionData connectionData)
+       public static DataTable GetIndexColumns(ConnectionData connectionData, string tabla)
         {
             var dataTable = new DataTable();
             var access = new DataAccess(connectionData);
@@ -311,8 +309,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("IndexColumns", new string[] { null, null, tabla });
                 }
             }
             catch (Exception ex)
@@ -323,7 +320,7 @@ namespace FireManager.Controllers
             return dataTable;
         }
 
-       public static DataTable GetPrimaryKeys(ConnectionData connectionData)
+       public static DataTable GetPrimaryKeys(ConnectionData connectionData,string table)
         {
             var dataTable = new DataTable();
             var access = new DataAccess(connectionData);
@@ -335,8 +332,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("PrimaryKeys", new string[] { null, null, table });
                 }
             }
             catch (Exception ex)
@@ -584,7 +580,7 @@ namespace FireManager.Controllers
             return dataTable;
         }
 
-       public static DataTable GetViewColumns(ConnectionData connectionData)
+       public static DataTable GetViewColumns(ConnectionData connectionData,string view)
         {
             var dataTable = new DataTable();
             var access = new DataAccess(connectionData);
@@ -596,8 +592,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                    dataTable = connection.GetSchema("ViewColumns");
                 }
             }
             catch (Exception ex)
