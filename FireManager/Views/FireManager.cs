@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using FirebirdSql.Data.FirebirdClient;
 using FireManager.Controllers;
 using FireManager.Forms;
 using FireManager.Models;
@@ -478,6 +479,9 @@ namespace FireManager.Views
             }
 
             MessageBox.Show(userMessage);
+
+            treeView1.Nodes.Clear();
+            SetTreeValues(connectionInfo);
         }
 
         private void borrarDropToolStripMenuItem_Click(object sender, EventArgs e)
@@ -487,7 +491,7 @@ namespace FireManager.Views
             var dataAccess = new DataAccess(connectionInfo);
             var result = dataAccess.DropDatabase();
 
-            if (result.Success)
+           if (result.Success)
             {
                 userMessage = string.Format("Borrada = {0}", result.Success);
             }

@@ -85,8 +85,10 @@ namespace FireManager.Controllers
 
                 if (!string.IsNullOrWhiteSpace(connectionString))
                 {
+                    var conection = new FbConnection(connectionString);
+                    conection.Close();
+
                     FbConnection.DropDatabase(connectionString);
-                    
                 }
                 result.Success = true;
                 result.Message = "Borrada";
