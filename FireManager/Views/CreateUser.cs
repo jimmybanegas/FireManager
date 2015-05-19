@@ -16,15 +16,17 @@ namespace FireManager.Views
     public partial class CreateUser : Form
     {
         private User Usuario;
+        private FireManager Padre;
 
         public CreateUser(FireManager fireManager)
         {
             InitializeComponent();
+            Padre = fireManager;
         }
 
         private void CreateUser_Load(object sender, EventArgs e)
         {
-
+            Usuario = new User();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -61,6 +63,10 @@ namespace FireManager.Views
             };
 
             var resultado = MetadataItemCreateStatement.CrearUsuario(Usuario);
+
+            Padre.SetQueryText(resultado.Message);
+
+            Close();
 
         }
 

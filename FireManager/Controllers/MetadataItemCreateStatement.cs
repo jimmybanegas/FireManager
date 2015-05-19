@@ -227,7 +227,19 @@ namespace FireManager.Controllers
 
             try
             {
+                var campos = funcion.Parametros.Select(x => x.Tipo).ToArray();
+                var camposSeparados  = string.Join(",", campos);
 
+                sql.Append(@"DECLARE EXTERNAL FUNCTION " + funcion.Nombre + "\r\n");
+
+                if (campos.Length != 0)
+                {
+                    //sql.Append()
+                }
+                 /*   "[, datatype | CSTRING (int) ...]]\n" +
+                   "RETURNS {datatype [BY VALUE] | CSTRING (int)} [FREE_IT]\n" +
+                   "ENTRY_POINT 'entryname'\n" +
+                   "MODULE_NAME 'modulename';\n");*/
             }
             catch (Exception ex)
             {
@@ -336,7 +348,12 @@ namespace FireManager.Controllers
 
             try
             {
+                sql.Append(@"CREATE USER "+usuario.Nombre+"\r\n");
+                sql.Append(" PASSWORD '" + usuario.Contraseña+"'\r\n");
+                sql.Append(" FIRSTNAME '" + usuario.Contraseña + "'\r\n");
+                sql.Append(" LASTNAME '" + usuario.Contraseña + "';\r\n");
 
+                result.Message = sql.ToString().ToUpper();
             }
             catch (Exception ex)
             {
