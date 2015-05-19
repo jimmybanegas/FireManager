@@ -67,10 +67,14 @@ namespace FireManager.Views
 
         private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbTipo.SelectedItem == (object)DataTypes.Char || cmbTipo.SelectedItem == (object)DataTypes.VarChar
-                 || cmbTipo.SelectedItem == (object)DataTypes.Numeric)
+            if ((DataTypes)cmbTipo.SelectedItem == DataTypes.Char || (DataTypes)cmbTipo.SelectedItem == DataTypes.VarChar
+                 || (DataTypes)cmbTipo.SelectedItem == DataTypes.Text)
             {
-              //  numericUpDown1.;
+                numericUpDown1.Enabled = true;
+            }
+            else
+            {
+                numericUpDown1.Enabled = false;
             }
         }
 
@@ -79,6 +83,8 @@ namespace FireManager.Views
             Campo = new Field();
 
             cmbTipo.DataSource = Enum.GetValues(typeof(DataTypes));
+
+            numericUpDown1.Enabled = false;
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)

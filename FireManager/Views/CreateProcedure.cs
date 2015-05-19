@@ -17,11 +17,14 @@ namespace FireManager.Views
     public partial class CreateProcedure : Form
     {
         public Procedure Procedimiento;
+        private FireManager Padre;
+
         public readonly BindingList<ProcParameter> _parametrosBindingList = new BindingList<ProcParameter>();
 
-        public CreateProcedure()
+        public CreateProcedure(FireManager fireManager)
         {
             InitializeComponent();
+            Padre = fireManager;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -60,6 +63,10 @@ namespace FireManager.Views
             Procedimiento.Definicion = richTextBox1.Text;
 
             var resultado = MetadataItemCreateStatement.CrearProcedimiento(Procedimiento);
+
+            Padre.SetQueryText(resultado.Message);
+
+            Close();
 
         }
 

@@ -36,7 +36,7 @@ namespace FireManager.Views
 
             var misColumnas = columnas.Select("COLUMN_NAME <> ''");
 
-            var misc = misColumnas.Select(row => ((string)row["COLUMN_NAME"])).ToArray(); //
+            var misc = misColumnas.Select(row => ((string)row["TABLE_NAME"]+"."+row["COLUMN_NAME"])).ToArray(); //
 
             checkedListBox1.DataSource = misc;
         }
@@ -70,22 +70,43 @@ namespace FireManager.Views
                 return;
             }
 
-            if (checkedListBox1.CheckedItems.Count == 0)
+            if (checkedListBox2.Items.Count == 0)
             {
                 MessageBox.Show(Resources.Click_Parámetros_vacíos);
                 return; 
             }
 
-            Vista.Tabla = comboBox1.Text;
+         //   Vista.Tabla = comboBox1.Text;
 
             Vista.Nombre = txtNombre.Text;
 
-            foreach (var item in checkedListBox1.CheckedItems)
+            foreach (var item in checkedListBox2.Items)
             {
-                Vista.Campos.Add(checkedListBox1.GetItemText(item));
+                Vista.Campos.Add(checkedListBox2.GetItemText(item));
             }
 
             var resultado = MetadataItemCreateStatement.CrearVista(Vista);
+
+            Padre.SetQueryText(resultado.Message);
+
+            Close();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            foreach (var item in checkedListBox1.CheckedItems.Cast<object>()
+                .Where(item => !checkedListBox2.Items.Contains(item)))
+            {
+                checkedListBox2.Items.Add(item);
+            }
+        }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            foreach (var item in checkedListBox2.CheckedItems.OfType<string>().ToList())
+            {
+                checkedListBox2.Items.Remove(item);
+            }
         }
     }
 }

@@ -17,11 +17,13 @@ namespace FireManager.Views
     public partial class CreateFunction : Form
     {
         public Function Funcion;
+        private FireManager Padre;
         public readonly BindingList<FuncParameter> _parametrosBindingList = new BindingList<FuncParameter>();
 
         public CreateFunction(FireManager fireManager)
         {
             InitializeComponent();
+            Padre = fireManager;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -55,6 +57,10 @@ namespace FireManager.Views
 
 
             var resultado = MetadataItemCreateStatement.CrearFuncion(Funcion);
+
+            Padre.SetQueryText(resultado.Message);
+
+            Close();
 
         }
 

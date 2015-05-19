@@ -9,6 +9,8 @@ namespace FireManager.Objects
 
         public DataTypes Tipo { get; set; }
 
+        public int Tamano { get; set; }
+
         public bool IsReturn { get; set; }
     }
 }

@@ -37,14 +37,13 @@
             this.borrarDropToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoObejtoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dominioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.excepcionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.funciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procedimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tablaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vistaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.QueryTextBox = new System.Windows.Forms.TextBox();
@@ -68,7 +67,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCrear = new System.Windows.Forms.Button();
-            this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -137,11 +135,9 @@
             // 
             this.nuevoObejtoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dominioToolStripMenuItem,
-            this.excepcionToolStripMenuItem,
             this.funciónToolStripMenuItem,
             this.generadorToolStripMenuItem,
             this.procedimientoToolStripMenuItem,
-            this.rolToolStripMenuItem,
             this.tablaToolStripMenuItem,
             this.triggerToolStripMenuItem,
             this.vistaToolStripMenuItem,
@@ -157,13 +153,6 @@
             this.dominioToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dominioToolStripMenuItem.Text = "Dominio";
             this.dominioToolStripMenuItem.Click += new System.EventHandler(this.dominioToolStripMenuItem_Click);
-            // 
-            // excepcionToolStripMenuItem
-            // 
-            this.excepcionToolStripMenuItem.Name = "excepcionToolStripMenuItem";
-            this.excepcionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.excepcionToolStripMenuItem.Text = "Excepción";
-            this.excepcionToolStripMenuItem.Click += new System.EventHandler(this.excepcionToolStripMenuItem_Click);
             // 
             // funciónToolStripMenuItem
             // 
@@ -186,13 +175,6 @@
             this.procedimientoToolStripMenuItem.Text = "Procedimiento";
             this.procedimientoToolStripMenuItem.Click += new System.EventHandler(this.procedimientoToolStripMenuItem_Click);
             // 
-            // rolToolStripMenuItem
-            // 
-            this.rolToolStripMenuItem.Name = "rolToolStripMenuItem";
-            this.rolToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rolToolStripMenuItem.Text = "Rol";
-            this.rolToolStripMenuItem.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
-            // 
             // tablaToolStripMenuItem
             // 
             this.tablaToolStripMenuItem.Name = "tablaToolStripMenuItem";
@@ -213,6 +195,13 @@
             this.vistaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.vistaToolStripMenuItem.Text = "Vista";
             this.vistaToolStripMenuItem.Click += new System.EventHandler(this.vistaToolStripMenuItem_Click);
+            // 
+            // usuarioToolStripMenuItem
+            // 
+            this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.usuarioToolStripMenuItem.Text = "Usuario";
+            this.usuarioToolStripMenuItem.Click += new System.EventHandler(this.usuarioToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
@@ -398,13 +387,6 @@
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
-            // usuarioToolStripMenuItem
-            // 
-            this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
-            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.usuarioToolStripMenuItem.Text = "Usuario";
-            this.usuarioToolStripMenuItem.Click += new System.EventHandler(this.usuarioToolStripMenuItem_Click);
-            // 
             // FireManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,11 +458,9 @@
         private System.Windows.Forms.ToolStripMenuItem guardarPerfilToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoObejtoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dominioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem excepcionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem funciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generadorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem procedimientoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rolToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tablaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem triggerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vistaToolStripMenuItem;

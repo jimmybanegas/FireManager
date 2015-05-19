@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using FireManager.EnumTypes;
 using FireManager.Models;
 using FireManager.Objects;
 
@@ -227,19 +229,50 @@ namespace FireManager.Controllers
 
             try
             {
-                var campos = funcion.Parametros.Select(x => x.Tipo).ToArray();
-                var camposSeparados  = string.Join(",", campos);
+                var parametros = funcion.Parametros.Select(x => x.Tipo).ToArray();
+               // var camposSeparados  = string.Join(",", campos);
+
+                var campoReturn = funcion.Parametros.Find(x => x.IsReturn);
 
                 sql.Append(@"DECLARE EXTERNAL FUNCTION " + funcion.Nombre + "\r\n");
 
-                if (campos.Length != 0)
+                foreach (var parametro in funcion.Parametros.Where(x=>!x.IsReturn))
                 {
-                    //sql.Append()
+                    if (parametro.Tamano > 0)
+                    {
+                        sql.Append(parametro.Tipo+"("+parametro.Tamano+") ,");
+                    }
+                    else
+                    {
+                        sql.Append(parametro.Tipo + ",");
+                    }
                 }
-                 /*   "[, datatype | CSTRING (int) ...]]\n" +
-                   "RETURNS {datatype [BY VALUE] | CSTRING (int)} [FREE_IT]\n" +
-                   "ENTRY_POINT 'entryname'\n" +
-                   "MODULE_NAME 'modulename';\n");*/
+
+                sql.Length -= 1;
+
+                if (campoReturn.Tamano > 0)
+                {
+                    sql.Append("\r\nRETURNS " + campoReturn.Tipo + "(" + campoReturn.Tamano + ") ");
+                }
+                else
+                {
+                    sql.Append("\r\nRETURNS " +campoReturn.Tipo);
+                }
+
+                if (campoReturn.Mecanismo == MechanismFunctionParameter.Valor)
+                {
+                    sql.Append(" BY VALUE "+"\r\n");
+                }
+
+                sql.Append("\nENTRY_POINT ' '\r\n" +
+                    "MODULE_NAME ' ';\r\n");
+
+                if (funcion.Comentario != "")
+                {
+                    sql.Append("\r\nCOMMENT ON EXTERNAL FUNCTION " + funcion.Nombre + " IS '" + funcion.Comentario + "';\r\n\r");
+                }
+                
+                result.Message = sql.ToString().ToUpper();
             }
             catch (Exception ex)
             {
@@ -279,7 +312,58 @@ namespace FireManager.Controllers
 
             try
             {
+                var input = procedimiento.Parametros.FindAll(x => x.Scope == ScopeProcedureParameter.Input);
 
+                var output = procedimiento.Parametros.FindAll(x => x.Scope==ScopeProcedureParameter.Output);
+
+                sql.Append(@"SET TERM ^ ; " + "\r\n" +
+                           "\r\n\rRECREATE PROCEDURE " + procedimiento.Nombre + "(\r\n");
+
+
+                foreach (var parametro in input)
+                {
+                    if (parametro.Tamano > 0)
+                    {
+                        sql.Append(parametro.Nombre+" "+parametro.Tipo+"("+parametro.Tamano+"),");
+                    }
+                    else
+                    {
+                        sql.Append(parametro.Nombre + " " + parametro.Tipo + ",");
+                    }
+                }
+
+                sql.Length -= 1;
+
+                sql.Append(") \r\n" + "RETURNS (");
+
+                foreach (var parametro in output)
+                {
+                    if (parametro.Tamano > 0)
+                    {
+                        sql.Append(parametro.Nombre + " " + parametro.Tipo + "(" + parametro.Tamano + "),");
+                    }
+                    else
+                    {
+                        sql.Append(parametro.Nombre + " " + parametro.Tipo + ",");
+                    }
+                }
+                
+                sql.Length -= 1;
+
+                sql.Append(") \r\n");
+
+                sql.Append("AS \r\n" +
+                "BEGIN \r\n" +
+                "   " + procedimiento.Definicion + "\r\n" +
+                "END^\r\n\r" +
+                "\nSET TERM ; ^\r\n");
+
+                if (procedimiento.Comentario != "")
+                {
+                    sql.Append("\r\n\rCOMMENT ON PROCEDURE " + procedimiento.Nombre + " IS '" + procedimiento.Comentario + "';\r\n\r");
+                }
+
+                result.Message = sql.ToString().ToUpper();
             }
             catch (Exception ex)
             {
@@ -328,9 +412,23 @@ namespace FireManager.Controllers
             var result = new Result();
             var sql = new StringBuilder();
 
+            var nombresCampos = vista.Campos.Select(campo => campo.Replace(".", "_")).ToList();
+
+            var tablas = vista.Campos.Select(campo => campo.Substring(0, campo.IndexOf('.'))).Distinct().ToList();
+
             try
             {
+                sql.Append ( @"CREATE VIEW "+vista.Nombre+ "( \r\n");
 
+                sql.Append(string.Join(",",nombresCampos) + ") \r\nAS \r\nSELECT\r\n");
+
+                var campos = string.Join(",", vista.Campos);
+
+                sql.Append(campos + "\r\nFROM\r\n");
+
+                sql.Append(string.Join(",",tablas));
+               
+                result.Message = sql.ToString().ToUpper();
             }
             catch (Exception ex)
             {

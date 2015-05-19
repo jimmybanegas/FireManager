@@ -10,7 +10,7 @@ namespace FireManager.Objects
     {
         public string Nombre { get; set; }
 
-        public string Tabla { get; set; }
+        //public string Tabla { get; set; }
 
         public List<string> Campos { get; set; }
 

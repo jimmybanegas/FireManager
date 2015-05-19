@@ -52,6 +52,7 @@ namespace FireManager.Views
             Parametro.Nombre = txtNombre.Text;
             Parametro.Scope = (ScopeProcedureParameter) cmbScope.SelectedItem;
             Parametro.Tipo = (DataTypes) cmbTipo.SelectedItem;
+            Parametro.Tamano = (int) numericUpDown1.Value;
 
             Padre.Procedimiento.Parametros.Add(Parametro);
 
@@ -59,6 +60,19 @@ namespace FireManager.Views
 
             Close();
 
+        }
+
+        private void cmbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((DataTypes)cmbTipo.SelectedItem == DataTypes.Char || (DataTypes)cmbTipo.SelectedItem == DataTypes.VarChar
+             || (DataTypes)cmbTipo.SelectedItem == DataTypes.Text)
+            {
+                numericUpDown1.Enabled = true;
+            }
+            else
+            {
+                numericUpDown1.Enabled = false;
+            }
         }
     }
 }

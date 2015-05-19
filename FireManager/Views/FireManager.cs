@@ -351,7 +351,7 @@ namespace FireManager.Views
 
         private void procedimientoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var nuevoProcedimiento = new CreateProcedure();
+            var nuevoProcedimiento = new CreateProcedure(this);
 
             nuevoProcedimiento.Show();
         }
