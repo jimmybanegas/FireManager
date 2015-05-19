@@ -1,5 +1,7 @@
 using System;
 using FirebirdSql.Data.FirebirdClient;
+using FirebirdSql.Data.Isql;
+using FirebirdSql.Data.Server;
 using FireManager.Models;
 
 namespace FireManager.Controllers
@@ -84,6 +86,7 @@ namespace FireManager.Controllers
                 if (!string.IsNullOrWhiteSpace(connectionString))
                 {
                     FbConnection.DropDatabase(connectionString);
+                    
                 }
                 result.Success = true;
                 result.Message = "Borrada";

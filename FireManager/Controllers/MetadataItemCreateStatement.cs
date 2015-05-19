@@ -432,7 +432,6 @@ namespace FireManager.Controllers
             }
             catch (Exception ex)
             {
-
                 result.Message = ex.Message;
             }
 

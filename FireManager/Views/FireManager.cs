@@ -445,5 +445,24 @@ namespace FireManager.Views
         {
             QueryTextBox.Text = message;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var typeId = GetQueryType();
+            Result result;
+            var queryProcessing = new QueryProcessing();
+            var connData = GetConnectionInformation();
+
+            if (typeId == 1)
+            {
+                 result = queryProcessing.ExecuteScript(connData, QueryTextBox.Text);
+            }
+            else
+            {
+                result = queryProcessing.ExecuteScript(connData, QueryTextBox.Text);
+            }
+
+            MessageBox.Show(result.Message);
+        }
     }
 }
