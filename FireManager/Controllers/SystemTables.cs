@@ -11,7 +11,7 @@ namespace FireManager.Controllers
 {
     class SystemTables
     {
-        public StringBuilder GetCharacterSets(string[] restrictions)
+        public static StringBuilder GetCharacterSets(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -58,7 +58,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetCheckConstraints(string[] restrictions)
+        public static StringBuilder GetCheckConstraints(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -102,7 +102,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetCheckConstraintsByTable(string[] restrictions)
+        public static StringBuilder GetCheckConstraintsByTable(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -150,7 +150,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetCollations(string[] restrictions)
+        public static StringBuilder GetCollations(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -196,7 +196,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetColumns(string[] restrictions)
+        public static StringBuilder GetColumns(string restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -279,7 +279,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetColumnPrivileges(string[] restrictions)
+        public static StringBuilder GetColumnPrivileges(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -347,8 +347,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-
-        public StringBuilder GetDomains(string[] restrictions)
+        public static StringBuilder GetDomains(string restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -412,7 +411,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetForeignKeys(string[] restrictions)
+        public static StringBuilder GetForeignKeys(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -483,7 +482,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetForeignKeyColumns(string[] restrictions)
+        public static StringBuilder GetForeignKeyColumns(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -549,7 +548,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetFunctions(string[] restrictions)
+        public static StringBuilder GetFunctions(string restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -610,7 +609,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetGenerators(string[] restrictions)
+        public static StringBuilder GetGenerators(string restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -666,7 +665,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetIndexes(string[] restrictions)
+        public static StringBuilder GetIndexes(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -730,7 +729,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetIndexColumns(string[] restrictions)
+        public static StringBuilder GetIndexColumns(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -802,7 +801,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetPrimaryKeys(string[] restrictions)
+        public static StringBuilder GetPrimaryKeys(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -852,7 +851,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetProcedureParameters(string[] restrictions)
+        public static StringBuilder GetProcedureParameters(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -900,7 +899,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetProcedurePrivileges(string[] restrictions)
+        public static StringBuilder GetProcedurePrivileges(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -961,7 +960,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetProcedures(string[] restrictions)
+        public static StringBuilder GetProcedures(string restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -1009,17 +1008,17 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetDataTypes(string[] restrictions)
+        public static StringBuilder GetDataTypes(string[] restrictions)
         {
             return null;
         }
 
-        public StringBuilder GetRoles(string[] restrictions)
+        public static StringBuilder GetRoles(string[] restrictions)
         {
             return null;
         }
 
-        public StringBuilder GetTables(string[] restrictions)
+        public static StringBuilder GetTables(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -1092,7 +1091,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetTableConstraints(string[] restrictions)
+        public static StringBuilder GetTableConstraints(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -1178,7 +1177,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetTablePrivileges(string[] restrictions)
+        public static StringBuilder GetTablePrivileges(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -1239,7 +1238,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetTriggers(string[] restrictions)
+        public static StringBuilder GetTriggers(string restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -1300,7 +1299,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetUniqueKeys(string[] restrictions)
+        public static StringBuilder GetUniqueKeys(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -1350,7 +1349,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetViewColumns(string[] restrictions)
+        public static StringBuilder GetViewColumns(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -1426,7 +1425,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetViews(string[] restrictions)
+        public static StringBuilder GetViews(string restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();
@@ -1474,7 +1473,7 @@ namespace FireManager.Controllers
             return sql;
         }
 
-        public StringBuilder GetViewPrivileges(string[] restrictions)
+        public static StringBuilder GetViewPrivileges(string[] restrictions)
         {
             StringBuilder sql = new StringBuilder();
             StringBuilder where = new StringBuilder();

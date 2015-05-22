@@ -13,6 +13,9 @@ namespace FireManager.Controllers
 {
     class FbObjetos
     {
+        
+       public static QueryProcessing QueryProcessing = new QueryProcessing();
+
        public static DataTable GetCharacterSets(ConnectionData connectionData)
         {
             var dataTable = new DataTable();
@@ -25,7 +28,7 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    var pr = connection.GetSchema();
+                    //var pr = connection.GetSchema();
 
                     dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
                               "TABLE"});
@@ -123,6 +126,8 @@ namespace FireManager.Controllers
                     connection.Open();
 
                     dataTable = connection.GetSchema("Columns", new[] { null, null, tableName });
+
+                    //dataTable = QueryProcessing.ExecuteQuery(connectionData, SystemTables.GetColumns("").ToString());
                 }
             }
             catch (Exception ex)
@@ -156,8 +161,7 @@ namespace FireManager.Controllers
 
             return dataTable;
         }
-
-
+        
        public static DataTable GetDomains(ConnectionData connectionData)
         {
             var dataTable = new DataTable();
@@ -170,7 +174,9 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Domains");
+                   // dataTable = connection.GetSchema("Domains");
+
+                    dataTable = QueryProcessing.ExecuteQuery(connectionData, SystemTables.GetDomains("").ToString());
                 }
             }
             catch (Exception ex)
@@ -240,7 +246,9 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Functions");
+                  // dataTable = connection.GetSchema("Functions");
+
+                    dataTable = QueryProcessing.ExecuteQuery(connectionData, SystemTables.GetFunctions("").ToString());
                 }
             }
             catch (Exception ex)
@@ -263,7 +271,10 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Generators");
+                   // dataTable = connection.GetSchema("Generators");
+
+                  dataTable = QueryProcessing.ExecuteQuery(connectionData, SystemTables.GetGenerators("").ToString());
+                    
                 }
             }
             catch (Exception ex)
@@ -403,7 +414,9 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Procedures");
+                  //  dataTable = connection.GetSchema("Procedures");
+                    dataTable = QueryProcessing.ExecuteQuery(connectionData, SystemTables.GetProcedures("").ToString());
+                    
                 }
             }
             catch (Exception ex)
@@ -473,8 +486,11 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
-                              "TABLE"});
+                  /*  dataTable = connection.GetSchema("Tables", new string[] {null, null, null, 
+                              "TABLE"});*/
+
+                    dataTable = QueryProcessing.ExecuteQuery(connectionData, SystemTables.GetTables(new string[] {null, null, null, 
+                              "TABLE"}).ToString());
                 }
             }
             catch (Exception ex)
@@ -545,7 +561,9 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Triggers");
+                   // dataTable = connection.GetSchema("Triggers");
+
+                    dataTable = QueryProcessing.ExecuteQuery(connectionData, SystemTables.GetTriggers("").ToString());
                 }
             }
             catch (Exception ex)
@@ -615,7 +633,9 @@ namespace FireManager.Controllers
                 {
                     connection.Open();
 
-                    dataTable = connection.GetSchema("Views");
+                    //dataTable = connection.GetSchema("Views");
+
+                    dataTable = QueryProcessing.ExecuteQuery(connectionData, SystemTables.GetViews("").ToString());
                 }
             }
             catch (Exception ex)

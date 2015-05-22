@@ -75,7 +75,6 @@ namespace FireManager.Controllers
 
         }
 
-
         public static string GetCreateTriggerStatement()
         {
             return "SET TERM ^ ;\n\n"+
@@ -90,8 +89,7 @@ namespace FireManager.Controllers
                 "END^\n\n"+
                 "SET TERM ; ^\n";
         }
-
-
+        
         public static Result CrearDominio(Domain dominio)
         {
             var result = new Result();
