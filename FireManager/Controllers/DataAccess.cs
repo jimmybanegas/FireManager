@@ -1,4 +1,5 @@
 using System;
+using System.Data.SqlClient;
 using FirebirdSql.Data.FirebirdClient;
 using FirebirdSql.Data.Isql;
 using FirebirdSql.Data.Server;
@@ -25,7 +26,7 @@ namespace FireManager.Controllers
 
                 if (!string.IsNullOrWhiteSpace(connectionString))
                 {
-                    var connection = new FbConnection(connectionString);
+                    var connection = new SqlConnection(connectionString);
                     connection.Open();
 
                     if (connection.State == System.Data.ConnectionState.Open)
@@ -53,59 +54,12 @@ namespace FireManager.Controllers
             return result;
         }
 
-        public Result CreateDatabase()
-        {
-            var result = new Result();
-            try
-            {
-                var connectionString = CreateConnectionString();
-
-                if (!string.IsNullOrWhiteSpace(connectionString))
-                {
-                    FbConnection.CreateDatabase(connectionString);
-                }
-                result.Success = true;
-                result.Message = "Creada";
-            }
-            catch (Exception ex)
-            {
-                result.Success = false;
-                result.Message = ex.Message;
-            }
-
-            return result;
-        }
-
-        public Result DropDatabase()
-        {
-            var result = new Result();
-            try
-            {
-                var connectionString = CreateConnectionString();
-
-                if (!string.IsNullOrWhiteSpace(connectionString))
-                {
-                    var conection = new FbConnection(connectionString);
-                    conection.Close();
-
-                    FbConnection.DropDatabase(connectionString);
-                }
-                result.Success = true;
-                result.Message = "Borrada";
-            }
-            catch (Exception ex)
-            {
-                result.Success = false;
-                result.Message = ex.Message;
-            }
-
-            return result;
-        }
+     
 
         public string CreateConnectionString()
         {
-            var connectionString = string.Format("Server={0};Port={1};User Id={2};Password={3};Database={4}",
-                _connectionData.ServerName, _connectionData.PortNumber, _connectionData.UserName, _connectionData.Password, _connectionData.DatabaseName);
+            var connectionString = string.Format("Server={0};User Id={1};Password={2};Database={3}",
+                _connectionData.ServerName, _connectionData.UserName, _connectionData.Password, _connectionData.DatabaseName);
 
             return connectionString;
         }

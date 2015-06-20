@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using FirebirdSql.Data.FirebirdClient;
 using FireManager.Controllers;
-using FireManager.Forms;
 using FireManager.Models;
 using FireManager.Properties;
-
 namespace FireManager.Views
 {
     public partial class FireManager : Form
@@ -28,107 +23,7 @@ namespace FireManager.Views
         {
             Application.Exit();
         }
-
-        private void btLoadQuery_Click(object sender, EventArgs e)
-        {
-            QueryTextBox.Text = "";
-            var queryText = GetSavedQuery();
-            QueryTextBox.Text = queryText;
-        }
-
-        private string GetSavedQuery()
-        {
-            var fileManager = new FileManagement();
-            var dialogResult = new Result();
-
-            var queryText = "";
-            openFileDialog1.FileName = "";
-            openFileDialog1.InitialDirectory = @"C:\";
-            openFileDialog1.Filter = Resources.FireManager_GetSavedQuery_SQL_Script_Files____sql____sql;
-            var openDialogResult = openFileDialog1.ShowDialog();
-
-            if (openDialogResult == DialogResult.OK)
-            {
-                var file = openFileDialog1.FileName;
-
-                queryText = fileManager.OpenQueryFile(file);
-            }
-
-            return queryText;
-        }
-
-        private void btSaveQuery_Click(object sender, EventArgs e)
-        {
-            var queryText = QueryTextBox.Text;
-
-            if (!string.IsNullOrWhiteSpace(queryText))
-            {
-                SaveQuery(queryText);
-            }
-            else
-            {
-                MessageBox.Show(Resources.FireManager_btSaveQuery_Click_No_hay_nada_que_guardar);
-            }
-        }
-
-        private void SaveQuery(string queryText)
-        {
-            var fileManager = new FileManagement();
-            var result = new Result();
-
-            saveFileDialog1.FileName = "Query";
-            saveFileDialog1.InitialDirectory = @"C:\";
-            saveFileDialog1.Filter = Resources.FireManager_GetSavedQuery_SQL_Script_Files____sql____sql;
-
-            var saveDialogResult = saveFileDialog1.ShowDialog();
-
-            if (saveDialogResult == DialogResult.OK)
-            {
-                var file = saveFileDialog1.FileName;
-
-                if (!string.IsNullOrWhiteSpace(queryText))
-                {
-                    result = fileManager.SaveQueryFile(file, queryText);
-                }
-
-            }
-
-            MessageBox.Show(result.Message);
-        }
-
-        private void ClearAllButton_Click(object sender, EventArgs e)
-        {
-            QueryTextBox.Clear();
-            dataGridView1.DataSource = "";
-            dataGridView1.Refresh();
-        }
-
-        private void RunButton_Click(object sender, EventArgs e)
-        {
-            var typeId = GetQueryType();
-            DataTable dataTable;
-            var queryProcessing = new QueryProcessing();
-            var connData = GetConnectionInformation();
-
-            if (typeId == 1)
-            {
-                dataTable = queryProcessing.ExecuteQuery(connData, QueryTextBox.Text);
-            }
-            else
-            {
-                dataTable = queryProcessing.ExecuteStoredProcedure(connData, QueryTextBox.Text);
-            }
-
-            dataGridView1.DataSource = dataTable;
-        }
-
-        private static int GetQueryType()
-        {
-           // int typeID = (int)cbQueryType.SelectedValue;
-            //return typeID;
-            return 1;
-        }
-
+        
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -151,14 +46,12 @@ namespace FireManager.Views
             var dataAccess = new DataAccess(connectionInfo);
             var result = dataAccess.TestDatabaseConnection();
 
-            treeView1.Nodes.Clear();
 
             if (result.Success)
             {
 
                 userMessage = string.Format("Hay conexión = {0}", result.Success);
-           
-                SetTreeValues(connectionInfo);
+               
             }
             else
             {
@@ -169,158 +62,7 @@ namespace FireManager.Views
 
            
         }
-
-        public void SetTreeValues(ConnectionData connData)
-        {
-            var tablas = FbObjetos.GetTables(connData);
-            var dominios = FbObjetos.GetDomains(connData);
-            var funciones = FbObjetos.GetFunctions(connData);
-            var generadores = FbObjetos.GetGenerators(connData);
-            var procedimientos = FbObjetos.GetProcedures(connData);
-            var triggers = FbObjetos.GetTriggers(connData);
-            var vistas = FbObjetos.GetViews(connData);
-
-            //GETTING TABLES
-            var misTablas = tablas.Select("TABLE_NAME <> ''");
-
-            var arrayTablas = misTablas.Select(row => new TreeNode((string) row["TABLE_NAME"])).ToArray(); //
-             
-            var treeNode = new TreeNode("Tablas", arrayTablas);
-            
-
-            treeView1.Nodes.Add(treeNode);
-        
-            
-            foreach (TreeNode child in treeNode.Nodes)
-            {
-                //SETTIG COLUMNS TO EACH TABLE
-                var a = child.Text;
-
-                var col = FbObjetos.GetColumns(connData, a);
-
-                var misCs = col.Select("COLUMN_NAME <> ''");
-
-                var arrayCols = misCs.Select(row => new TreeNode((string)row["COLUMN_NAME"])).ToArray(); //
-
-                child.Nodes.Add(new TreeNode("Columnas", arrayCols));
-
-                //SETTIG primnary TO EACH TABLE
-                var pri = FbObjetos.GetPrimaryKeys(connData, a);
-
-                var misPri = pri.Select("COLUMN_NAME <> '' ");
-
-                var arrPri = misPri.Select(row => new TreeNode((string)row["COLUMN_NAME"])).ToArray(); //
-
-                child.Nodes.Add(new TreeNode("Primarias", arrPri));
-
-                //SETTIG INDEXES TO EACH TABLE
-                var ind = FbObjetos.GetIndexes(connData,a);
-
-                var misIn = ind.Select("INDEX_NAME <> '' AND IS_PRIMARY = FALSE");
-
-                var arrIn = misIn.Select(row => new TreeNode((string)row["INDEX_NAME"])).ToArray(); //
-
-                child.Nodes.Add(new TreeNode("Indices", arrIn));
-
-
-                //SETTIG FOREIGN KEYS TO EACH TABLE
-                var fora = FbObjetos.GetForeignKeys(connData);
-
-                var misFora = fora.Select("CONSTRAINT_NAME <> '' AND TABLE_NAME ='"+a+"'");
-
-                var arrFora = misFora.Select(row => new TreeNode((string)row["CONSTRAINT_NAME"])).ToArray(); //
-
-                child.Nodes.Add(new TreeNode("Foráneas", arrFora));
-
-
-                //SETTIG triggers KEYS TO EACH TABLE
-                var tr = FbObjetos.GetTriggers(connData);
-
-                var misTr = tr.Select("TRIGGER_NAME <> '' AND TABLE_NAME ='" + a + "' AND IS_SYSTEM_TRIGGER = 0" );
-
-                var arrTr = misTr.Select(row => new TreeNode((string)row["TRIGGER_NAME"])).ToArray(); //
-
-                child.Nodes.Add(new TreeNode("Triggers", arrTr));
-
-            }
-            
-      
-            //GETTING DOMAINS
-            var misDominios = dominios.Select("DOMAIN_NAME <> ''");
-
-            var arrayDominios = misDominios.Select(row => new TreeNode((string) row["DOMAIN_NAME"])).ToArray(); //
-
-            treeNode = new TreeNode("Dominios", arrayDominios);
-
-            treeView1.Nodes.Add(treeNode);
-
-
-            //GETTING FUNCTIONS
-            var misFunciones = funciones.Select("IS_SYSTEM_FUNCTION = 0 ");
-
-            var arrayFunciones = misFunciones.Select(row => new TreeNode((string) row["FUNCTION_NAME"])).ToArray(); //
-
-            treeNode = new TreeNode("Funciones", arrayFunciones);
-
-            treeView1.Nodes.Add(treeNode);
-
-
-            //GETTING GENERATORS
-            var misGeneradores = generadores.Select("IS_SYSTEM_GENERATOR = 0");
-
-            var arrayGeneradores = misGeneradores.Select(row => new TreeNode((string) row["GENERATOR_NAME"])).ToArray(); //
-
-            treeNode = new TreeNode("Generadores", arrayGeneradores);
-
-            treeView1.Nodes.Add(treeNode);
-
-
-            //GETTING PROCEDURES
-            var misProcedimientos = procedimientos.Select("IS_SYSTEM_PROCEDURE = 0");
-
-            var arrayProcedimientos = misProcedimientos.Select(row => new TreeNode((string) row["PROCEDURE_NAME"])).ToArray();
-                //
-
-            treeNode = new TreeNode("Procedimientos", arrayProcedimientos);
-
-            treeView1.Nodes.Add(treeNode);
-
-
-            //GETTING TRIGGERS
-            var misTriggers = triggers.Select("IS_SYSTEM_TRIGGER = 0 ");
-            var arrayTriggers = misTriggers.Select(row => new TreeNode((string) row["TRIGGER_NAME"])).ToArray(); //
-
-            treeNode = new TreeNode("Triggers", arrayTriggers);
-
-            treeView1.Nodes.Add(treeNode);
-
-
-            //GETTING VIEWS
-            var misVistas = vistas.Select("IS_SYSTEM_VIEW = 0");
-
-            var arrayVistas = misVistas.Select(row => new TreeNode((string) row["VIEW_NAME"])).ToArray(); //
-
-            treeNode = new TreeNode("Vistas", arrayVistas);
-
-            treeView1.Nodes.Add(treeNode);
-
-            nuevoObejtoToolStripMenuItem.Enabled = true;
-
-            foreach (TreeNode child in treeNode.Nodes)
-            {
-                //SETTIG COLUMNS TO EACH VIEW
-                var a = child.Text;
-
-                var col = FbObjetos.GetViewColumns(connData, a);
-
-                var misCs = col.Select("COLUMN_NAME <> '' AND VIEW_NAME = '"+a+"'");
-
-                var arrayCols = misCs.Select(row => new TreeNode((string) row["COLUMN_NAME"])).ToArray(); //
-
-                child.Nodes.Add(new TreeNode("Columnas", arrayCols));
-            }
-        }
-
+    
         public  ConnectionData GetConnectionInformation()
         {
             var data = new ConnectionData
@@ -364,7 +106,7 @@ namespace FireManager.Views
 
                 connectionData = profileManager.GetSavedProfile(filePath);
 
-                SetTreeValues(connectionData);
+               
             }
 
             return connectionData;
@@ -401,145 +143,9 @@ namespace FireManager.Views
             return result;
         }
 
-        private void excepcionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void label6_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void crearNuevaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevaDb = new CreateDatabase();
-
-            nuevaDb.Show();
-        }
-
-        private void tablaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevaTabla = new CreateTable(this);
-
-            nuevaTabla.Show();
-        }
-
-        private void procedimientoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevoProcedimiento = new CreateProcedure(this);
-
-            nuevoProcedimiento.Show();
-        }
-
-        private void vistaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevaVista = new CreateView(this);
-
-            nuevaVista.Show();
-        }
-
-        private void triggerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevoTrigger = new CreateTrigger(this);
-
-            nuevoTrigger.Show();
-        }
-
-        private void generadorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevoGenerador = new CreateGenerator(this);
-
-            nuevoGenerador.Show();
-        }
-
-        private void funciónToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevaFuncion = new CreateFunction(this);
-
-            nuevaFuncion.Show();
-        }
-
-        private void dominioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevoDominio = new CreateDomain(this);
-
-            nuevoDominio.Show();
-        }
-
-        private void btnCrear_Click(object sender, EventArgs e)
-        {
-            var userMessage = "";
-            var connectionInfo = GetConnectionInformation();
-            var dataAccess = new DataAccess(connectionInfo);
-            var result = dataAccess.CreateDatabase();
-
-            if (result.Success)
-            {
-                userMessage = string.Format("Creada = {0}", result.Success);
-            }
-            else
-            {
-                userMessage = string.Format("Mensaje = {0} No creada = {1}", result.Message, result.Success);
-            }
-
-            MessageBox.Show(userMessage);
-
-            treeView1.Nodes.Clear();
-            SetTreeValues(connectionInfo);
-        }
-
-        private void borrarDropToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var userMessage = "";
-            var connectionInfo = GetConnectionInformation();
-            var dataAccess = new DataAccess(connectionInfo);
-            var result = dataAccess.DropDatabase();
-
-           if (result.Success)
-            {
-                userMessage = string.Format("Borrada = {0}", result.Success);
-            }
-            else
-            {
-                userMessage = string.Format("Mensaje = {0} No borrada = {1}", result.Message, result.Success);
-            }
-
-            MessageBox.Show(userMessage);
-        }
-
-        private void rolToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void usuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var nuevoDominio = new CreateUser(this);
-
-            nuevoDominio.Show();
-        }
-
-        public void SetQueryText(string message)
-        {
-            QueryTextBox.Text = message;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var typeId = GetQueryType();
-            Result result;
-            var queryProcessing = new QueryProcessing();
-            var connData = GetConnectionInformation();
-
-            if (typeId == 1)
-            {
-                 result = queryProcessing.ExecuteScript(connData, QueryTextBox.Text);
-            }
-            else
-            {
-                result = queryProcessing.ExecuteScript(connData, QueryTextBox.Text);
-            }
-
-            MessageBox.Show(result.Message);
-
-            treeView1.Nodes.Clear();
-            SetTreeValues(connData);
         }
     }
 }
