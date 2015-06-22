@@ -143,16 +143,14 @@ namespace FireManager.Views
 
             var saveDialogResult = saveFileDialog1.ShowDialog();
 
-            if (saveDialogResult == DialogResult.OK)
-            {
-                var filePath = saveFileDialog1.FileName;
+            if (saveDialogResult != DialogResult.OK) return result;
+            var filePath = saveFileDialog1.FileName;
 
-                var fileManager = new FileManagement();
+            var fileManager = new FileManagement();
 
-                var connectionData = GetConnectionInformation();
+            var connectionData = GetConnectionInformation();
 
-                result = fileManager.SaveNewProfile(connectionData, filePath);
-            }
+            result = fileManager.SaveNewProfile(connectionData, filePath);
 
             return result;
         }
@@ -177,16 +175,18 @@ namespace FireManager.Views
             dataGridView1.DataSource =  FixBinaryColumnsForDisplay(dataTable);
         }
 
-        private DataTable FixBinaryColumnsForDisplay(DataTable t)
+        private static DataTable FixBinaryColumnsForDisplay(DataTable t)
         {
-            List<string> binaryColumnNames = t.Columns.Cast<DataColumn>().Where(col => col.DataType.Equals(typeof(byte[]))).Select(col => col.ColumnName).ToList();
-            foreach (string binaryColumnName in binaryColumnNames)
+            var binaryColumnNames = t.Columns.Cast<DataColumn>().Where(col => col.DataType == typeof(byte[])).
+                Select(col => col.ColumnName).ToList();
+
+            foreach (var binaryColumnName in binaryColumnNames)
             {
-                string tempColumnName = "C" + Guid.NewGuid().ToString();
+                var tempColumnName = "C" + Guid.NewGuid();
                 t.Columns.Add(new DataColumn(tempColumnName, typeof(string)));
                 t.Columns[tempColumnName].SetOrdinal(t.Columns[binaryColumnName].Ordinal);
 
-                StringBuilder hexBuilder = new StringBuilder(MaxBinaryDisplayString * 2 + 2);
+                var hexBuilder = new StringBuilder(MaxBinaryDisplayString * 2 + 2);
                 foreach (DataRow r in t.Rows)
                 {
                     r[tempColumnName] = BinaryDataColumnToString(hexBuilder, r[binaryColumnName]);
@@ -198,26 +198,23 @@ namespace FireManager.Views
             return t;
         }
 
-        private string BinaryDataColumnToString(StringBuilder hexBuilder, object columnValue)
+        private static string BinaryDataColumnToString(StringBuilder hexBuilder, object columnValue)
         {
             const string hexChars = "0123456789ABCDEF";
             if (columnValue == DBNull.Value)
             {
                 return "(null)";
             }
-            else
+            var byteArray = (byte[])columnValue;
+            var displayLength = (byteArray.Length > MaxBinaryDisplayString) ? MaxBinaryDisplayString : byteArray.Length;
+            hexBuilder.Length = 0;
+            hexBuilder.Append("0x");
+            for (var i = 0; i < displayLength; i++)
             {
-                byte[] byteArray = (byte[])columnValue;
-                int displayLength = (byteArray.Length > MaxBinaryDisplayString) ? MaxBinaryDisplayString : byteArray.Length;
-                hexBuilder.Length = 0;
-                hexBuilder.Append("0x");
-                for (int i = 0; i < displayLength; i++)
-                {
-                    hexBuilder.Append(hexChars[(int)byteArray[i] >> 4]);
-                    hexBuilder.Append(hexChars[(int)byteArray[i] % 0x10]);
-                }
-                return hexBuilder.ToString();
+                hexBuilder.Append(hexChars[(int)byteArray[i] >> 4]);
+                hexBuilder.Append(hexChars[(int)byteArray[i] % 0x10]);
             }
+            return hexBuilder.ToString();
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -235,6 +232,7 @@ namespace FireManager.Views
 
         private void SetTable(List<Campos> campos)
         {
+            if (campos == null) throw new ArgumentNullException("campos");
             var dt = new DataTable();
             dt.Clear();
 
@@ -263,7 +261,8 @@ namespace FireManager.Views
 
             var dataTable = queryProcessing.ExecuteQuery(connData, selectCampo);
 
-            return (from DataRow row in dataTable.Rows where row["Tipo"].ToString().Equals("varchar") 
+            return (from DataRow row in dataTable.Rows
+                    where row["Tipo"].ToString().Equals("varchar") || row["Tipo"].ToString().Equals("nchar")
                     select row["Name"].ToString()).ToList();
         }
 
