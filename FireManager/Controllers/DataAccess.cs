@@ -1,8 +1,6 @@
 using System;
+using System.Data;
 using System.Data.SqlClient;
-using FirebirdSql.Data.FirebirdClient;
-using FirebirdSql.Data.Isql;
-using FirebirdSql.Data.Server;
 using FireManager.Models;
 
 namespace FireManager.Controllers
@@ -29,7 +27,7 @@ namespace FireManager.Controllers
                     var connection = new SqlConnection(connectionString);
                     connection.Open();
 
-                    if (connection.State == System.Data.ConnectionState.Open)
+                    if (connection.State == ConnectionState.Open)
                     {
                         result.Success = true;
                         result.Message = "Test satisfactorio";

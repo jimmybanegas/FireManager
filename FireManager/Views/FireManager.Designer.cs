@@ -44,13 +44,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tbUserName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbPort = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.tbServerName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.bt_Cargar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -99,7 +99,7 @@
             // 
             // ClearAllButton
             // 
-            this.ClearAllButton.Location = new System.Drawing.Point(661, 19);
+            this.ClearAllButton.Location = new System.Drawing.Point(523, 53);
             this.ClearAllButton.Name = "ClearAllButton";
             this.ClearAllButton.Size = new System.Drawing.Size(75, 23);
             this.ClearAllButton.TabIndex = 17;
@@ -116,11 +116,11 @@
             // 
             // btConnectionTest
             // 
-            this.btConnectionTest.Location = new System.Drawing.Point(628, 62);
+            this.btConnectionTest.Location = new System.Drawing.Point(274, 54);
             this.btConnectionTest.Name = "btConnectionTest";
             this.btConnectionTest.Size = new System.Drawing.Size(108, 23);
             this.btConnectionTest.TabIndex = 32;
-            this.btConnectionTest.Text = "Probar Conexión";
+            this.btConnectionTest.Text = "Conectar";
             this.btConnectionTest.UseVisualStyleBackColor = true;
             this.btConnectionTest.Click += new System.EventHandler(this.btConnectionTest_Click);
             // 
@@ -174,23 +174,6 @@
             this.label3.TabIndex = 24;
             this.label3.Text = "Usuario";
             // 
-            // tbPort
-            // 
-            this.tbPort.Location = new System.Drawing.Point(286, 74);
-            this.tbPort.Name = "tbPort";
-            this.tbPort.Size = new System.Drawing.Size(61, 20);
-            this.tbPort.TabIndex = 31;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(223, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "Puerto";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
             // tbServerName
             // 
             this.tbServerName.Location = new System.Drawing.Point(124, 36);
@@ -214,7 +197,7 @@
             this.groupBox1.Controls.Add(this.ClearAllButton);
             this.groupBox1.Location = new System.Drawing.Point(12, 19);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(853, 99);
+            this.groupBox1.Size = new System.Drawing.Size(648, 99);
             this.groupBox1.TabIndex = 33;
             this.groupBox1.TabStop = false;
             // 
@@ -234,13 +217,34 @@
             this.label6.Size = new System.Drawing.Size(42, 13);
             this.label6.TabIndex = 35;
             this.label6.Text = "Tablas:";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // bt_Cargar
+            // 
+            this.bt_Cargar.Location = new System.Drawing.Point(351, 142);
+            this.bt_Cargar.Name = "bt_Cargar";
+            this.bt_Cargar.Size = new System.Drawing.Size(75, 23);
+            this.bt_Cargar.TabIndex = 36;
+            this.bt_Cargar.Text = "Cargar";
+            this.bt_Cargar.UseVisualStyleBackColor = true;
+            this.bt_Cargar.Click += new System.EventHandler(this.bt_Cargar_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(482, 142);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 37;
+            this.button1.Text = "Convertir";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FireManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 466);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bt_Cargar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.tbDatabaseName);
@@ -249,8 +253,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbUserName);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.tbPort);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.tbServerName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -285,8 +287,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbUserName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbPort;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbServerName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem perfilesToolStripMenuItem;
@@ -295,6 +295,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button bt_Cargar;
+        private System.Windows.Forms.Button button1;
     }
 }
 
