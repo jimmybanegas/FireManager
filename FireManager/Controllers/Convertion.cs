@@ -7,72 +7,54 @@ using FireManager.Models;
 
 namespace FireManager.Controllers
 {
-    static class Conversiones
+    static class Conversions
     {
-        public static string DarleVuelta(string hex)
-        {
-            var converted = "";
-            for (var i=hex.Length-1;i>=0;i-=2)
-            {
-                converted = converted+hex.Substring(i-1, 1);
-                converted = converted + hex.Substring(i, 1);
-            }
-            return converted;
-        }
+       
 
-        public static byte[] FromHex(string hex)
+      
+        public static int ConvertToInt(string hex)
         {
-            var raw = new byte[hex.Length / 2];
-            for (var i = 0; i < raw.Length; i++)
-            {
-                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-            }
-            return raw;
-        }
-
-        public static int Conversion_a_Int(string hex)
-        {
-            var converted = int.Parse(DarleVuelta(hex), NumberStyles.HexNumber);
+            var converted = int.Parse(Utilities.Reverse(hex), NumberStyles.HexNumber);
             return converted;
         }
 
 
-        public static string Conversion_a_DateTime(string hex)
+        public static string ConvertToDateTime(string hex)
         {
-            var data=FromHex(DarleVuelta(hex));
+            var data= Utilities.FromHex(Utilities.Reverse(hex));
            // if (data.Length != 4) throw new ArgumentException();
             return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(
                       BitConverter.ToUInt32(data, 0)).ToString(CultureInfo.InvariantCulture);
         }
 
 
-        public static char Conversion_a_Char(string hex)
+        public static char ConvertToChar(string hex)
         {
-            var value = Convert.ToInt32(DarleVuelta(hex), 16);
+            var value = Convert.ToInt32(Utilities.Reverse(hex), 16);
             return (char) value;
         }
 
-        public static string Conversion_a_TinyInt(string hex)
+        public static string ConvertToTinyInt(string hex)
         {
             if (hex == null) throw new ArgumentNullException("hex");
-            var data = FromHex(DarleVuelta(hex));
+            var data = Utilities.FromHex(Utilities.Reverse(hex));
             return ((int)data[0]).ToString();
         }
 
-        public static string Conversion_a_Double(string hex)
+        public static string ConvertToDouble(string hex)
         {
-            var parsed = long.Parse(DarleVuelta(hex), NumberStyles.AllowHexSpecifier);
+            var parsed = long.Parse(Utilities.Reverse(hex), NumberStyles.AllowHexSpecifier);
             var d = BitConverter.Int64BitsToDouble(parsed);
 
             return  d.ToString(CultureInfo.InvariantCulture);
         }
 
-        public static BigInteger Conversion_a_BigInt(string hex)
+        public static BigInteger ConvertToBigInt(string hex)
         {
-            return BigInteger.Parse(DarleVuelta(hex), NumberStyles.HexNumber);
+            return BigInteger.Parse(Utilities.Reverse(hex), NumberStyles.HexNumber);
         }
         
-        public static string Conversion_a_String_Varchar(string hex)
+        public static string ConvertToVarchar(string hex)
         {
             var sData = "";
             while (hex.Length > 0)
@@ -84,16 +66,16 @@ namespace FireManager.Controllers
             return sData;
         }
 
-        private static double Conversion_a_Decimal(string hex)
+        public static double ConvertToDecimal(string hex)
         {
-            var hexNumber = DarleVuelta(hex).Substring(0,14);
+            var hexNumber = Utilities.Reverse(hex).Substring(0,14);
             hexNumber = hexNumber.Replace("x", string.Empty);
             long result;
             long.TryParse(hexNumber, NumberStyles.HexNumber, null, out result);
             return result;
         }
 
-        public static string Conversion_a_SmallDateTime(byte[] data)
+        public static string ConvertToSmallDateTime(byte[] data)
         {
             var returnDate = new DateTime(1900, 1, 1);
 
@@ -105,7 +87,7 @@ namespace FireManager.Controllers
             return returnDate.ToString(CultureInfo.InvariantCulture);
         }
 
-        public static float Conversion_del_Real(string hex)
+        public static float ConvertToReal(string hex)
         {
             var raw = new byte[hex.Length / 2];
             for (var i = 0; i < raw.Length; i++)
@@ -116,99 +98,6 @@ namespace FireManager.Controllers
             var f = BitConverter.ToSingle(raw, 0);
             return f;
         }
-
-        public static List<Campos> Recorrer(string rowlog,List<Campos> campos,List<string>camposVariables )
-        {
-          //  var columnas=new List<string>();
-            var recorrer = 10;
-
-            for (var i = 0; i < campos.Count ;i++ )
-            {
-                switch (campos.ElementAt(i).Type)
-                {
-                    case "int":
-                        campos.ElementAt(i).Valor=Conversion_a_Int(rowlog.Substring(recorrer,campos.ElementAt(i).Tamaño)).ToString();
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "nchar":
-                        campos.ElementAt(i).Valor = (Conversion_a_String_Varchar(rowlog.Substring(recorrer,17)));
-                        recorrer += 17;
-                     /*   camposVariables.Add(new Campos()
-                        {
-                          Nombre   = campos.ElementAt(i).Nombre,
-                          Type = "varchar"
-                        });*/
-                        break;
-                    case "char":
-                        campos.ElementAt(i).Valor = (Conversion_a_Char(rowlog.Substring(recorrer, 4)).ToString());
-                        recorrer += 4;
-                        break;
-                    case "float":
-                        campos.ElementAt(i).Valor = (Conversion_a_Double(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)));
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "bigint":
-                        campos.ElementAt(i).Valor = (Conversion_a_BigInt(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).ToString());
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "money":
-                        campos.ElementAt(i).Valor = (Conversion_a_Decimal(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).
-                            ToString(CultureInfo.InvariantCulture));
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "decimal":
-                        campos.ElementAt(i).Valor = (Conversion_a_Decimal(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).
-                            ToString(CultureInfo.InvariantCulture));
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "real":
-                        campos.ElementAt(i).Valor = (Conversion_del_Real(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).
-                            ToString(CultureInfo.InvariantCulture));
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "tinyint":
-                        campos.ElementAt(i).Valor = (Conversion_a_TinyInt(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)));
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "datetime":
-                        campos.ElementAt(i).Valor = (Conversion_a_DateTime(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)));
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                   /* case "numeric":
-                        campos.ElementAt(i).Valor = (Conversion_a_Int(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).ToString());
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;*/
-                }
-            }
-
-            if (camposVariables.Count == 0) return campos;
-            var totalColumnas = int.Parse(Conversion_a_Int(rowlog.Substring(recorrer, 4)).ToString());
-            recorrer += 4;
-            recorrer += int.Parse((Math.Ceiling(((double)totalColumnas / 8)) * 2).ToString(CultureInfo.InvariantCulture));
-            int.Parse(Conversion_a_Int(rowlog.Substring(recorrer, 4)).ToString());
-            recorrer += 4;
-
-            var tamano = new int[camposVariables.Count];
-            for (var i = 0; i < camposVariables.Count; i++)
-            {
-                tamano[i]=(Conversion_a_Int(rowlog.Substring(recorrer, 4))*2)+2; // +2 porque mi hex empieza con x0
-                recorrer += 4;
-            }
-
-            for (var i = 0; i < camposVariables.Count; i++)
-            {
-                    
-                campos.Add(new Campos()
-                {
-                    Nombre = camposVariables.ElementAt(i),
-                    Type = "varchar",
-                    Tamaño = tamano[i],
-                    Valor = Conversion_a_String_Varchar(rowlog.Substring(recorrer, tamano[i]-recorrer))
-                        
-                });
-                recorrer += tamano[i];
-            }
-            return campos;
-        }
+     
     }
 }

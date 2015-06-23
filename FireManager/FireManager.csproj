@@ -55,8 +55,8 @@
     <Compile Include="Controllers\FileManagement.cs" />
     <Compile Include="Controllers\ProfileManagement.cs" />
     <Compile Include="Controllers\QueryProcessing.cs" />
+    <Compile Include="Controllers\Utilities.cs" />
     <Compile Include="Models\Campos.cs" />
-    <Compile Include="Models\CamposNoFijos.cs" />
     <Compile Include="Models\ConnectionData.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Views\FireManager.cs">

@@ -39,7 +39,6 @@ namespace FireManager.Controllers
                         result.Message = "Test fallido";
                         result.ConnectionString = connectionString;
                     }
-
                     connection.Close();
                 }
             }
@@ -51,9 +50,7 @@ namespace FireManager.Controllers
 
             return result;
         }
-
-     
-
+        
         public string CreateConnectionString()
         {
             var connectionString = string.Format("Server={0};User Id={1};Password={2};Database={3}",

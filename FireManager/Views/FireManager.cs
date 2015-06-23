@@ -226,7 +226,7 @@ namespace FireManager.Views
                 //List<CamposNoFijos> camposNofijos = getCamposNofijos(campos);
                 var camposVariables = GetCamposVariables();
 
-                SetTable(Conversiones.Recorrer(rowlogContents0, campos, camposVariables));
+                SetTable(Utilities.LoopHexadecimal(rowlogContents0, campos, camposVariables));
            // }
         }
 
