@@ -47,15 +47,10 @@ namespace FireManager.Controllers
                     case "nchar":
                         campos.ElementAt(i).Valor = (Conversions.ConvertToVarchar(rowlog.Substring(recorrer, 17)));
                         recorrer += 17;
-                        /*   camposVariables.Add(new Campo()
-                           {
-                             Nombre   = campos.ElementAt(i).Nombre,
-                             Type = "varchar"
-                           });*/
                         break;
                     case "char":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToChar(rowlog.Substring(recorrer, 4)).ToString());
-                        recorrer += 4;
+                        campos.ElementAt(i).Valor = (Conversions.ConvertToChar(rowlog.Substring(recorrer, 2)).ToString());
+                        recorrer += 2;
                         break;
                     case "float":
                         campos.ElementAt(i).Valor = (Conversions.ConvertToDouble(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)));
@@ -66,7 +61,7 @@ namespace FireManager.Controllers
                         recorrer += campos.ElementAt(i).Tamaño;
                         break;
                     case "money":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToDecimal(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).
+                        campos.ElementAt(i).Valor = (Conversions.ConvertToMoney(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).
                             ToString(CultureInfo.InvariantCulture)); 
                         recorrer += campos.ElementAt(i).Tamaño;
                         break;

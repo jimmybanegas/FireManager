@@ -34,8 +34,25 @@ namespace FireManager.Controllers
 
         public static char ConvertToChar(string hex)
         {
-            var value = Convert.ToInt32(Utilities.Reverse(hex), 16);
-            return (char) value;
+           /* var value = Convert.ToInt32(Utilities.Reverse(hex), 16);
+            return (char) value;*/
+          /*  byte[] charBytes = new byte[DataTypeLength.Value];
+            Array.Copy(bytes, offset, charBytes, 0, length);
+            //go ahead and set each extra 32's (spaces) if length is shorted
+            for (int i = length; i < DataTypeLength.Value; i++)
+            {
+                charBytes[i] = 32;
+            }
+            return Encoding.UTF8.GetString(charBytes);*/
+
+            //return (char)short.Parse(Utilities.Reverse(hex), NumberStyles.AllowHexSpecifier);
+
+           //return Convert.ToChar(Convert.ToUInt32(hex));
+
+            int num = int.Parse(Utilities.Reverse(hex), NumberStyles.AllowHexSpecifier);
+            char cnum = (char)num;
+
+            return cnum;
         }
 
         public static string ConvertToTinyInt(string hex)
@@ -102,6 +119,12 @@ namespace FireManager.Controllers
             var f = BitConverter.ToSingle(raw, 0);
             return f;
         }
-     
+
+        public static double ConvertToMoney(string hex)
+        {
+            var dateBytes = Utilities.FromHex(hex);
+
+            return BitUtil.ToInt64(dateBytes, 0, true) / 10000d;
+        }
     }
 }
