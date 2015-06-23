@@ -2,7 +2,7 @@
 
 namespace FireManager.Models
 {
-    class Campos
+    class Campo
     {
         public string Nombre { get; set; }
         public string Type { get; set; }

@@ -50,13 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BitUtil.cs" />
     <Compile Include="Controllers\Convertion.cs" />
     <Compile Include="Controllers\DataAccess.cs" />
     <Compile Include="Controllers\FileManagement.cs" />
     <Compile Include="Controllers\ProfileManagement.cs" />
     <Compile Include="Controllers\QueryProcessing.cs" />
     <Compile Include="Controllers\Utilities.cs" />
-    <Compile Include="Models\Campos.cs" />
+    <Compile Include="Models\Campo.cs" />
     <Compile Include="Models\ConnectionData.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Views\FireManager.cs">

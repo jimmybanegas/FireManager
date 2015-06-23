@@ -13,8 +13,6 @@ namespace FireManager.Views
 {
     public partial class FireManager : Form
     {
-
-
         const int MaxBinaryDisplayString = 8000;
 
         public FireManager()
@@ -22,33 +20,17 @@ namespace FireManager.Views
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-           
-        }
-
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-        
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void btConnectionTest_Click(object sender, EventArgs e)
         {
             var userMessage = "";
             var connectionInfo = GetConnectionInformation();
             var dataAccess = new DataAccess(connectionInfo);
             var result = dataAccess.TestDatabaseConnection();
-
 
             if (result.Success)
             {
@@ -61,8 +43,6 @@ namespace FireManager.Views
             }
 
             MessageBox.Show(userMessage);
-
-           
         }
 
         private void LlenarTablas()
@@ -73,12 +53,10 @@ namespace FireManager.Views
             const string tablas = "SELECT NAME FROM sys.Tables";
           
             var dataTable = queryProcessing.ExecuteQuery(connData, tablas );
-            
 
             comboBox1.DataSource = dataTable;
             comboBox1.DisplayMember = "NAME";
             comboBox1.ValueMember = "NAME";
-
         }
 
         public  ConnectionData GetConnectionInformation()
@@ -109,19 +87,15 @@ namespace FireManager.Views
             var profileManager = new ProfileManagement();
             var connectionData = new ConnectionData();
 
-            var dialogResult = new Result();
-
             openFileDialog1.FileName = "";
             openFileDialog1.InitialDirectory = @"C:\Documents";
             openFileDialog1.Filter = Resources.FireManager_LoadProfile_Firebird_Profile_File____XML____XML;
             var openDialogResult = openFileDialog1.ShowDialog();
 
-            if (openDialogResult == DialogResult.OK)
-            {
-                var filePath = openFileDialog1.FileName;
+            if (openDialogResult != DialogResult.OK) return connectionData;
+            var filePath = openFileDialog1.FileName;
 
-                connectionData = profileManager.GetSavedProfile(filePath);
-            }
+            connectionData = profileManager.GetSavedProfile(filePath);
 
             return connectionData;
         }
@@ -154,28 +128,26 @@ namespace FireManager.Views
 
             return result;
         }
-
-        private void bt_Cargar_Click(object sender, EventArgs e)
-        {
-            CargarBorrados();
-        }
+      
 
         private void CargarBorrados()
         {
             var queryProcessing = new QueryProcessing();
             var connData = GetConnectionInformation();
 
-            var borrados = "SELECT [Transaction ID],[AllocUnitName],[RowLog Contents 0] FROM ::fn_dblog(NULL, NULL) " +
+            var borrados = "SELECT  [Operation],[Transaction ID],[AllocUnitName],[RowLog Contents 0] FROM ::fn_dblog(NULL, NULL) " +
                             "where operation='LOP_DELETE_ROWS' and " +
                             "[RowLog Contents 0] <> 0x and " +
                             "[AllocUnitName]='dbo." + comboBox1.Text + ".PK_" + comboBox1.Text + "'";
 
             var dataTable = queryProcessing.ExecuteQuery(connData, borrados);
+            
 
-            dataGridView1.DataSource =  FixBinaryColumnsForDisplay(dataTable);
+            dataGridView1.DataSource =  DisplayBinaries(dataTable);
+
         }
 
-        private static DataTable FixBinaryColumnsForDisplay(DataTable t)
+        private static DataTable DisplayBinaries(DataTable t)
         {
             var binaryColumnNames = t.Columns.Cast<DataColumn>().Where(col => col.DataType == typeof(byte[])).
                 Select(col => col.ColumnName).ToList();
@@ -189,7 +161,7 @@ namespace FireManager.Views
                 var hexBuilder = new StringBuilder(MaxBinaryDisplayString * 2 + 2);
                 foreach (DataRow r in t.Rows)
                 {
-                    r[tempColumnName] = BinaryDataColumnToString(hexBuilder, r[binaryColumnName]);
+                    r[tempColumnName] = BinaryToString(hexBuilder, r[binaryColumnName]);
                 }
 
                 t.Columns.Remove(binaryColumnName);
@@ -198,57 +170,66 @@ namespace FireManager.Views
             return t;
         }
 
-        private static string BinaryDataColumnToString(StringBuilder hexBuilder, object columnValue)
+        private static string BinaryToString(StringBuilder hexBuilder, object columnValue)
         {
             const string hexChars = "0123456789ABCDEF";
+
             if (columnValue == DBNull.Value)
             {
                 return "(null)";
             }
             var byteArray = (byte[])columnValue;
+
             var displayLength = (byteArray.Length > MaxBinaryDisplayString) ? MaxBinaryDisplayString : byteArray.Length;
             hexBuilder.Length = 0;
             hexBuilder.Append("0x");
             for (var i = 0; i < displayLength; i++)
             {
-                hexBuilder.Append(hexChars[(int)byteArray[i] >> 4]);
-                hexBuilder.Append(hexChars[(int)byteArray[i] % 0x10]);
+                hexBuilder.Append(hexChars[byteArray[i] >> 4]);
+                hexBuilder.Append(hexChars[byteArray[i] % 0x10]);
             }
             return hexBuilder.ToString();
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
-          //  foreach (var row in dataGridView1.Rows)
-            //{
-                var rowlogContents0 = dataGridView1.CurrentCell.Value.ToString();
-                var bytes = ConvertToBinary(rowlogContents0);
-                var campos = GetCampos();
-                //List<CamposNoFijos> camposNofijos = getCamposNofijos(campos);
-                var camposVariables = GetCamposVariables();
+           var camposSetList = (from DataGridViewRow row in dataGridView1.Rows 
+                                where !row.IsNewRow select row.Cells["RowLog Contents 0"].Value.ToString() 
+                                into rowlogContents0 let bytes = ConvertToBinary(rowlogContents0) 
+                                let campos = GetCampos() let camposVariables = GetCamposVariables() 
+                                select (Utilities.LoopHexadecimal(rowlogContents0, campos, camposVariables))).ToList();
 
-                SetTable(Utilities.LoopHexadecimal(rowlogContents0, campos, camposVariables));
-           // }
+            MostrarValoresEnTabla(camposSetList);
         }
 
-        private void SetTable(List<Campos> campos)
+        private void MostrarValoresEnTabla(IReadOnlyCollection<List<Campo>> campos)
         {
             if (campos == null) throw new ArgumentNullException("campos");
             var dt = new DataTable();
+
             dt.Clear();
 
-            for (var i = 0; i < campos.Count; i++)
+            if (campos.Count <= 0) return;
+            for (var i = 0; i < campos.First().Count; i++)
             {
-                dt.Columns.Add(campos.ElementAt(i).Nombre);
-            }
-            var row = dt.NewRow();
-
-            for (var i = 0; i < campos.Count; i++)
-            {
-                row[campos.ElementAt(i).Nombre] = campos.ElementAt(i).Valor;
+                dt.Columns.Add(campos.First().ElementAt(i).Nombre);
             }
 
-            dt.Rows.Add(row);
+            foreach (var campo in campos)
+            {
+                var row = dt.NewRow();
+
+                for (var i = 0; i < campo.Count; i++)
+                {
+                    row[campo.ElementAt(i).Nombre] = campo.ElementAt(i).Valor;
+                }
+
+                dt.Rows.Add(row);
+            }
+
             dataGridView1.DataSource = dt;
+
+            button1.Enabled = false;
         }
 
         private List<string> GetCamposVariables()
@@ -266,7 +247,7 @@ namespace FireManager.Views
                     select row["Name"].ToString()).ToList();
         }
 
-        private List<Campos> GetCampos()
+        private List<Campo> GetCampos()
         {
             var queryProcessing = new QueryProcessing();
             var connData = GetConnectionInformation();
@@ -279,12 +260,11 @@ namespace FireManager.Views
 
 
             return (from DataRow row in dataTable.Rows
-                select new Campos()
+                select new Campo()
                 {
                     Nombre = row["name"].ToString(), Type = row["NameType"].ToString(), Tamaño = int.Parse(row["Size"].ToString())*2
                 }).ToList();
         }
-
 
         public static byte[] ConvertToBinary(string str)
         {
@@ -292,5 +272,10 @@ namespace FireManager.Views
             return encoding.GetBytes(str);
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarBorrados();
+            button1.Enabled = true;
+        }
     }
 }

@@ -3,30 +3,34 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using FireManager.Models;
 
 namespace FireManager.Controllers
 {
     static class Conversions
     {
-       
+        private const double THREE_AND_ONE_THIRD = 10 / 3.0d;
 
-      
         public static int ConvertToInt(string hex)
         {
             var converted = int.Parse(Utilities.Reverse(hex), NumberStyles.HexNumber);
             return converted;
         }
 
-
         public static string ConvertToDateTime(string hex)
         {
-            var data= Utilities.FromHex(Utilities.Reverse(hex));
-           // if (data.Length != 4) throw new ArgumentException();
-            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(
-                      BitConverter.ToUInt32(data, 0)).ToString(CultureInfo.InvariantCulture);
+            var dateBytes = Utilities.FromHex(hex);
+            
+            return new DateTime(1900, 1, 1).AddDays(BitUtil.ToInt32(dateBytes, 4, true)).
+                           AddMilliseconds(THREE_AND_ONE_THIRD * BitUtil.ToInt32(dateBytes, 0, true)).ToString(CultureInfo.InvariantCulture);
         }
 
+        public static DateTime ConvertWindowsDate(byte[] bytes)
+        {
+            if (bytes.Length != 8) throw new ArgumentException();
+            return DateTime.FromFileTimeUtc(BitConverter.ToInt64(bytes, 0));
+        }
 
         public static char ConvertToChar(string hex)
         {

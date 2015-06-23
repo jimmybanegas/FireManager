@@ -31,8 +31,7 @@ namespace FireManager.Controllers
             return raw;
         }
 
-
-        public static List<Campos> LoopHexadecimal(string rowlog, List<Campos> campos, List<string> camposVariables)
+        public static List<Campo> LoopHexadecimal(string rowlog, List<Campo> campos, List<string> camposVariables)
         {
             //  var columnas=new List<string>();
             var recorrer = 10;
@@ -48,7 +47,7 @@ namespace FireManager.Controllers
                     case "nchar":
                         campos.ElementAt(i).Valor = (Conversions.ConvertToVarchar(rowlog.Substring(recorrer, 17)));
                         recorrer += 17;
-                        /*   camposVariables.Add(new Campos()
+                        /*   camposVariables.Add(new Campo()
                            {
                              Nombre   = campos.ElementAt(i).Nombre,
                              Type = "varchar"
@@ -112,8 +111,7 @@ namespace FireManager.Controllers
 
             for (var i = 0; i < camposVariables.Count; i++)
             {
-
-                campos.Add(new Campos()
+                campos.Add(new Campo()
                 {
                     Nombre = camposVariables.ElementAt(i),
                     Type = "varchar",

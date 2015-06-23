@@ -49,7 +49,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.bt_Cargar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -156,7 +155,6 @@
             this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 26;
             this.label4.Text = "Contraseña";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // tbUserName
             // 
@@ -189,7 +187,6 @@
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 22;
             this.label1.Text = "Servidor";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // groupBox1
             // 
@@ -208,6 +205,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(216, 21);
             this.comboBox1.TabIndex = 34;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -218,21 +216,11 @@
             this.label6.TabIndex = 35;
             this.label6.Text = "Tablas:";
             // 
-            // bt_Cargar
-            // 
-            this.bt_Cargar.Location = new System.Drawing.Point(351, 142);
-            this.bt_Cargar.Name = "bt_Cargar";
-            this.bt_Cargar.Size = new System.Drawing.Size(75, 23);
-            this.bt_Cargar.TabIndex = 36;
-            this.bt_Cargar.Text = "Cargar";
-            this.bt_Cargar.UseVisualStyleBackColor = true;
-            this.bt_Cargar.Click += new System.EventHandler(this.bt_Cargar_Click);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(482, 142);
+            this.button1.Location = new System.Drawing.Point(400, 142);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(142, 23);
             this.button1.TabIndex = 37;
             this.button1.Text = "Convertir";
             this.button1.UseVisualStyleBackColor = true;
@@ -244,7 +232,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 466);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.bt_Cargar);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.tbDatabaseName);
@@ -262,7 +249,7 @@
             this.Name = "FireManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FireManager";
-            this.Load += new System.EventHandler(this.Form1_Load);
+          
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -295,7 +282,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button bt_Cargar;
         private System.Windows.Forms.Button button1;
     }
 }
