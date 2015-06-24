@@ -10,87 +10,80 @@ namespace FireManager.Controllers
 {
     class Utilities
     {
-        public static string Reverse(string hex)
+      public static List<Field> LoopRowLog(string rowlog, List<Field> fields, List<string> camposVariables)
         {
-            var converted = "";
-            for (var i = hex.Length - 1; i >= 0; i -= 2)
-            {
-                converted = converted + hex.Substring(i - 1, 1);
-                converted = converted + hex.Substring(i, 1);
-            }
-            return converted;
-        }
-
-        public static byte[] FromHex(string hex)
-        {
-            var raw = new byte[hex.Length / 2];
-            for (var i = 0; i < raw.Length; i++)
-            {
-                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-            }
-            return raw;
-        }
-
-        public static List<Campo> LoopHexadecimal(string rowlog, List<Campo> campos, List<string> camposVariables)
-        {
-            //  var columnas=new List<string>();
+           
             var recorrer = 10;
 
-            for (var i = 0; i < campos.Count; i++)
+            for (var i = 0; i < fields.Count; i++)
             {
-                switch (campos.ElementAt(i).Type)
+                switch (fields.ElementAt(i).Type)
                 {
-                    case "int":
-                        campos.ElementAt(i).Valor = Conversions.ConvertToInt(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).ToString();
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "nchar":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToVarchar(rowlog.Substring(recorrer, 17)));
-                        recorrer += 17;
-                        break;
                     case "char":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToChar(rowlog.Substring(recorrer, 2)).ToString());
+                        fields.ElementAt(i).Value = (Conversions.ConvertToChar(rowlog.Substring(recorrer, 2)).ToString());
                         recorrer += 2;
                         break;
-                    case "float":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToDouble(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)));
-                        recorrer += campos.ElementAt(i).Tamaño;
+                    case "datetime":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToDateTime(rowlog.Substring(recorrer, fields.ElementAt(i).Length)));
+                        recorrer += fields.ElementAt(i).Length;
+                        break;
+                    case "smalldatetime":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToSmallDateTime(rowlog.Substring(recorrer, 4)));
+                        recorrer += 4;
+                        break;
+                    case "int":
+                        fields.ElementAt(i).Value = Conversions.ConvertToInt(rowlog.Substring(recorrer, fields.ElementAt(i).Length)).ToString();
+                        recorrer += fields.ElementAt(i).Length;
                         break;
                     case "bigint":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToBigInt(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).ToString());
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "money":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToMoney(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).
-                            ToString(CultureInfo.InvariantCulture)); 
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "decimal":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToDecimal(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).
-                            ToString(CultureInfo.InvariantCulture));
-                        recorrer += campos.ElementAt(i).Tamaño;
-                        break;
-                    case "real":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToReal(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).
-                            ToString(CultureInfo.InvariantCulture));
-                        recorrer += campos.ElementAt(i).Tamaño;
+                        fields.ElementAt(i).Value = (Conversions.ConvertToBigInt(rowlog.Substring(recorrer, fields.ElementAt(i).Length)).ToString());
+                        recorrer += fields.ElementAt(i).Length;
                         break;
                     case "tinyint":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToTinyInt(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)));
-                        recorrer += campos.ElementAt(i).Tamaño;
+                        fields.ElementAt(i).Value = (Conversions.ConvertToTinyInt(rowlog.Substring(recorrer, fields.ElementAt(i).Length)));
+                        recorrer += fields.ElementAt(i).Length;
                         break;
-                    case "datetime":
-                        campos.ElementAt(i).Valor = (Conversions.ConvertToDateTime(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)));
-                        recorrer += campos.ElementAt(i).Tamaño;
+                    case "decimal":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToDecimal(rowlog.Substring(recorrer, fields.ElementAt(i).Length - 10)).
+                            ToString(CultureInfo.InvariantCulture));
+                        recorrer += fields.ElementAt(i).Length - 10;
                         break;
-                    /* case "numeric":
-                         campos.ElementAt(i).Valor = (ConvertToInt(rowlog.Substring(recorrer, campos.ElementAt(i).Tamaño)).ToString());
-                         recorrer += campos.ElementAt(i).Tamaño;
-                         break;*/
+                    case "money":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToMoney(rowlog.Substring(recorrer, fields.ElementAt(i).Length)).
+                            ToString(CultureInfo.InvariantCulture));
+                        recorrer += fields.ElementAt(i).Length;
+                        break;
+                    case "float":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToFloat(rowlog.Substring(recorrer, fields.ElementAt(i).Length)))
+                            .ToString(CultureInfo.InvariantCulture);
+                        recorrer += fields.ElementAt(i).Length;
+                        break;
+                    case "real":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToReal(rowlog.Substring(recorrer, fields.ElementAt(i).Length)).
+                            ToString(CultureInfo.InvariantCulture));
+                        recorrer += fields.ElementAt(i).Length;
+                        break;
+                   /* case "numeric":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToNumeric(rowlog.Substring(recorrer, fields.ElementAt(i).Length)));
+                        recorrer += fields.ElementAt(i).Length;
+                        break;*/
+                    case "bit":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToBit(rowlog.Substring(recorrer, fields.ElementAt(i).Length)))
+                            .ToString();
+                        recorrer += fields.ElementAt(i).Length;
+                        break;
+                   /* case "binary":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToBinary(rowlog.Substring(recorrer, 17)));
+                        recorrer += 17;
+                        break;*/
+                    case "nchar":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToVarchar(rowlog.Substring(recorrer, 17)));
+                        recorrer += 17;
+                        break;
                 }
             }
 
-            if (camposVariables.Count == 0) return campos;
+            if (camposVariables.Count == 0) return fields;
             var totalColumnas = int.Parse(Conversions.ConvertToInt(rowlog.Substring(recorrer, 4)).ToString());
             recorrer += 4;
             recorrer += int.Parse((Math.Ceiling(((double)totalColumnas / 8)) * 2).ToString(CultureInfo.InvariantCulture));
@@ -106,18 +99,17 @@ namespace FireManager.Controllers
 
             for (var i = 0; i < camposVariables.Count; i++)
             {
-                campos.Add(new Campo()
+                fields.Add(new Field()
                 {
-                    Nombre = camposVariables.ElementAt(i),
+                    Name = camposVariables.ElementAt(i),
                     Type = "varchar",
-                    Tamaño = tamano[i],
-                    Valor = Conversions.ConvertToVarchar(rowlog.Substring(recorrer, tamano[i] - recorrer))
+                    Length = tamano[i],
+                    Value = Conversions.ConvertToVarchar(rowlog.Substring(recorrer, tamano[i] - recorrer))
 
                 });
                 recorrer += tamano[i];
             }
-            return campos;
+            return fields;
         }
-
     }
 }

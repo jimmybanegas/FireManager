@@ -61,7 +61,7 @@ namespace FireManager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nombre vacío.
+        ///   Looks up a localized string similar to Name vacío.
         /// </summary>
         internal static string Click_Nombre_vacío {
             get {

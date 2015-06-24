@@ -14,43 +14,23 @@ namespace FireManager.Controllers
 
         public static int ConvertToInt(string hex)
         {
-            var converted = int.Parse(Utilities.Reverse(hex), NumberStyles.HexNumber);
+            var converted = int.Parse(BitUtil.Reverse(hex), NumberStyles.HexNumber);
             return converted;
         }
 
         public static string ConvertToDateTime(string hex)
         {
-            var dateBytes = Utilities.FromHex(hex);
+            var dateBytes = BitUtil.FromHex(hex);
             
             return new DateTime(1900, 1, 1).AddDays(BitUtil.ToInt32(dateBytes, 4, true)).
-                           AddMilliseconds(THREE_AND_ONE_THIRD * BitUtil.ToInt32(dateBytes, 0, true)).ToString(CultureInfo.InvariantCulture);
-        }
-
-        public static DateTime ConvertWindowsDate(byte[] bytes)
-        {
-            if (bytes.Length != 8) throw new ArgumentException();
-            return DateTime.FromFileTimeUtc(BitConverter.ToInt64(bytes, 0));
+                           AddMilliseconds(THREE_AND_ONE_THIRD * BitUtil.ToInt32(dateBytes, 0, true)).
+                           ToString(CultureInfo.InvariantCulture);
         }
 
         public static char ConvertToChar(string hex)
         {
-           /* var value = Convert.ToInt32(Utilities.Reverse(hex), 16);
-            return (char) value;*/
-          /*  byte[] charBytes = new byte[DataTypeLength.Value];
-            Array.Copy(bytes, offset, charBytes, 0, length);
-            //go ahead and set each extra 32's (spaces) if length is shorted
-            for (int i = length; i < DataTypeLength.Value; i++)
-            {
-                charBytes[i] = 32;
-            }
-            return Encoding.UTF8.GetString(charBytes);*/
-
-            //return (char)short.Parse(Utilities.Reverse(hex), NumberStyles.AllowHexSpecifier);
-
-           //return Convert.ToChar(Convert.ToUInt32(hex));
-
-            int num = int.Parse(Utilities.Reverse(hex), NumberStyles.AllowHexSpecifier);
-            char cnum = (char)num;
+            var num = int.Parse(BitUtil.Reverse(hex), NumberStyles.AllowHexSpecifier);
+            var cnum = (char)num;
 
             return cnum;
         }
@@ -58,21 +38,31 @@ namespace FireManager.Controllers
         public static string ConvertToTinyInt(string hex)
         {
             if (hex == null) throw new ArgumentNullException("hex");
-            var data = Utilities.FromHex(Utilities.Reverse(hex));
+            var data = BitUtil.FromHex(BitUtil.Reverse(hex));
             return ((int)data[0]).ToString();
         }
 
-        public static string ConvertToDouble(string hex)
+        public static double ConvertToFloat(string hex)
         {
-            var parsed = long.Parse(Utilities.Reverse(hex), NumberStyles.AllowHexSpecifier);
+           /* var parsed = long.Parse(Utilities.Reverse(hex), NumberStyles.AllowHexSpecifier);
             var d = BitConverter.Int64BitsToDouble(parsed);
 
-            return  d.ToString(CultureInfo.InvariantCulture);
+            return  d.ToString(CultureInfo.InvariantCulture);*/
+         
+         /*  uint num = uint.Parse(hex, NumberStyles.AllowHexSpecifier);
+
+            byte[] floatVals = BitConverter.GetBytes(num);
+            float f = BitConverter.ToSingle(floatVals, 0);
+
+            return f.ToString(CultureInfo.InvariantCulture);*/
+            var dateBytes = BitUtil.FromHex(hex);
+
+            return BitUtil.ToDouble(dateBytes, 0, true);
         }
 
         public static BigInteger ConvertToBigInt(string hex)
         {
-            return BigInteger.Parse(Utilities.Reverse(hex), NumberStyles.HexNumber);
+            return BigInteger.Parse(BitUtil.Reverse(hex), NumberStyles.HexNumber);
         }
         
         public static string ConvertToVarchar(string hex)
@@ -87,17 +77,52 @@ namespace FireManager.Controllers
             return sData;
         }
 
-        public static double ConvertToDecimal(string hex)
+       
+
+        public static float ConvertToReal(string hex)
         {
-            var hexNumber = Utilities.Reverse(hex).Substring(0,14);
-            hexNumber = hexNumber.Replace("x", string.Empty);
+           /* var raw = new byte[hex.Length / 2];
+            for (var i = 0; i < raw.Length; i++)
+            {
+                //raw[raw.Length - i - 1] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+            }
+            var f = BitConverter.ToSingle(raw, 0);
+            return f;*/
+           var bytes = BitUtil.FromHex(hex);
+           return BitUtil.ToSingle(bytes, 0, true);
+        }
+
+        public static double ConvertToMoney(string hex)
+        {
+            var dateBytes = BitUtil.FromHex(hex);
+
+            return BitUtil.ToInt64(dateBytes, 0, true) / 10000d;
+        }
+
+        public static bool ConvertToBit(string hex)
+        {
+            var bytes = BitUtil.FromHex(hex);
+            
+            return (bytes[0] & 1) != 0;
+        }
+
+        public static decimal ConvertToDecimal(string hex)
+        {
+            /*  var hexNumber = Utilities.Reverse(hex).Substring(0,14);
+              hexNumber = hexNumber.Replace("x", string.Empty);
+              long result;
+              long.TryParse(hexNumber, NumberStyles.HexNumber, null, out result);
+              return result;*/
             long result;
-            long.TryParse(hexNumber, NumberStyles.HexNumber, null, out result);
+            long.TryParse(BitUtil.Reverse(hex), NumberStyles.HexNumber, null, out result);
+
             return result;
         }
 
-        public static string ConvertToSmallDateTime(byte[] data)
+        public static string ConvertToSmallDateTime(string hex)
         {
+            /*var data = Utilities.FromHex((hex));
             var returnDate = new DateTime(1900, 1, 1);
 
             int timePart = BitConverter.ToUInt16(data, 0);
@@ -105,26 +130,22 @@ namespace FireManager.Controllers
 
             returnDate = returnDate.AddDays(datePart).AddMinutes(timePart);
 
-            return returnDate.ToString(CultureInfo.InvariantCulture);
+            return returnDate.ToString(CultureInfo.InvariantCulture);*/
+
+            var data = BitUtil.FromHex(hex);
+
+            return new DateTime(1900, 1, 1).AddDays(BitUtil.ToUInt16(data, 0, false)).
+                       AddMinutes(BitUtil.ToUInt16(data, 0, true)).ToString(CultureInfo.InvariantCulture);
         }
 
-        public static float ConvertToReal(string hex)
+        public static string ConvertToBinary(string substring)
         {
-            var raw = new byte[hex.Length / 2];
-            for (var i = 0; i < raw.Length; i++)
-            {
-                //raw[raw.Length - i - 1] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-            }
-            var f = BitConverter.ToSingle(raw, 0);
-            return f;
+            throw new NotImplementedException();
         }
 
-        public static double ConvertToMoney(string hex)
+        public static string ConvertToNumeric(string substring)
         {
-            var dateBytes = Utilities.FromHex(hex);
-
-            return BitUtil.ToInt64(dateBytes, 0, true) / 10000d;
+            throw new NotImplementedException();
         }
     }
 }

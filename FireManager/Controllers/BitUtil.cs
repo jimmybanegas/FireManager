@@ -29,6 +29,27 @@ namespace FireManager.Controllers
             return ret;
         }
 
+        public static byte[] FromHex(string hex)
+        {
+            var raw = new byte[hex.Length / 2];
+            for (var i = 0; i < raw.Length; i++)
+            {
+                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+            }
+            return raw;
+        }
+
+        public static string Reverse(string hex)
+        {
+            var converted = "";
+            for (var i = hex.Length - 1; i >= 0; i -= 2)
+            {
+                converted = converted + hex.Substring(i - 1, 1);
+                converted = converted + hex.Substring(i, 1);
+            }
+            return converted;
+        }
+
         private static byte[] ToBytes(long val, int count, bool littleEndian)
         {
             byte[] bytes = new byte[count];

@@ -197,12 +197,12 @@ namespace FireManager.Views
                                 where !row.IsNewRow select row.Cells["RowLog Contents 0"].Value.ToString() 
                                 into rowlogContents0 let bytes = ConvertToBinary(rowlogContents0) 
                                 let campos = GetCampos() let camposVariables = GetCamposVariables() 
-                                select (Utilities.LoopHexadecimal(rowlogContents0, campos, camposVariables))).ToList();
+                                select (Utilities.LoopRowLog(rowlogContents0, campos, camposVariables))).ToList();
 
             MostrarValoresEnTabla(camposSetList);
         }
 
-        private void MostrarValoresEnTabla(IReadOnlyCollection<List<Campo>> campos)
+        private void MostrarValoresEnTabla(IReadOnlyCollection<List<Field>> campos)
         {
             if (campos == null) throw new ArgumentNullException("campos");
             var dt = new DataTable();
@@ -212,7 +212,7 @@ namespace FireManager.Views
             if (campos.Count <= 0) return;
             for (var i = 0; i < campos.First().Count; i++)
             {
-                dt.Columns.Add(campos.First().ElementAt(i).Nombre);
+                dt.Columns.Add(campos.First().ElementAt(i).Name);
             }
 
             foreach (var campo in campos)
@@ -221,7 +221,7 @@ namespace FireManager.Views
 
                 for (var i = 0; i < campo.Count; i++)
                 {
-                    row[campo.ElementAt(i).Nombre] = campo.ElementAt(i).Valor;
+                    row[campo.ElementAt(i).Name] = campo.ElementAt(i).Value;
                 }
 
                 dt.Rows.Add(row);
@@ -247,7 +247,7 @@ namespace FireManager.Views
                     select row["Name"].ToString()).ToList();
         }
 
-        private List<Campo> GetCampos()
+        private List<Field> GetCampos()
         {
             var queryProcessing = new QueryProcessing();
             var connData = GetConnectionInformation();
@@ -260,9 +260,9 @@ namespace FireManager.Views
 
 
             return (from DataRow row in dataTable.Rows
-                select new Campo()
+                select new Field()
                 {
-                    Nombre = row["name"].ToString(), Type = row["NameType"].ToString(), Tamaño = int.Parse(row["Size"].ToString())*2
+                    Name = row["name"].ToString(), Type = row["NameType"].ToString(), Length = int.Parse(row["Size"].ToString())*2
                 }).ToList();
         }
 
