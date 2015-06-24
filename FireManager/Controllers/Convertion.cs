@@ -45,17 +45,6 @@ namespace FireManager.Controllers
 
         public static double ConvertToFloat(string hex)
         {
-           /* var parsed = long.Parse(Utilities.Reverse(hex), NumberStyles.AllowHexSpecifier);
-            var d = BitConverter.Int64BitsToDouble(parsed);
-
-            return  d.ToString(CultureInfo.InvariantCulture);*/
-         
-         /*  uint num = uint.Parse(hex, NumberStyles.AllowHexSpecifier);
-
-            byte[] floatVals = BitConverter.GetBytes(num);
-            float f = BitConverter.ToSingle(floatVals, 0);
-
-            return f.ToString(CultureInfo.InvariantCulture);*/
             var dateBytes = BitUtil.FromHex(hex);
 
             return BitUtil.ToDouble(dateBytes, 0, true);
@@ -82,14 +71,6 @@ namespace FireManager.Controllers
 
         public static float ConvertToReal(string hex)
         {
-           /* var raw = new byte[hex.Length / 2];
-            for (var i = 0; i < raw.Length; i++)
-            {
-                //raw[raw.Length - i - 1] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-            }
-            var f = BitConverter.ToSingle(raw, 0);
-            return f;*/
            var bytes = BitUtil.FromHex(hex);
            return BitUtil.ToSingle(bytes, 0, true);
         }
@@ -129,20 +110,10 @@ namespace FireManager.Controllers
             returnDate = returnDate.AddDays(datePart).AddMinutes(timePart);
 
             return returnDate;
-
-           /* var data = BitUtil.FromHex(hex);
-
-            return new DateTime(1900, 1, 1).AddDays(BitUtil.ToUInt16(data, 2, false)).
-                       AddMinutes(BitUtil.ToUInt16(data, 0, true));*/
-           
         }
 
         public static StringBuilder ConvertToBinary(string hex)
         {
-           /* var bytes = BitUtil.FromHex(hex);
-            byte[] binaryBytes = new byte[DataTypeLength.Value];
-            Array.Copy(bytes, 0, binaryBytes, 0, length);
-            return binaryBytes;*/
             StringBuilder result = new StringBuilder();
             foreach (char c in hex)
             {

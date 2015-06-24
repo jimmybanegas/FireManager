@@ -263,5 +263,10 @@ namespace FireManager.Views
             CargarBorrados();
             button1.Enabled = true;
         }
+
+        private void ClearAllButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

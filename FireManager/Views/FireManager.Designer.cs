@@ -33,7 +33,6 @@
             this.cargarPerfilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarPerfilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ClearAllButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -96,15 +95,6 @@
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
-            // ClearAllButton
-            // 
-            this.ClearAllButton.Location = new System.Drawing.Point(523, 53);
-            this.ClearAllButton.Name = "ClearAllButton";
-            this.ClearAllButton.Size = new System.Drawing.Size(75, 23);
-            this.ClearAllButton.TabIndex = 17;
-            this.ClearAllButton.Text = "Limpiar";
-            this.ClearAllButton.UseVisualStyleBackColor = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -115,7 +105,7 @@
             // 
             // btConnectionTest
             // 
-            this.btConnectionTest.Location = new System.Drawing.Point(274, 54);
+            this.btConnectionTest.Location = new System.Drawing.Point(388, 53);
             this.btConnectionTest.Name = "btConnectionTest";
             this.btConnectionTest.Size = new System.Drawing.Size(108, 23);
             this.btConnectionTest.TabIndex = 32;
@@ -127,7 +117,7 @@
             // 
             this.tbDatabaseName.Location = new System.Drawing.Point(124, 75);
             this.tbDatabaseName.Name = "tbDatabaseName";
-            this.tbDatabaseName.Size = new System.Drawing.Size(78, 20);
+            this.tbDatabaseName.Size = new System.Drawing.Size(159, 20);
             this.tbDatabaseName.TabIndex = 29;
             // 
             // label5
@@ -141,7 +131,7 @@
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(510, 36);
+            this.tbPassword.Location = new System.Drawing.Point(673, 17);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 20);
@@ -150,7 +140,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(443, 39);
+            this.label4.Location = new System.Drawing.Point(606, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 26;
@@ -158,7 +148,7 @@
             // 
             // tbUserName
             // 
-            this.tbUserName.Location = new System.Drawing.Point(286, 36);
+            this.tbUserName.Location = new System.Drawing.Point(450, 16);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(122, 20);
             this.tbUserName.TabIndex = 25;
@@ -166,7 +156,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(223, 43);
+            this.label3.Location = new System.Drawing.Point(385, 20);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 24;
@@ -176,7 +166,7 @@
             // 
             this.tbServerName.Location = new System.Drawing.Point(124, 36);
             this.tbServerName.Name = "tbServerName";
-            this.tbServerName.Size = new System.Drawing.Size(92, 20);
+            this.tbServerName.Size = new System.Drawing.Size(233, 20);
             this.tbServerName.TabIndex = 23;
             // 
             // label1
@@ -191,10 +181,13 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btConnectionTest);
-            this.groupBox1.Controls.Add(this.ClearAllButton);
+            this.groupBox1.Controls.Add(this.tbPassword);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.tbUserName);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 19);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(648, 99);
+            this.groupBox1.Size = new System.Drawing.Size(822, 100);
             this.groupBox1.TabIndex = 33;
             this.groupBox1.TabStop = false;
             // 
@@ -222,7 +215,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(142, 23);
             this.button1.TabIndex = 37;
-            this.button1.Text = "Convertir";
+            this.button1.Text = "Recuperar Datos";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -236,10 +229,6 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.tbDatabaseName);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.tbPassword);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.tbUserName);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.tbServerName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -249,11 +238,11 @@
             this.Name = "FireManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FireManager";
-          
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,7 +254,6 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button ClearAllButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btConnectionTest;
         private System.Windows.Forms.TextBox tbDatabaseName;
