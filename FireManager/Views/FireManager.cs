@@ -142,7 +142,7 @@ namespace FireManager.Views
 
             var dataTable = queryProcessing.ExecuteQuery(connData, borrados);
 
-            dataTable.Columns.Add("Fecha");
+            dataTable.Columns.Add("Fecha").SetOrdinal(0);
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -155,6 +155,8 @@ namespace FireManager.Views
             }
 
             dataGridView1.DataSource =  DisplayBinaries(dataTable);
+            dataGridView1.AutoResizeColumns();
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private static DataTable DisplayBinaries(DataTable t)
@@ -255,9 +257,7 @@ namespace FireManager.Views
                     Name = row["name"].ToString(), Type = row["NameType"].ToString(), Length = int.Parse(row["Size"].ToString())*2
                 }).ToList();
         }
-
-     
-
+        
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarBorrados();
