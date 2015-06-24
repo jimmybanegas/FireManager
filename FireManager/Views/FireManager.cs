@@ -13,8 +13,8 @@ namespace FireManager.Views
 {
     public partial class FireManager : Form
     {
-        const int MaxBinaryDisplayString = 8000;
 
+        public const int MaxBinaryDisplayString = 8000;
         public FireManager()
         {
             InitializeComponent();
@@ -141,10 +141,20 @@ namespace FireManager.Views
                             "[AllocUnitName]='dbo." + comboBox1.Text + ".PK_" + comboBox1.Text + "'";
 
             var dataTable = queryProcessing.ExecuteQuery(connData, borrados);
-            
+
+            dataTable.Columns.Add("Fecha");
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                var fecha =
+                    "select [Begin Time] from fn_dblog(null,null) where [Transaction ID] = '"+row["Transaction ID"]+"'AND Operation = 'LOP_BEGIN_XACT'";
+
+                var f = queryProcessing.ExecuteQuery(connData, fecha);
+
+                row["Fecha"] = f.Rows[0]["Begin Time"];
+            }
 
             dataGridView1.DataSource =  DisplayBinaries(dataTable);
-
         }
 
         private static DataTable DisplayBinaries(DataTable t)
@@ -161,7 +171,7 @@ namespace FireManager.Views
                 var hexBuilder = new StringBuilder(MaxBinaryDisplayString * 2 + 2);
                 foreach (DataRow r in t.Rows)
                 {
-                    r[tempColumnName] = BinaryToString(hexBuilder, r[binaryColumnName]);
+                    r[tempColumnName] = BitUtil.BinaryToString(hexBuilder, r[binaryColumnName]);
                 }
 
                 t.Columns.Remove(binaryColumnName);
@@ -169,33 +179,13 @@ namespace FireManager.Views
             }
             return t;
         }
-
-        private static string BinaryToString(StringBuilder hexBuilder, object columnValue)
-        {
-            const string hexChars = "0123456789ABCDEF";
-
-            if (columnValue == DBNull.Value)
-            {
-                return "(null)";
-            }
-            var byteArray = (byte[])columnValue;
-
-            var displayLength = (byteArray.Length > MaxBinaryDisplayString) ? MaxBinaryDisplayString : byteArray.Length;
-            hexBuilder.Length = 0;
-            hexBuilder.Append("0x");
-            for (var i = 0; i < displayLength; i++)
-            {
-                hexBuilder.Append(hexChars[byteArray[i] >> 4]);
-                hexBuilder.Append(hexChars[byteArray[i] % 0x10]);
-            }
-            return hexBuilder.ToString();
-        }
+       
 
         private void button1_Click(object sender, EventArgs e)
         {
            var camposSetList = (from DataGridViewRow row in dataGridView1.Rows 
                                 where !row.IsNewRow select row.Cells["RowLog Contents 0"].Value.ToString() 
-                                into rowlogContents0 let bytes = ConvertToBinary(rowlogContents0) 
+                                into rowlogContents0 let bytes = BitUtil.ConvertToBinary(rowlogContents0) 
                                 let campos = GetCampos() let camposVariables = GetCamposVariables() 
                                 select (Utilities.LoopRowLog(rowlogContents0, campos, camposVariables))).ToList();
 
@@ -266,11 +256,7 @@ namespace FireManager.Views
                 }).ToList();
         }
 
-        public static byte[] ConvertToBinary(string str)
-        {
-            var encoding = new ASCIIEncoding();
-            return encoding.GetBytes(str);
-        }
+     
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

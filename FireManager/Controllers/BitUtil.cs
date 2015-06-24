@@ -7,21 +7,23 @@ using System.Threading.Tasks;
 
 namespace FireManager.Controllers
 {
+   
     class BitUtil
     {
+         public const int MaxBinaryDisplayString = 8000;
         private static long FromBytes(byte[] bytes, int offset, int count, bool littleEndian)
         {
             long ret = 0;
             if (littleEndian)
             {
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
                     ret = unchecked((ret << 8) | bytes[offset + count - 1 - i]);
                 }
             }
             else
             {
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
                     ret = unchecked((ret << 8) | bytes[offset + i]);
                 }
@@ -50,6 +52,12 @@ namespace FireManager.Controllers
             return converted;
         }
 
+        public static byte[] ConvertToBinary(string str)
+        {
+            var encoding = new ASCIIEncoding();
+            return encoding.GetBytes(str);
+        }
+
         private static byte[] ToBytes(long val, int count, bool littleEndian)
         {
             byte[] bytes = new byte[count];
@@ -70,6 +78,28 @@ namespace FireManager.Controllers
                 }
             }
             return bytes;
+        }
+
+        public static string BinaryToString(StringBuilder hexBuilder, object columnValue)
+        {
+            const string hexChars = "0123456789ABCDEF";
+
+            if (columnValue == DBNull.Value)
+            {
+                return "(null)";
+            }
+            var byteArray = (byte[])columnValue;
+
+            var displayLength = (byteArray.Length > Views.FireManager.MaxBinaryDisplayString) 
+                ? Views.FireManager.MaxBinaryDisplayString : byteArray.Length;
+            hexBuilder.Length = 0;
+            hexBuilder.Append("0x");
+            for (var i = 0; i < displayLength; i++)
+            {
+                hexBuilder.Append(hexChars[byteArray[i] >> 4]);
+                hexBuilder.Append(hexChars[byteArray[i] % 0x10]);
+            }
+            return hexBuilder.ToString();
         }
 
         public static byte[] GetBytes(short val, bool littleEndian)

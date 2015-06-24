@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -109,30 +110,12 @@ namespace FireManager.Controllers
 
         public static decimal ConvertToDecimal(string hex)
         {
-           /*  var hexNumber = BitUtil.Reverse(hex).Substring(0, 14);
-              hexNumber = hexNumber.Replace("x", string.Empty);
-              long result;
-              long.TryParse(hexNumber, NumberStyles.HexNumber, null, out result);
-              return result;
-           long result;
-            long.TryParse(BitUtil.Reverse(hex), NumberStyles.HexNumber, null, out result);
+            var hexNumber = BitUtil.Reverse(hex).Substring(0, 14);
+            hexNumber = hexNumber.Replace("x", string.Empty);
+            long result;
+            long.TryParse(hexNumber, NumberStyles.HexNumber, null, out result);
 
-            return result;*/
-
-          /*  var hex2 = BitUtil.Reverse(hex);
-
-            String highPart = hex2.Remove(hex2.Length - 16);
-            String lowPart = hex2.Substring(hex2.Length - 16);
-
-            Decimal result =
-              ulong.Parse(highPart, NumberStyles.HexNumber);
-
-             result = result * ulong.MaxValue + ulong.Parse(lowPart, NumberStyles.HexNumber);
-
-            return result;*/
-            Decimal myInt = decimal.Parse(hex, System.Globalization.NumberStyles.HexNumber);
-
-            return myInt;
+            return result;
         }
 
         public static DateTime ConvertToSmallDateTime(string hex)
@@ -170,23 +153,23 @@ namespace FireManager.Controllers
         }
 
         private static readonly Dictionary<char, string> HexCharacterToBinary = new Dictionary<char, string> {
-    { '0', "0000" },
-    { '1', "0001" },
-    { '2', "0010" },
-    { '3', "0011" },
-    { '4', "0100" },
-    { '5', "0101" },
-    { '6', "0110" },
-    { '7', "0111" },
-    { '8', "1000" },
-    { '9', "1001" },
-    { 'a', "1010" },
-    { 'b', "1011" },
-    { 'c', "1100" },
-    { 'd', "1101" },
-    { 'e', "1110" },
-    { 'f', "1111" }
-};
+            { '0', "0000" },
+            { '1', "0001" },
+            { '2', "0010" },
+            { '3', "0011" },
+            { '4', "0100" },
+            { '5', "0101" },
+            { '6', "0110" },
+            { '7', "0111" },
+            { '8', "1000" },
+            { '9', "1001" },
+            { 'a', "1010" },
+            { 'b', "1011" },
+            { 'c', "1100" },
+            { 'd', "1101" },
+            { 'e', "1110" },
+            { 'f', "1111" }
+        };
 
         public static string ConvertToNumeric(string substring)
         {
