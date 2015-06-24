@@ -12,7 +12,6 @@ namespace FireManager.Controllers
     {
       public static List<Field> LoopRowLog(string rowlog, List<Field> fields, List<string> camposVariables)
         {
-           
             var recorrer = 10;
 
             for (var i = 0; i < fields.Count; i++)
@@ -28,8 +27,9 @@ namespace FireManager.Controllers
                         recorrer += fields.ElementAt(i).Length;
                         break;
                     case "smalldatetime":
-                        fields.ElementAt(i).Value = (Conversions.ConvertToSmallDateTime(rowlog.Substring(recorrer, 4)));
-                        recorrer += 4;
+                        fields.ElementAt(i).Value = (Conversions.ConvertToSmallDateTime(rowlog.Substring(recorrer, fields.ElementAt(i).Length+6))).
+                            ToString(CultureInfo.InvariantCulture);
+                        recorrer += fields.ElementAt(i).Length+6;
                         break;
                     case "int":
                         fields.ElementAt(i).Value = Conversions.ConvertToInt(rowlog.Substring(recorrer, fields.ElementAt(i).Length)).ToString();
@@ -72,10 +72,11 @@ namespace FireManager.Controllers
                             .ToString();
                         recorrer += fields.ElementAt(i).Length;
                         break;
-                   /* case "binary":
-                        fields.ElementAt(i).Value = (Conversions.ConvertToBinary(rowlog.Substring(recorrer, 17)));
-                        recorrer += 17;
-                        break;*/
+                   case "binary":
+                        fields.ElementAt(i).Value = (Conversions.ConvertToBinary(rowlog.Substring(recorrer, fields.ElementAt(i).Length)))
+                            .ToString();
+                        recorrer += fields.ElementAt(i).Length;
+                        break;
                     case "nchar":
                         fields.ElementAt(i).Value = (Conversions.ConvertToVarchar(rowlog.Substring(recorrer, 17)));
                         recorrer += 17;
