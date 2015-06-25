@@ -29,7 +29,7 @@ namespace FireManager.Controllers
                     case "smalldatetime":
                         fields.ElementAt(i).Value = (Conversions.ConvertToSmallDateTime(rowlog.Substring(recorrer, fields.ElementAt(i).Length+6))).
                             ToString(CultureInfo.InvariantCulture);
-                        recorrer += fields.ElementAt(i).Length+6;
+                        recorrer += fields.ElementAt(i).Length;
                         break;
                     case "int":
                         fields.ElementAt(i).Value = Conversions.ConvertToInt(rowlog.Substring(recorrer, fields.ElementAt(i).Length)).ToString();
@@ -106,7 +106,6 @@ namespace FireManager.Controllers
                     Type = "varchar",
                     Length = tamano[i],
                     Value = Conversions.ConvertToVarchar(rowlog.Substring(recorrer, tamano[i] - recorrer))
-
                 });
                 recorrer += tamano[i];
             }
